@@ -26,9 +26,15 @@ https://www.markdownguide.org/basic-syntax/
 - `cd !$`, `sudo !!`
 - `ls | grep | sed 'p;s/a/b/' | xargs -n2 echo`, `mv`
 - `sensors | awk '/Core/ {gsub("[+°C]","",$3), a=a+$3} END {print a/4}`
+- `for i in $(seq 10); do echo $((a=a+i)) ; done`, `a=1 ; for i in $(seq 10); do echo $((a=a*i)) ; done`, `a=0; b=0; c=1; for i in $(seq 10); do echo "$((a=b)), $((b=c)), $((c=b+a))" ; done`
+- 
 
 ## Emacs
 
 - `M-x M-p`
 - `M-x tdoe`
 - 
+
+## NeoVim
+
+- Copy-paste with `"+y` and `"+p` registers
