@@ -16,8 +16,8 @@ https://www.markdownguide.org/basic-syntax/
 
 ## Shell
 
-- `Ctrl-R`, `setopt no_flow_control`, `Ctrl-S`
-- `C-e`, `C-a`, `C-R`
+- `Ctrl-r`, `setopt no_flow_control`, `Ctrl-s`
+- `C-e`, `C-a`, `C-r`
 - `M-.`
 - `M-#` (bash)
 - `C-d`, `C-w`
