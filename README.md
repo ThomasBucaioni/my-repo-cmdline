@@ -22,3 +22,9 @@ https://www.markdownguide.org/basic-syntax/
 - `M-#` (bash)
 - `C-d`, `C-w`
 - `C-x`, `C-e`
+
+## Emacs
+
+- `M-x M-p`
+- `M-x tdoe`
+- 
