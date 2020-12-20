@@ -19,7 +19,7 @@ https://www.markdownguide.org/basic-syntax/
 - `Ctrl-r`, `setopt no_flow_control`, `Ctrl-s`
 - `C-e`, `C-a`, `C-r`
 - `M-.`
-- `M-#` (bash)
+- `M-#` (bash), `bindkey '^[#' pound-insert` (zsh)
 - `C-d`, `C-w`
 - `C-x`, `C-e`
 - `C-u` (bash/zsh), `C-k`, `C-y`
