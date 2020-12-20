@@ -24,7 +24,7 @@ https://www.markdownguide.org/basic-syntax/
 - `C-x`, `C-e`
 - `C-u` (bash/zsh), `C-k`
 - `cd !$`, `sudo !!`
-- `ll | grep | sed /a/b/ | xargs -n2 echo`, `mv`
+- `ls | grep | sed 'p;s/a/b/' | xargs -n2 echo`, `mv`
 - `sensors | awk '/Core/ {gsub("[+°C]","",$3), a=a+$3} END {print a/4}`
 
 ## Emacs
