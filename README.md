@@ -25,7 +25,7 @@
 2. `git add somefile1 somefile2`; 
 2. `git commit`; 
 2. `git push origin pr1`; 
-2. `git checkoutmaster`.
+2. `git checkout master`.
 
 ### Sync fork
 
