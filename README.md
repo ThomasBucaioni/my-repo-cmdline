@@ -6,7 +6,7 @@ https://www.markdownguide.org/basic-syntax/
 
 ## Git
 
-0. `git init name.git`
+0. `$ git init name.git`
 
 1. `$ git remote -v; git remote add origin https://github.com/ThomasBucaioni/name.git; git remote -v`
 
