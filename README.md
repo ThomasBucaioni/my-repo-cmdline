@@ -6,6 +6,8 @@
 
 ## Git
 
+### Init
+
 0. `$ git init name.git`
 
 1. `$ git remote -v; git remote add origin https://github.com/ThomasBucaioni/name.git; git remote -v`
@@ -13,6 +15,33 @@
 2. `$ git pull`
 
 3. `$ git push -u origin master`
+
+### Branch
+
+1. `git checkout master`; 
+2. `git branch pr1`; 
+2. `git checkout pr1`; 
+2. edit files; 
+2. `git add somefile1 somefile2`; 
+2. `git commit`; 
+2. `git push origin pr1`; 
+2. `git checkoutmaster`.
+
+### Sync fork
+
+1. `git status`
+2. `git remote -v`
+2. `git remote add upstream https://github.com/org-repo`
+2. `git remote -v`
+2. `git fetch upstream`
+2. `git checkout master`
+2. `git merge upstream/master`
+
+### Drop
+
+1. `git rebase -i HEAD~4`
+2. change 'pick' to 'drop'
+2. `git push --force`
 
 ## Shell
 
