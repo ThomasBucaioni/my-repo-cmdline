@@ -2,7 +2,7 @@
 
 ## Markdown
 
-https://www.markdownguide.org/basic-syntax/
+- https://www.markdownguide.org/basic-syntax/
 
 ## Git
 
@@ -38,3 +38,7 @@ https://www.markdownguide.org/basic-syntax/
 ## NeoVim
 
 - Copy-paste with `"+y` and `"+p` registers
+
+## Screen command
+
+- https://www.geeksforgeeks.org/screen-command-in-linux-with-examples/
