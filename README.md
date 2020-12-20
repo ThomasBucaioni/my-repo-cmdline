@@ -22,7 +22,7 @@ https://www.markdownguide.org/basic-syntax/
 - `M-#` (bash)
 - `C-d`, `C-w`
 - `C-x`, `C-e`
-- `C-u` (bash/zsh), `C-k`
+- `C-u` (bash/zsh), `C-k`, `C-y`
 - `cd !$`, `sudo !!`
 - `ls | grep | sed 'p;s/a/b/' | xargs -n2 echo`, `mv`
 - `sensors | awk '/Core/ {gsub("[+°C]","",$3), a=a+$3} END {print a/4}`
