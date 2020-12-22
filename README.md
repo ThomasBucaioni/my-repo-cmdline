@@ -70,3 +70,9 @@
 ## Screen command
 
 - https://www.geeksforgeeks.org/screen-command-in-linux-with-examples/
+
+## Salt
+
+- `sha1sum file`, `sha256sum file`, `md5sum file`
+- `echo -n "my_string" | openssl dgst -sha256`, `echo -n "my_string" | sha256sum`
+- 
