@@ -76,3 +76,43 @@
 - `sha1sum file`, `sha256sum file`, `md5sum file`
 - `echo -n "my_string" | openssl dgst -sha256`, `echo -n "my_string" | sha256sum`
 - 
+
+## Arch
+
+1. `loadkeys dvorak`
+1. `ip link`
+1. `echo "[Match]\nName=enpXYZ\n\n[Network]\nDHCP=yes" > /etc/systemd/network/20-wired.network`
+1. `systemctl start systemd-networkd.service`
+1. `systemctl start dhcpcd.service`
+1. `ping archlinux.org`
+1. `timedatectl set-ntp true`
+1. `fdisk -l`
+1. `mkfs.ext4 /dev/sdXX`
+1. `mkswap /dev/sdXY`
+1. `mount /dev/sdXX /mnt`
+1. `swapon /dev/sdXY`
+1. `mount /dev/sdXZ /home`
+1. `curl -s "https://archlinux.org/mirrorlist/?country=FR&country=GB&protocol=https&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' > /etc/pacman.d/mirrorlist.backup`
+1. `pacman -Sy pacman-contrib`
+1. `rankmirrors -n 10 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist`
+1. `pacstrap /mnt base linux linux-firmware`
+1. `vi /etc/pacman.d/gnupg/gpg.conf`, `keyserver hkp://keyserver.ubuntu.com`, `pacman-key --populate archlinux`, `pacman -Sc`
+1. `pacman -Sy archlinux-keyring` 
+1. `pacstrap /mnt base linux linux-firmware`
+1. `genfstab -U /mnt >> /mnt/etc/fstab`, `vi /mnt/etc/fstab`
+1. `arch-chroot /mnt`
+1. `ln -sf /usr/share/zoneinfo/Region/City /etc/localtime`
+1. `hwclock --systohc`
+1. `echo "en_US.UTF-8 UTF-8" > /etc/locale.gen`
+1. `locale-gen`
+1. `echo LANG=en_US.UTF-8 > /etc/locale.conf`
+1. `echo KEYMAP=dvorak > /etc/vconsole.conf`
+1. `echo mypcname > /etc/hostname`
+1. `echo "127.0.1.1	mypcname.localdomain	mypcname" > /etc/hosts`
+1. `mkinitcpio -P`
+1. `passwd`
+1. `exit`
+1. `reboot`
+1. `sudo grub-mkconfig –o /boot/grub/grub.cfg`
+
+
