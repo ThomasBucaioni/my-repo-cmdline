@@ -136,5 +136,5 @@ dhcp-range=172.168.1.2,172.168.1.5
 ```
 127.0.0.1
 ```
-4. `ip addr add 172.168.1.1/24 dev enp0s25`, ip addr add 172.168.1.2/24 via 172.168.1.1 dev enp0s25`, `ip route add default via 172.168.1.1 dev enp0s25`
+4. `ip addr add 172.168.1.1/24 dev enp0s25`, `ip addr add 172.168.1.2/24 via 172.168.1.1 dev enp0s25`, `ip route add default via 172.168.1.1 dev enp0s25`
 5. `iptables -t nat -A POSTROUTING -o WAN-interface -j MASQUERADE`, `iptables -A FORWARD -i LAN-interface -o WAN-interface -j ACCEPT`
