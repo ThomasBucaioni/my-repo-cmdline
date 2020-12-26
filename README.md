@@ -82,10 +82,10 @@
 1. `loadkeys dvorak`
 1. `ip link`
 1. `ping archlinux.org`
-   a. `echo "[Match]\nName=enpXYZ\n\n[Network]\nDHCP=yes" > /etc/systemd/network/20-wired.network`
-   a. `systemctl start systemd-networkd.service`
-   a. `systemctl start dhcpcd.service`
-   a. `ping archlinux.org`
+   - `echo "[Match]\nName=enpXYZ\n\n[Network]\nDHCP=yes" > /etc/systemd/network/20-wired.network`
+   - `systemctl start systemd-networkd.service`
+   - `systemctl start dhcpcd.service`
+   - `ping archlinux.org`
 1. `timedatectl set-ntp true`
 1. `fdisk -l`
 1. `mkfs.ext4 /dev/sdXX`
@@ -97,9 +97,9 @@
 1. `pacman -Sy pacman-contrib`
 1. `rankmirrors -n 10 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist`
 1. `pacstrap /mnt base linux linux-firmware`
-   a. `vi /etc/pacman.d/gnupg/gpg.conf`, `keyserver hkp://keyserver.ubuntu.com`, `pacman-key --populate archlinux`, `pacman -Sc`
-   b. `pacman -Sy archlinux-keyring` 
-   c. `pacstrap /mnt base linux linux-firmware`
+   - `vi /etc/pacman.d/gnupg/gpg.conf`, `keyserver hkp://keyserver.ubuntu.com`, `pacman-key --populate archlinux`, `pacman -Sc`
+   - `pacman -Sy archlinux-keyring` 
+   - `pacstrap /mnt base linux linux-firmware`
 1. `genfstab -U /mnt >> /mnt/etc/fstab`, `vi /mnt/etc/fstab`
 1. `arch-chroot /mnt`
 1. `ln -sf /usr/share/zoneinfo/Region/City /etc/localtime`
