@@ -81,10 +81,11 @@
 
 1. `loadkeys dvorak`
 1. `ip link`
-1. `echo "[Match]\nName=enpXYZ\n\n[Network]\nDHCP=yes" > /etc/systemd/network/20-wired.network`
-1. `systemctl start systemd-networkd.service`
-1. `systemctl start dhcpcd.service`
 1. `ping archlinux.org`
+   a. `echo "[Match]\nName=enpXYZ\n\n[Network]\nDHCP=yes" > /etc/systemd/network/20-wired.network`
+   a. `systemctl start systemd-networkd.service`
+   a. `systemctl start dhcpcd.service`
+   a. `ping archlinux.org`
 1. `timedatectl set-ntp true`
 1. `fdisk -l`
 1. `mkfs.ext4 /dev/sdXX`
@@ -96,9 +97,9 @@
 1. `pacman -Sy pacman-contrib`
 1. `rankmirrors -n 10 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist`
 1. `pacstrap /mnt base linux linux-firmware`
-1. `vi /etc/pacman.d/gnupg/gpg.conf`, `keyserver hkp://keyserver.ubuntu.com`, `pacman-key --populate archlinux`, `pacman -Sc`
-1. `pacman -Sy archlinux-keyring` 
-1. `pacstrap /mnt base linux linux-firmware`
+   a. `vi /etc/pacman.d/gnupg/gpg.conf`, `keyserver hkp://keyserver.ubuntu.com`, `pacman-key --populate archlinux`, `pacman -Sc`
+   b. `pacman -Sy archlinux-keyring` 
+   c. `pacstrap /mnt base linux linux-firmware`
 1. `genfstab -U /mnt >> /mnt/etc/fstab`, `vi /mnt/etc/fstab`
 1. `arch-chroot /mnt`
 1. `ln -sf /usr/share/zoneinfo/Region/City /etc/localtime`
@@ -111,8 +112,29 @@
 1. `echo "127.0.1.1	mypcname.localdomain	mypcname" > /etc/hosts`
 1. `mkinitcpio -P`
 1. `passwd`
+1. `pacman -S grub os-prober`
+1. `sudo grub-mkconfig –o /boot/grub/grub.cfg`
 1. `exit`
 1. `reboot`
-1. `sudo grub-mkconfig –o /boot/grub/grub.cfg`
 
+## Dnsmasq
 
+1. `/etc/dnsmasq.conf`
+```
+server=8.8.8.8
+server=8.8.4.4
+interface=enp0s25
+dhcp-range=172.168.1.2,172.168.1.5
+```
+2. `/etc/hosts`
+```
+172.168.1.1	gateway-hostname
+172.168.1.2	mypc1-hostname
+172.168.1.3	mypc2-hostname
+```
+3. `/etc/resolv.conf`
+```
+127.0.0.1
+```
+4. `ip addr add 172.168.1.1/24 dev enp0s25`, ip addr add 172.168.1.2/24 via 172.168.1.1 dev enp0s25`, `ip route add default via 172.168.1.1 dev enp0s25`
+5. `iptables -t nat -A POSTROUTING -o WAN-interface -j MASQUERADE`, `iptables -A FORWARD -i LAN-interface -o WAN-interface -j ACCEPT`
