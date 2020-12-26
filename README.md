@@ -123,7 +123,7 @@
 ```
 server=8.8.8.8
 server=8.8.4.4
-interface=enp0s25
+interface=LAN-interface-on-gateway
 dhcp-range=172.168.1.2,172.168.1.5
 ```
 2. `/etc/hosts`
@@ -136,5 +136,5 @@ dhcp-range=172.168.1.2,172.168.1.5
 ```
 127.0.0.1
 ```
-4. `ip addr add 172.168.1.1/24 dev enp0s25`, `ip addr add 172.168.1.2/24 via 172.168.1.1 dev enp0s25`, `ip route add default via 172.168.1.1 dev enp0s25`
-5. `iptables -t nat -A POSTROUTING -o WAN-interface -j MASQUERADE`, `iptables -A FORWARD -i LAN-interface -o WAN-interface -j ACCEPT`
+4. `ip addr add 172.168.1.1/24 dev LAN-interface-on-gateway`, `ip addr add 172.168.1.2/24 via 172.168.1.1 dev LAN-interface-on-host`, `ip route add default via 172.168.1.1 dev LAN-interface-on-host`
+5. `iptables -t nat -A POSTROUTING -o WAN-interface-on-gateway -j MASQUERADE`, `iptables -A FORWARD -i LAN-interface-on-gateway -o WAN-interface-on-gateway -j ACCEPT`
