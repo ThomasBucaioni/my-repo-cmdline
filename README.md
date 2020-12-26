@@ -129,7 +129,9 @@ dhcp-range=172.168.1.2,172.168.1.5
 ```
 2. `/etc/hosts`
 ```
-172.168.1.1	gateway-hostname
+127.0.0.1	localhost
+127.0.1.1	gateway-hostname1or2
+172.168.1.1	gateway-hostname2or1
 172.168.1.2	mypc1-hostname
 172.168.1.3	mypc2-hostname
 ```
