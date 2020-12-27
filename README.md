@@ -66,6 +66,7 @@
 ## NeoVim
 
 - Copy-paste with `"+y` and `"+p` registers
+- `vnoremap <C-C> y:call system("wl-copy --trim-newline", @")<cr>`, `inoremap <C-V> <ESC>:let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>pa`
 
 ## Screen command
 
@@ -73,9 +74,24 @@
 
 ## Salt
 
+### Checksum
+
 - `sha1sum file`, `sha256sum file`, `md5sum file`
 - `echo -n "my_string" | openssl dgst -sha256`, `echo -n "my_string" | sha256sum`
-- 
+
+### Sha256 signature
+
+- `openssl dgst -sha256 message.txt`
+- `openssl dgst -sha256 -sign privatekey.pem -out signature.bin message.txt`
+- `openssl dgst -sha256 -verify publickey.pem -signature signature.bin message.txt`
+
+### ECDSA signature
+
+- `openssl ecparam -genkey -name secp256k1 -noout -out eccprivatekey.pem`
+- `openssl dgst -ecdsa-with-SHA1 -sign eccprivatekey.pem message.txt > ecsign.bin`
+- `openssl dgst -ecdsa-with-SHA1 -verify eccpublickey.pem -signature ecsign.bin message.txt`
+- `openssl req -new -key eccprivatekey.pem -x509 -nodes -days 365 -out ecccertificate.pem`
+- `openssl x509 -in ecccertificate.pem -text -noout`
 
 ## Arch
 
@@ -117,6 +133,32 @@
 1. `grub-mkconfig –o /boot/grub/grub.cfg`
 1. `exit`
 1. `reboot`
+
+## Sway
+
+- `echo -e  "<span foreground='#963000'> $xkb_switch ⌨️ </span>"\| "<span foreground='#c1a000'> </span><span foreground='#c16b26'>${Mem} <span foreground='#c1a000'>/ </span>${TotalMem}</span> <span foreground='#c1a000'>G</span>" \| "<span foreground='#c1a000'> </span><span foreground='#c16b26'>${load}</span>" \| "<span foreground='#c1a000'> </span><span foreground='#c16b26'>${fan}</span>" \| "<span foreground='#00ff00'> $ip </span>"\|   $date_formatted`
+- `echo -e  ''   \| "<span foreground='#0088ff'> $weather</span>" \| "<span foreground='#c1a000'> <span foreground='#c16b26'>$disk_home</span> G</span> | <span foreground='#c1a000'> <span foreground='#c16b26'>$disk_root</span> G</span>" \| "<span foreground='#963000'> $check_updates 💎 $check_updates_aur 💻 $uptime_formatted ⬆️ $linux_version 🐧 </span>"\|"<span foreground='#ff0000'> $ram </span>"`
+
+### Mako
+```
+exec mako
+bindsym $mod+comma exec makoctl dismiss
+bindsym $mod+period exec makoctl invoke
+bindsym $mod+shift+comma  exec makoctl dismiss -a
+bindsym $mod+shift+period exec makoctl menu wofi -d -p 'Choose Action: '
+```
+### Wheather
+```
+bindsym $mod+Scroll_Lock exec ~/bin/run_with_sway_command.sh 'floating enable, resize set 1200 800' \
+    kitty -e zsh -c 'curl https://wttr.in/ && read "?Press enter to continue"'
+```
+### Screenshots
+```
+# Take a screenshot with all output and save it into screenshots (jpeg: -t jpeg)
+bindsym Print exec grim ~/screenshots/$(date +%Y-%m-%d_%H-%M-%S).png
+# Take a Screenshot with the region select (jpeg: -t jpeg) 
+bindsym $mod+Print exec grim -g "$(slurp)" ~/screenshots/$(date +%Y-%m-%d_%H-%M-%S).png
+```
 
 ## Dnsmasq
 
