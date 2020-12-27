@@ -15,14 +15,14 @@
 
 ### Branch
 
-1. `git checkout master`; 
-2. `git branch pr1`; 
-2. `git checkout pr1`; 
-2. edit files; 
-2. `git add somefile1 somefile2`; 
-2. `git commit`; 
-2. `git push origin pr1`; 
-2. `git checkout master`.
+1. `git checkout master`
+2. `git branch pr1`
+2. `git checkout pr1`
+2. edit files
+2. `git add somefile1 somefile2`
+2. `git commit`
+2. `git push origin pr1`
+2. `git checkout master`
 
 ### Sync fork
 
