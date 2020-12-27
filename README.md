@@ -146,7 +146,7 @@
 - `Mem=$(vmstat -s | sed -n 2p | sed s/[^0-9]//g)`, `Mem=$(echo "scale=1;${Mem}/1048576" | bc -l)`
 - `TotalMem=$(vmstat -s | sed -n 1p | sed s/[^0-9]//g)`, `TotalMem=$(echo "scale=1;${TotalMem}/1048576" | bc -l)`
 - `load=$(cut -d ' ' -f1 /proc/loadavg)`
-- `disk_root=$(df -h -P -l '/' | awk '/G/ {print $4}' | sed 's/G//g')`, `disk_home=$(df -h -P -l ~ | awk '/G/ {print $4}' | sed 's/G//g')
+- `disk_root=$(df -h -P -l '/' | awk '/G/ {print $4}' | sed 's/G//g')`, `disk_home=$(df -h -P -l ~ | awk '/G/ {print $4}' | sed 's/G//g')`
 - `ip=$(hostname -i | awk '{ print "" $1 }')`
 - `date_formatted=$(date "+%a %F %H:%M:%S")`
 
