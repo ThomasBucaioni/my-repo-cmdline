@@ -51,7 +51,8 @@
 - `C-u` (bash/zsh), `C-k`, `C-y`
 - `cd !$`, `sudo !!`, `$1`, `$2`, `$3`, `$@`, `$0`, `$#`, `$*`, `$_`, `$?` ([see](https://devhints.io/bash) [special parameters](https://wiki.bash-hackers.org/syntax/shellvars#special_parameters_and_shell_variables))
 - `ls | grep | sed 'p;s/a/b/' | xargs -n2 echo`, `mv`
-- `sensors | awk '/Core/ {gsub("[+°C]","",$3), a=a+$3} END {print a/4}`
+- `ls | awk '{printf("\"%s\"\n",$0); gsub("[ \047]","",$0); print $1}' | xargs -n2 echo`, `mv`
+- `sensors | awk '/Core/ {gsub("[+°C]","",$3); a=a+$3; i++} END {print a/i}`
 - `for i in $(seq 10); do echo $((a=a+i)) ; done`, `a=1 ; for i in $(seq 10); do echo $((a=a*i)) ; done`, `a=0; b=0; c=1; for i in $(seq 10); do echo "$((a=b)), $((b=c)), $((c=b+a))" ; done`
 - `[[ 0 -eq $? ]] && echo true || echo false`
 - `lsblk -f`, `mount -v -t /dev/sdX /mnt`, `lsblk`, `gdisk /dev/sdX (xzyy)`, `sudo dd if=new.iso of=/dev/sdX bs=1M status=progress`, `sudo umount -v /mnt`, `sudo fdisk -l`
