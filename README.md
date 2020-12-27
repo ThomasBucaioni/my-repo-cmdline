@@ -136,8 +136,19 @@
 
 ## Sway
 
-- `echo -e  "<span foreground='#963000'> $xkb_switch ⌨️ </span>"\| "<span foreground='#c1a000'> </span><span foreground='#c16b26'>${Mem} <span foreground='#c1a000'>/ </span>${TotalMem}</span> <span foreground='#c1a000'>G</span>" \| "<span foreground='#c1a000'> </span><span foreground='#c16b26'>${load}</span>" \| "<span foreground='#c1a000'> </span><span foreground='#c16b26'>${fan}</span>" \| "<span foreground='#00ff00'> $ip </span>"\|   $date_formatted`
-- `echo -e  ''   \| "<span foreground='#0088ff'> $weather</span>" \| "<span foreground='#c1a000'> <span foreground='#c16b26'>$disk_home</span> G</span> | <span foreground='#c1a000'> <span foreground='#c16b26'>$disk_root</span> G</span>" \| "<span foreground='#963000'> $check_updates 💎 $check_updates_aur 💻 $uptime_formatted ⬆️ $linux_version 🐧 </span>"\|"<span foreground='#ff0000'> $ram </span>"`
+### Bars
+
+- `fan=$(sensors | awk '/^fan1/{print $2 " rpm"}')`
+- `echo -e  "<span foreground='#c1a000'> </span><span foreground='#c16b26'> $fan </span>" \|`
+- `tempcpu=$(sensors | awk '/Core/ {gsub("[+°C]","",$3); a=a+$3; i++} END {printf("%4.1f",a/i)}')`
+- `tempgpu=$(sensors | awk '/^temp/ {gsub("[+°C]","",$2); print $2}')`
+- `xkb_switch=$(swaymsg -t get_inputs | jq -r '.[] | select(.identifier == "1241:41096:HID_04d9:a088") | .xkb_active_layout_name')`
+- `Mem=$(vmstat -s | sed -n 2p | sed s/[^0-9]//g)`, `Mem=$(echo "scale=1;${Mem}/1048576" | bc -l)`
+- `TotalMem=$(vmstat -s | sed -n 1p | sed s/[^0-9]//g)`, `TotalMem=$(echo "scale=1;${TotalMem}/1048576" | bc -l)`
+- `load=$(cut -d ' ' -f1 /proc/loadavg)`
+- `disk_root=$(df -h -P -l '/' | awk '/G/ {print $4}' | sed 's/G//g')`, `disk_home=$(df -h -P -l ~ | awk '/G/ {print $4}' | sed 's/G//g')
+- `ip=$(hostname -i | awk '{ print "" $1 }')`
+- `date_formatted=$(date "+%a %F %H:%M:%S")`
 
 ### Mako
 ```
