@@ -65,7 +65,7 @@
 
 ## NeoVim
 
-- Copy-paste with `"+y` and `"+p` registers
+- `"+y`, `"+p`
 - `vnoremap <C-C> y:call system("wl-copy --trim-newline", @")<cr>`, `inoremap <C-V> <ESC>:let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>pa`
 
 ## Screen command
