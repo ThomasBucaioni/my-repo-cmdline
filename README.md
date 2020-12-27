@@ -99,10 +99,10 @@
 1. `loadkeys dvorak`
 1. `ip link`
 1. `ping archlinux.org`
-   - `echo "[Match]\nName=enpXYZ\n\n[Network]\nDHCP=yes" > /etc/systemd/network/20-wired.network`
-   - `systemctl start systemd-networkd.service`
-   - `systemctl start dhcpcd.service`
-   - `ping archlinux.org`
+- `echo "[Match]\nName=enpXYZ\n\n[Network]\nDHCP=yes" > /etc/systemd/network/20-wired.network`
+- `systemctl start systemd-networkd.service`
+- `systemctl start dhcpcd.service`
+- `ping archlinux.org`
 1. `timedatectl set-ntp true`
 1. `fdisk -l`
 1. `mkfs.ext4 /dev/sdXX`
@@ -114,9 +114,9 @@
 1. `pacman -Sy pacman-contrib`
 1. `rankmirrors -n 10 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist`
 1. `pacstrap /mnt base linux linux-firmware`
-   - `vi /etc/pacman.d/gnupg/gpg.conf`, `keyserver hkp://keyserver.ubuntu.com`, `pacman-key --populate archlinux`, `pacman -Sc`
-   - `pacman -Sy archlinux-keyring` 
-   - `pacstrap /mnt base linux linux-firmware`
+- `vi /etc/pacman.d/gnupg/gpg.conf`, `keyserver hkp://keyserver.ubuntu.com`, `pacman-key --populate archlinux`, `pacman -Sc`
+- `pacman -Sy archlinux-keyring` 
+- `pacstrap /mnt base linux linux-firmware`
 1. `genfstab -U /mnt >> /mnt/etc/fstab`, `vi /mnt/etc/fstab`
 1. `arch-chroot /mnt`
 1. `ln -sf /usr/share/zoneinfo/Region/City /etc/localtime`
@@ -162,7 +162,7 @@ bindsym $mod+shift+period exec makoctl menu wofi -d -p 'Choose Action: '
 ### Wheather
 ```
 bindsym $mod+Scroll_Lock exec ~/bin/run_with_sway_command.sh 'floating enable, resize set 1200 800' \
-    kitty -e zsh -c 'curl https://wttr.in/ && read "?Press enter to continue"'
+kitty -e zsh -c 'curl https://wttr.in/ && read "?Press enter to continue"'
 ```
 ### Screenshots
 ```
@@ -197,3 +197,38 @@ nameserver 127.0.0.1
 5. `iptables -t nat -A POSTROUTING -o WAN-interface-on-GATEWAY -j MASQUERADE`, `iptables -A FORWARD -i LAN-interface-on-GATEWAY -o WAN-interface-on-GATEWAY -j ACCEPT`
 6. `sysctl net.ipv4.ip_forward`, `sudo sysctl -w net.ipv4.ip_forward=1`
 
+## Isc-dhcp-server
+
+1. `sudo apt install isc-dhcp-server`
+2. `/etc/dhcp/dhcpd.conf`
+```
+default-lease-time 600;
+max-lease-time 7200;
+option subnet-mask 255.255.255.0;
+option broadcast-address 172.168.1.255;
+option routers 172.168.1.1;
+option domain-name-servers 8.8.8.8, 4.4.4.4, 1.1.1.1;
+
+subnet 172.168.1.0 netmask 255.255.255.0 {
+option routers 172.168.1.1;
+option subnet-mask 255.255.255.0;
+option broadcast-address 172.168.1.255;
+option domain-name-servers 8.8.8.8, 4.4.4.4, 1.1.1.1;
+range 172.168.1.2 172.168.1.5;
+default-lease-time 86400;
+max-lease-time 86400;
+} 
+ddns-update-style none;
+```
+3. `/etc/default/isc-dhcp-server`
+```
+INTERFACESv4="LAN-interface-on-GATEWAY"
+INTERFACESv6=""
+```
+4. iptables:
+```
+iptables -t nat -L POSTROUTING
+iptables -L FORWARD
+iptables -t nat -A POSTROUTING -o WAN-interface-on-GATEWAY -j MASQUERADE
+iptables -A FORWARD -i LAN-interface-on-GATEWAY -o WAN-interface-on-GATEWAY -j ACCEPT
+```
