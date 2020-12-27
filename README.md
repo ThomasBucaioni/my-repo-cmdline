@@ -165,7 +165,7 @@ bindsym $mod+Scroll_Lock exec ~/bin/run_with_sway_command.sh 'floating enable, r
 ```
 ### Screenshots
 ```
-# Take a screenshot with all outputs and save it into the $screenshots directorie (jpeg format: -t jpeg)
+# Take a screenshot with all outputs and save it into the $screenshots directory (jpeg format: -t jpeg)
 bindsym Print exec grim ~/screenshots/$(date +%Y-%m-%d_%H-%M-%S).png
 # Take a screenshot with the region selected (jpeg format: -t jpeg) 
 bindsym $mod+Print exec grim -g "$(slurp)" ~/screenshots/$(date +%Y-%m-%d_%H-%M-%S).png
