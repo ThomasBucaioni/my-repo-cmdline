@@ -42,11 +42,11 @@
 
 ## Shell
 
-- `Ctrl-r`, `setopt no_flow_control`, `Ctrl-s`
+- `Ctrl-r`, `setopt no_flow_control` (zsh), `stty -ixon` (bash), `Ctrl-s`
 - `C-e`, `C-a`, `C-r`
 - `M-.`
 - `M-#` (bash), `bindkey '^[#' pound-insert` (zsh)
-- `C-d`, `C-w`
+- `C-d`, `M-d`, `C-w`
 - `C-x`, `C-e`
 - `C-u` (bash/zsh), `C-k`, `C-y`
 - `cd !$`, `sudo !!`, `$1`, `$2`, `$3`, `$@`, `$0`, `$#`, `$*`, `$_`, `$?` ([see](https://devhints.io/bash) [special parameters](https://wiki.bash-hackers.org/syntax/shellvars#special_parameters_and_shell_variables))
@@ -57,6 +57,8 @@
 - `[[ 0 -eq $? ]] && echo true || echo false`
 - `lsblk -f`, `mount -v -t /dev/sdX /mnt`, `lsblk`, `gdisk /dev/sdX (xzyy)`, `sudo dd if=new.iso of=/dev/sdX bs=1M status=progress`, `sudo umount -v /mnt`, `sudo fdisk -l`
 - `find . -name "*.torrent" -exec rm -rf {} \;`
+- `echo "keymaps 0-255\nkeycode  58 = Control\nkeycode  29 = Caps_Lock" > /etc/my_caps_ctrl.kmap`; `sudo loadkeys /etc/my_caps_ctrl.kmap`
+- `sudo cp ~/my_dovak.map.gz /usr/?lib?/kbd/keymaps/legacy/i386/dvorak/my_dvorak.map.gz`, `localectl set-keymap my_dvorak`
 
 ## Emacs
 
