@@ -64,6 +64,7 @@
 
 - `M-x M-p`
 - `M-x tdoe`
+- `etags ~/dir/*.c`, `M-.`
 - 
 
 ## NeoVim
