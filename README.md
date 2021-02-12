@@ -59,6 +59,7 @@
 - `find . -name "*.torrent" -exec rm -rf {} \;`
 - `echo "keymaps 0-255\nkeycode  58 = Control\nkeycode  29 = Caps_Lock" > /etc/my_caps_ctrl.kmap`; `sudo loadkeys /etc/my_caps_ctrl.kmap`
 - `sudo cp ~/my_dovak.map.gz /usr/?lib?/kbd/keymaps/legacy/i386/dvorak/my_dvorak.map.gz`, `localectl set-keymap my_dvorak`
+- `for file in $DIR/*my_string*.txt ; do echo "$file" ; done`, `for file in $DIR/*my_string*.txt ; do mv -nv -- "$file" "$file.$(date +%Y%m%d)" ; done`
 
 ## Emacs
 
@@ -176,7 +177,34 @@ bindsym Print exec grim ~/screenshots/$(date +%Y-%m-%d_%H-%M-%S).png
 bindsym $mod+Print exec grim -g "$(slurp)" ~/screenshots/$(date +%Y-%m-%d_%H-%M-%S).png
 ```
 
-## Dnsmasq
+## Xubuntu
+
+### StumpWM
+
+- `(define-key *top-map* (stumpwm:kbd "s-F1") "exec slock")`
+- `(define-key *top-map* (stumpwm:kbd "s-S-F2") "loadrc")`
+- `(define-key *top-map* (stumpwm:kbd "s-F2") "gnew")`
+- `(define-key *top-map* (stumpwm:kbd "s-F3") "exec kitty")`
+- `(define-key *top-map* (stumpwm:kbd "M-F4") "delete")`
+- `(define-key *top-map* (stumpwm:kbd "s-S-F12") "exec poweroff")`
+- `(define-key *top-map* (stumpwm:kbd "s-Left") "move-focus left")`, `Down`, `Right`, `Up`
+- `(define-key *top-map* (stumpwm:kbd "s-S-Left") "move-window left")`
+- `(define-key *top-map* (stumpwm:kbd "s-n") "next-in-frame")`
+- `(define-key *top-map* (stumpwm:kbd "s-o") "other-in-frame")`
+- `(define-key *top-map* (stumpwm:kbd "s-;") "exchange-direction left")`
+- `(define-key *top-map* (stumpwm:kbd "s-q") "exchange-direction right")`
+- `(define-key *top-map* (stumpwm:kbd "s-'") "gnext")`
+- `(define-key *top-map* (stumpwm:kbd "s-a") "gprev")`
+- `(define-key *top-map* (stumpwm:kbd "s-\"") "gnext-with-window")`
+- `(define-key *top-map* (stumpwm:kbd "s-A") "gprev-with-window")`
+
+### Xfce
+
+- 
+
+## Networking
+
+### Dnsmasq
 
 1. `/etc/dnsmasq.conf`
 ```
@@ -201,7 +229,7 @@ nameserver 127.0.0.1
 5. `iptables -t nat -A POSTROUTING -o WAN-interface-on-GATEWAY -j MASQUERADE`, `iptables -A FORWARD -i LAN-interface-on-GATEWAY -o WAN-interface-on-GATEWAY -j ACCEPT`
 6. `sysctl net.ipv4.ip_forward`, `sudo sysctl -w net.ipv4.ip_forward=1`
 
-## Isc-dhcp-server
+### Isc-dhcp-server
 
 1. `sudo apt install isc-dhcp-server`
 2. `/etc/dhcp/dhcpd.conf`
@@ -236,3 +264,8 @@ iptables -L FORWARD
 iptables -t nat -A POSTROUTING -o WAN-interface-on-GATEWAY -j MASQUERADE
 iptables -A FORWARD -i LAN-interface-on-GATEWAY -o WAN-interface-on-GATEWAY -j ACCEPT
 ```
+
+### Firewall
+
+- `sudo ~/bin/firewall.sh`
+
