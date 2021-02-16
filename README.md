@@ -60,6 +60,7 @@
 - `echo "keymaps 0-255\nkeycode  58 = Control\nkeycode  29 = Caps_Lock" > /etc/my_caps_ctrl.kmap`; `sudo loadkeys /etc/my_caps_ctrl.kmap`
 - `sudo cp ~/my_dovak.map.gz /usr/?lib?/kbd/keymaps/legacy/i386/dvorak/my_dvorak.map.gz`, `localectl set-keymap my_dvorak`
 - `for file in $DIR/*my_string*.txt ; do echo "$file" ; done`, `for file in $DIR/*my_string*.txt ; do mv -nv -- "$file" "$file.$(date +%Y%m%d)" ; done`, `for file in *; do echo-mv "$" $(echo $file | sed 's/regex/replace_text/'); done`
+- `du -h | sort -nr | head`
 
 
 ## Emacs
@@ -78,6 +79,7 @@
 ## Screen command
 
 - https://www.geeksforgeeks.org/screen-command-in-linux-with-examples/
+- `C-z :layout dump`
 
 ## Salt
 
