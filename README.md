@@ -62,6 +62,28 @@
 - `for file in $DIR/*my_string*.txt ; do echo "$file" ; done`, `for file in $DIR/*my_string*.txt ; do mv -nv -- "$file" "$file.$(date +%Y%m%d)" ; done`, `for file in *; do echo-mv "$" $(echo $file | sed 's/regex/replace_text/'); done`
 - `du -h | sort -nr | head`
 
+### Prompt
+
+```
+PS1="" # reset
+PS1="$PS1\[\e[0m\]\[\e[03;32m\]\u" # user
+PS1="$PS1\[\e[0m\]\[\e[01;35m\]@" # separator
+PS1="$PS1\[\e[0m\]\[\e[01;36m\]\h" # host
+PS1="$PS1\[\e[0m\]\[\e[01;35m\]:" # separator
+PS1="$PS1\[\e[0m\]\[\e[48;5;95;38;5;214m\]\D{%d.%m@%H.%M.%S}" # date
+PS1="$PS1\[\e[0m\]\[\e[01;35m\]:" # separator
+PS1="$PS1\[\e[0m\]\[\e[01;34m\]\w" # path
+PS1="$PS1\[\e[0m\]\[\e[01;35m\]:" # separator
+PS1="$PS1\[\e[0m\]\[\e[01;37m\]$?" # last error code
+PS1="$PS1\[\e[0m\]\[\e[01;35m\]:\$\[\e[00m\] " # ending
+```
+
+### Screensaver
+
+1. `xset s off`
+2. `xset s noblank`
+3. `xset dpms 0 0 0`
+4. `xset -dpms`
 
 ## Emacs
 
@@ -203,7 +225,9 @@ bindsym $mod+Print exec grim -g "$(slurp)" ~/screenshots/$(date +%Y-%m-%d_%H-%M-
 
 ### Xfce
 
-- 
+- `xfce4-panel`
+- `xfce4-screenshoter`
+- `blueman-manager`
 
 ## Networking
 
