@@ -296,3 +296,33 @@ iptables -A FORWARD -i LAN-interface-on-GATEWAY -o WAN-interface-on-GATEWAY -j A
 
 - `sudo ~/bin/firewall.sh`
 
+
+## LVM & RAID
+
+### LVM
+
+- `sudo fdisk -l /dev/sda`
+- `sudo pvs`
+- `sudo vgs`
+- `sudo lvs`
+- `lsblk`
+- `sudo cfdisk /dev/sdk`, `8e`
+- `sudo pvcreate /dev/sdb1`, `sudo pvs`
+- `sudo vgextend vg0 /dev/sdb1`, `sudo pvs`, `sudo vgs`
+- `sudo lextend -l +100%FREE /dev/mapper/vg0-root`, `sudo lvs`
+- `sudo resize2fs /dev/mapper/vg0-root`, `df -h`
+
+### RAID
+
+- `cat /proc/mdstat`
+- `sudo mdadm --detail /dev/md/root`, `boot`, `swap`
+- `sudo mdadm --fail`
+- `sudo mdadm --manage /dev/md125 --add /dev/sdb3`
+- `sudo if=/dev/urandom of=/dev/sdb bs=512 count=5000000`, `sudo fdisk -l /dev/sdb`
+- `sudo mdadm --manage /dev/md125 --add /dev/sdb3`, `watch cat /proc/mdstat`
+
+
+## Grub
+
+- `sudo grub2-mkconfig -o /boot/grub2/grub.cfg`
+- `grep limit /etc/yum.conf`, `rpm -qa | grep kernel`,  `sudo package-cleanup --oldkernels --count=1`
