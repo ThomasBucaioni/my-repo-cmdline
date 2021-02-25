@@ -228,6 +228,7 @@ bindsym $mod+Print exec grim -g "$(slurp)" ~/screenshots/$(date +%Y-%m-%d_%H-%M-
 - `xfce4-panel`
 - `xfce4-screenshoter`
 - `blueman-manager`
+- `xset s off`, `xset s noblank`, `xset dpms 0 0 0`, `xset -dpms`
 
 ## Networking
 
