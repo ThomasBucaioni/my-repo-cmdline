@@ -1,5 +1,5 @@
 Host My_Server
-    HostName IpOrDomain
+    HostName IpOrDomain # e.g. ssh.github.com or 172.168.1.254
     User user
-    Port port_number # default is 22
-    IdentityFile ~/.ssh/id_rsa_key_name
+    Port port_number # default is 22, github is 443
+    IdentityFile ~/.ssh/id_rsa_key_name # ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_key_name
