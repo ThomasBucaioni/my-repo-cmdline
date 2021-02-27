@@ -1,0 +1,4 @@
+Host My_Server
+    HostName 172.168.1.254
+    User user
+    IdentityFile ~/.ssh/id_rsa_router

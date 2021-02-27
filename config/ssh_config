@@ -1,0 +1,5 @@
+Host My_Server
+    HostName IpOrDomain
+    User user
+    Port port_number # default is 22
+    IdentityFile ~/.ssh/id_rsa_key_name

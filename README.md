@@ -320,7 +320,8 @@ iptables -A FORWARD -i LAN-interface-on-GATEWAY -o WAN-interface-on-GATEWAY -j A
 - `sudo mdadm --fail`
 - `sudo mdadm --manage /dev/md125 --add /dev/sdb3`
 - `sudo if=/dev/urandom of=/dev/sdb bs=512 count=5000000`, `sudo fdisk -l /dev/sdb`
-- `sudo mdadm --manage /dev/md125 --add /dev/sdb3`, `watch cat /proc/mdstat`
+- `# sfdisk -d /dev/sda | sfdisk /dev/sdb`
+- `# mdadm --manage /dev/md125 --add /dev/sdb3`, `# watch cat /proc/mdstat`
 
 
 ## Grub
