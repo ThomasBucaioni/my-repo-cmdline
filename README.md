@@ -298,7 +298,7 @@ iptables -A FORWARD -i LAN-interface-on-GATEWAY -o WAN-interface-on-GATEWAY -j A
 - `sudo ~/bin/firewall.sh`
 
 
-## LVM & RAID
+## LVM & RAID ("[Administration Linux par la pratique T.1](https://www.eyrolles.com/Informatique/Livre/administration-linux-par-la-pratique-9782212677386/)", pp. 337-365)
 
 ### LVM
 
