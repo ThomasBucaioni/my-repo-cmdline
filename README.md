@@ -9,7 +9,7 @@
 ### Init
 
 0. `$ git init name.git`
-1. `$ git remote -v; git remote add origin https://github.com/ThomasBucaioni/name.git; git remote -v`
+1. `$ git remote -v; git remote add origin https://github.com/username/name.git; git remote -v`
 2. `$ git pull`
 3. `$ git push -u origin master`
 
