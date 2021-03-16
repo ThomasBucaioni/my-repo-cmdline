@@ -9,7 +9,7 @@
 ### Init
 
 0. `$ git init name.git`
-1. `$ git remote -v; git remote add origin https://github.com/ThomasBucaioni/name.git; git remote -v`
+1. `$ git remote -v; git remote add origin https://github.com/username/name.git; git remote -v`
 2. `$ git pull`
 3. `$ git push -u origin master`
 
@@ -298,7 +298,7 @@ iptables -A FORWARD -i LAN-interface-on-GATEWAY -o WAN-interface-on-GATEWAY -j A
 - `sudo ~/bin/firewall.sh`
 
 
-## LVM & RAID
+## LVM & RAID ("[Administration Linux par la pratique T.1](https://www.eyrolles.com/Informatique/Livre/administration-linux-par-la-pratique-9782212677386/)", pp. 337-365)
 
 ### LVM
 
@@ -320,7 +320,8 @@ iptables -A FORWARD -i LAN-interface-on-GATEWAY -o WAN-interface-on-GATEWAY -j A
 - `sudo mdadm --fail`
 - `sudo mdadm --manage /dev/md125 --add /dev/sdb3`
 - `sudo if=/dev/urandom of=/dev/sdb bs=512 count=5000000`, `sudo fdisk -l /dev/sdb`
-- `sudo mdadm --manage /dev/md125 --add /dev/sdb3`, `watch cat /proc/mdstat`
+- `# sfdisk -d /dev/sda | sfdisk /dev/sdb`
+- `# mdadm --manage /dev/md125 --add /dev/sdb3`, `# watch cat /proc/mdstat`
 
 
 ## Grub

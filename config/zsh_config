@@ -1,0 +1,7 @@
+# delete back to the previous slash
+backward-kill-dir () {
+    local WORDCHARS=${WORDCHARS/\/}
+    zle backward-kill-word
+}
+zle -N backward-kill-dir
+bindkey '^[^?' backward-kill-dir

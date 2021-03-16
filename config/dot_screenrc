@@ -3,3 +3,4 @@ termcapinfo xterm* ti@:te@
 hardstatus alwayslastline "%{kb}%{c}[%{w}%D %d/%m/%Y %c:%s%{c}] %{w}%-w%{rk}%n %t%{wb}%+w %=%{c}[%{W}%H %l%{c}]"
 bindkey -k k6 prev
 bindkey -k k7 next
+bindkey -k k8 focus
