@@ -1,0 +1,92 @@
+set grid ;
+
+show grid ;
+
+#--------------------
+# Time Response
+#--------------------
+
+#-----
+# set terminals
+#-----
+
+#set terminal x11 size 1300, 900 position 0,0
+#set terminal postscript enhanced
+
+set term pngcairo size 1300, 900
+
+#-----
+# set encoding
+#-----
+set encoding iso_8859_1
+
+#-----
+# set output
+#-----
+
+set output "output_file.png"
+#set term x11 1
+
+#-----
+# set labels and title
+#-----
+
+set xlabel "X label" #{/Symbol m}s
+set xrange [16:19.5]
+set ylabel "Y label"
+set title "Title\nSubtitle"
+
+#-----
+# Line style
+#-----
+
+set style line 1 lt rgb "red" lw 1.5 dt 5
+set style line 2 lt rgb "orange" lw 1.5 dt 5
+set style line 3 lt rgb "yellow" lw 1.5 dt 5
+set style line 4 lt rgb "green" lw 1.5 dt 5
+set style line 5 lt rgb "cyan" lw 1.5 dt 5
+set style line 6 lt rgb "blue" lw 1.5 dt 5
+set style line 7 lt rgb "violet" lw 1.5 dt 5
+
+set style line 11 lt rgb "red" lw 1.5 dt 1
+set style line 12 lt rgb "orange" lw 1.5 dt 1
+set style line 13 lt rgb "yellow" lw 1.5 dt 1
+set style line 14 lt rgb "green" lw 1.5 dt 1
+set style line 15 lt rgb "cyan" lw 1.5 dt 1
+set style line 16 lt rgb "blue" lw 1.5 dt 1
+set style line 17 lt rgb "violet" lw 1.5 dt 1
+
+show style line
+
+#-----
+# Labels
+#-----
+#
+# set label 1 'set style line 1 lt rgb "red" lw 1.5 dt 1'    at -0.4, -0.25 tc rgb "red"
+# set label 2 'set style line 2 lt rgb "orange" lw 1.5 dt 1' at -0.4, -0.35 tc rgb "orange"
+# set label 3 'set style line 3 lt rgb "yellow" lw 1.5 dt 1' at -0.4, -0.45 tc rgb "yellow"
+# set label 4 'set style line 4 lt rgb "green" lw 1.5 dt 1'  at -0.4, -0.55 tc rgb "green"
+# set label 5 'set style line 5 lt rgb "cyan" lw 1.5 dt 1'   at -0.4, -0.65 tc rgb "cyan"
+# set label 6 'set style line 6 lt rgb "blue" lw 1.5 dt 1'   at -0.4, -0.75 tc rgb "blue"
+# set label 7 'set style line 7 lt rgb "violet" lw 1.5 dt 1' at -0.4, -0.85 tc rgb "violet"
+#
+
+#-----
+# plot
+#-----
+
+plot \
+	"<(sed -n '820,1030p' file-00)" using (($1)*1e3):(sqrt($6**2+$7**2)*1000) ls 1 with lines title "file-00", \
+        "<(sed -n '820,1030p' file-01)" using (($1)*1e3):(sqrt($6**2+$7**2)*1000) with lines ls 2 title "file-01", \
+        "<(sed -n '820,1030p' file-02)" using (($1)*1e3):(sqrt($6**2+$7**2)*1000) with lines ls 3 title "file-02", \
+        "<(sed -n '820,1030p' file-03)" using (($1)*1e3):(sqrt($6**2+$7**2)*1000) with lines ls 4 title "file-03", \
+        "<(sed -n '820,1030p' file-04)" using (($1)*1e3):(sqrt($6**2+$7**2)*1000) with lines ls 5 title "file-04", \
+        "<(sed -n '820,1030p' file-05)" using (($1)*1e3):(sqrt($6**2+$7**2)*1000) with lines ls 6 title "file-05", \
+        "<(sed -n '313,393p' file.txt)" using (($1)*1e3):($2*1000) with line lw 3.5 lt rgb "purple" title "title ref", \
+	"<(sed -n '820,1030p' file-10)" using (($1)*1e3):(sqrt($6**2+$7**2)*1000) with lines ls 11 title "file-10", \
+        "<(sed -n '820,1030p' file-11)" using (($1)*1e3):(sqrt($6**2+$7**2)*1000) with lines ls 12 title "file-11", \
+        "<(sed -n '820,1030p' file-12)" using (($1)*1e3):(sqrt($6**2+$7**2)*1000) with lines ls 13 title "file-12", \
+        "<(sed -n '820,1030p' file-13)" using (($1)*1e3):(sqrt($6**2+$7**2)*1000) with lines ls 14 title "file-13", \
+        "<(sed -n '820,1030p' file-14)" using (($1)*1e3):(sqrt($6**2+$7**2)*1000) with lines ls 15 title "file-14", \
+        "<(sed -n '820,1030p' file-15)" using (($1)*1e3):(sqrt($6**2+$7**2)*1000) with lines ls 16 title "file-15"
+	
