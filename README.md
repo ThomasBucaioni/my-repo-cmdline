@@ -90,6 +90,7 @@ PS1="$PS1\[\e[0m\]\[\e[01;35m\]:\$\[\e[00m\] " # ending
 - `M-x M-p`
 - `M-x tdoe`
 - `etags ~/dir/*.c`, `M-.`
+- `M-x transparency`
 - 
 
 ## NeoVim
