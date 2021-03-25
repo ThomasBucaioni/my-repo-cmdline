@@ -61,6 +61,7 @@
 - `gunzip dvorak.map.gz`, `sudo cp dvorak.map my_dvorak.map`, `vi my_dvorak.map`, `gzip my_dvorak.map`, `sudo cp ~/my_dovak.map.gz /usr/?lib?/kbd/keymaps/legacy/i386/dvorak/my_dvorak.map.gz`, `localectl set-keymap my_dvorak`
 - `for file in $DIR/*my_string*.txt ; do echo "$file" ; done`, `for file in $DIR/*my_string*.txt ; do mv -nv -- "$file" "$file.$(date +%Y%m%d)" ; done`, `for file in *; do echo-mv "$" $(echo $file | sed 's/regex/replace_text/'); done`
 - `du -h | sort -nr | head`
+- `gnuplot -e 'plot for [file in system("find . -depth 1 -type f -print")] file u 3:2'`
 
 ### Prompt
 
