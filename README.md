@@ -65,6 +65,8 @@
 
 ### Prompt
 
+1. Bash
+
 ```
 PS1="" # reset
 PS1="$PS1\[\e[0m\]\[\e[03;32m\]\u" # user
@@ -77,6 +79,18 @@ PS1="$PS1\[\e[0m\]\[\e[01;34m\]\w" # path
 PS1="$PS1\[\e[0m\]\[\e[01;35m\]:" # separator
 PS1="$PS1\[\e[0m\]\[\e[01;37m\]$?" # last error code
 PS1="$PS1\[\e[0m\]\[\e[01;35m\]:\$\[\e[00m\] " # ending
+```
+
+2. Zsh
+```
+PS1="%K{032}%B%n%b%k"
+PS1="$PS1 %F{magenta}%K{grey}%B@%b%k%f"
+PS1="$PS1 %K{green}%F{118}%B%m%b%f%k"
+PS1="$PS1 %F{magenta}%K{grey}%B:%b%k%f"
+PS1="$PS1 %K{054}%F{208} %T - %W %f%k%"
+PS1="$PS1 F{blue}%F{magenta}%K{grey}%B:%b%k%f"
+PS1="$PS1 %K{105}%F{11} %~/ %f%k%F{magenta}%K{grey}%B>%b%k %f"
+RPS1="%(?.%F{green}0.%K{red}%F{011})%(?..(%?%))%(?.%f.%f%k)%F{magenta}%K{grey}:%k%f%F{105}%2c%f"
 ```
 
 ### Screensaver
