@@ -1,0 +1,42 @@
+set grid ;
+
+show grid ;
+
+#--------------------
+# Réponse fréquencielle
+#--------------------
+
+#-----
+# set terminals
+#-----
+
+#set terminal x11 size 1300, 900 position 0,0
+#set terminal postscript enhanced
+
+set term pngcairo size 1920, 1080
+
+#-----
+# set encoding
+#-----
+set encoding iso_8859_1
+
+#-----
+# set output
+#-----
+
+set output "s11.png"
+
+#-----
+# set labels and title
+#-----
+
+set xlabel "Fréquence (MHz)" #{/Symbol m}s
+#set xrange [16:19.5]
+set ylabel "Admittance (mS)"
+set title "Dipôle 41m, ø20mm - spectre de l'admittance dans le générateur\nrotation du dipôle"
+
+FILES = system("ls -1 ~/FichiersSortieAConserver/Temporaire/s11*-para")
+LABEL = system("ls -1 ~/FichiersSortieAConserver/Temporaire/s11*-para | sed -e 's/-para//' -e 's/s11-//'")
+
+plot for [i=1:words(FILES)] word(FILES,i) u (($1)*1e3):(sqrt($6**2+$7**2)*1000) w l title word(LABEL,i), \
+     "FEKO.txt" with lines lw 2 lc rgb "black" title "FEKO"

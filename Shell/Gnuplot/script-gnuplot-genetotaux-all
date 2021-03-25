@@ -1,0 +1,42 @@
+set grid ;
+
+show grid ;
+
+#--------------------
+# Réponse temporelle
+#--------------------
+
+#-----
+# set terminals
+#-----
+
+#set terminal x11 size 1300, 900 position 0,0
+set term pngcairo size 1920, 1080
+
+#-----
+# set encoding
+#-----
+#set encoding iso_8859_1
+#set terminal postscript enhanced
+set termoption enhanced
+set encoding utf8
+
+#-----
+# set output
+#-----
+
+set output "gene.png"
+
+#-----
+# set labels and title
+#-----
+
+set xlabel "Temps ({/Symbol m}s)"
+#set xrange [16:19.5]
+set ylabel "Courant (mA)"
+set title "Dipôle 41m, ø20mm - courant dans le générateur\nrotation du dipôle"
+
+FILES = system("ls -1 ~/FichiersSortieAConserver/Temporaire/gene*-para")
+LABEL = system("ls -1 ~/FichiersSortieAConserver/Temporaire/gene*-para | sed -e 's/-para//' -e 's/.*gene-//'")
+
+plot for [i=1:words(FILES)] word(FILES,i) u (($1)*1.668335e-3):($3*1e3) with lines title word(LABEL,i)
