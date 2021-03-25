@@ -26,6 +26,7 @@ set style line 17 lt rgb "violet" lw 1.5 dt 1
 ```
 set terminal x11 size 1300, 900 position 0,0
 set term pngcairo size 1300, 900
+set term pngcairo dashed # Dashed lines
 ```
 - Encoding
 ```
