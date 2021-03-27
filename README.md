@@ -62,6 +62,7 @@
 - `for file in $DIR/*my_string*.txt ; do echo "$file" ; done`, `for file in $DIR/*my_string*.txt ; do mv -nv -- "$file" "$file.$(date +%Y%m%d)" ; done`, `for file in *; do echo-mv "$" $(echo $file | sed 's/regex/replace_text/'); done`
 - `du -h | sort -nr | head`
 - `gnuplot -e 'plot for [file in system("find . -depth 1 -type f -print")] file u 3:2'`
+- `until timeout 5s sleep 6 ; do echo $(( i=i+1 )) ; done`
 
 ### Prompt
 
