@@ -1,8 +1,8 @@
 from random import gauss
 from matplotlib import pyplot as plt
 import numpy as np
-r = 1
-s = 0.5
+r = 0.3
+s = 0.75
 tau = 1/255
 print(f"Exponential Martingale, {r=}, {s=}, {tau=}")
 Nc = 1000
