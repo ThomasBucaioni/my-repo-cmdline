@@ -63,6 +63,7 @@
 - `du -h | sort -nr | head`
 - `gnuplot -e 'plot for [file in system("find . -depth 1 -type f -print")] file u 3:2'`
 - `until timeout 5s sleep 6 ; do echo $(( i=i+1 )) ; done`
+- `^foo^bar^:G`
 
 ### Prompt
 
