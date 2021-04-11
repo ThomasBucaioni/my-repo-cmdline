@@ -8,8 +8,8 @@ The goal is to have a non-synchronized password file for secondary websites need
 2. Create a `passwords_encrypted` file in the later directory:
 ```
 $ cd ~/passwords
-$ echo "site:login:password" >> password_decipher.txt
-$ openssl enc -aes-256-cbc -pbkdf2 -e -in password_decipher.txt -out password_encrypted
+$ echo "site:login:password" >> passwords_decipher.txt
+$ openssl enc -aes-256-cbc -pbkdf2 -e -in passwords_decipher.txt -out passwords_encrypted
 ```
 3. When you need to add a password for a new site `newsite` with login `newlogin`, call `sAddPassword.sh`:
 ```
