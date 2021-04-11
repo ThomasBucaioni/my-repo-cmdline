@@ -1,7 +1,9 @@
 # Custom password manager
 
 The goal is to have a non-synchronized password file for secondary websites needing an account.
+
 The script `sAddPassword.sh` adds a password to the list and the script `sRetrievePassword.sh` retrieves all the passwords matching the website name.
+
 Both scripts assume the username is `user` which you would need to change.
 
 ## Usage
