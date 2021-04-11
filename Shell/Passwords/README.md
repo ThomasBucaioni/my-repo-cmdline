@@ -1,6 +1,6 @@
 # Custom password manager
 
-The goal is to have a non-synchronized password file for secondary websites needing an account
+The goal is to have a non-synchronized password file for secondary websites needing an account. The scripts assume the username is `user` which you would need to change.
 
 ## Usage
 
