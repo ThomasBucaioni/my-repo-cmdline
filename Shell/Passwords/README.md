@@ -25,4 +25,4 @@ A copy is made to the clipboard via `xclip` under X or `wl-copy` under Wayland
 ```
 $ openssl enc -aes-256-cbc -pbkdf2 -d -in ~/passwords/passwords_encrypted  -out passwords_decipher.txt
 ```
-Don't forget te remove `passwords_decipher.txt` afterwards
+Don't forget to remove `passwords_decipher.txt` afterwards
