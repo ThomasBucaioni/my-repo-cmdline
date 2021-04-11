@@ -20,6 +20,7 @@ $ ./sAddPassword.sh newsite newlogin
 $ ./sRetrievePassword.sh newsite
 ```
 A copy is made to the clipboard via `xclip` under X or `wl-copy` under Wayland
+
 5. To force the decryption of the encrypted password file and clean it up, you can call `openssl` directly:
 ```
 $ openssl enc -aes-256-cbc -pbkdf2 -d -in ~/passwords/passwords_encrypted  -out passwords_decipher.txt
