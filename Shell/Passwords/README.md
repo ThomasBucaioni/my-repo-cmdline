@@ -15,7 +15,7 @@ $ openssl enc -aes-256-cbc -pbkdf2 -e -in password_decipher.txt -out password_en
 ```
 $ ./sAddPassword.sh newsite newlogin
 ```
-4. To retrive a password for the site `newsite` with login `newlogin`, you call `sRetrievePassword.sh`
+4. To retrive a password for the site `newsite`, you call `sRetrievePassword.sh`
 ```
 $ ./sRetrievePassword.sh newsite
 ```
