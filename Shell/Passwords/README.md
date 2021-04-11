@@ -4,10 +4,8 @@ The goal is to have a non-synchronized password file for secondary websites need
 
 - the script `sAddPassword.sh` adds a password to the list and the script `sRetrievePassword.sh` retrieves the passwords matching the website name
 - a copy is made to the clipboard with `xclip` under Xorg and `wl-copy` under Wayland
-- in the case several logins match the site
-- the password in the clipboard is always the first one found.
-
-Both scripts assume the username is `user` which you would need to change.
+- in the case several logins match the site, the password in the clipboard is always the first one found
+- both scripts assume the username is `user` which you would need to change.
 
 ## Usage
 
