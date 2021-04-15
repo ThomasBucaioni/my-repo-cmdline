@@ -9,3 +9,4 @@ NormalityTest2=function(X){
   Verdict=ifelse(Normality>=0.05,"Variable can be considered Gaussian", "Non Gaussian")
   (TF=cbind(Normality,Verdict))
 }
+# Improvements: if nrow<12, prefer a plot

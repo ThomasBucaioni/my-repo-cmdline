@@ -100,7 +100,7 @@ Normality=function(X){
 Normality(ozone)
 Normality(Kars)
 
-rm(Normality) # remove the name
+rm(Normality) # remove the name  
 source("mesScripts/NormalityTest.R")
 NormalityTest(ozone)
 NormalityTest(Kars)
