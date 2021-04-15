@@ -88,3 +88,29 @@ irec()
 ## Description analysis----
 ## Modelisation----
 ## Graphs----
+
+# Other examples
+# Disc surface
+DiscSurface = function (R){
+  pi*R**2 # return the surface
+}
+DiscSurface(1) # Returns pi
+DiscSurfaceMonteCarlo = function (R,N){
+  X=runif(N,-R,R)
+  Y=runif(N,-R,R)
+  return(4*sum((X**2+Y**2)<=R)/N)
+}
+N=100
+R=1
+(X=runif(N,0,R))
+(Y=runif(N,0,R))
+(X**2+Y**2<=R)
+4*sum(X**2+Y**2<=R)/N
+DiscSurfaceMonteCarlo(1,100000000) # returns pi
+pi
+
+cc = function(){
+#  read.table('clipboard', header = TRUE, sep='\t', dec = ) # Windows
+  read.table(pipe("pbpaste"), header = TRUE, sep='\t', dec = ",")
+}
+DN=cc()
