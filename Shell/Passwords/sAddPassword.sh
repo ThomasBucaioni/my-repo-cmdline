@@ -50,9 +50,9 @@ if [ -z $3 ]; then
     echo 'Default password length is 20'
     #exit
     length=16
-elif [[ $1 -ge 4 ]]; then
+elif [[ $3 -ge 4 ]]; then
     echo "Password of length $1"
-    length=$(($1 - 4))
+    length=$(($3 - 4))
 else
     echo 'Password of length 4'
     length=0
@@ -71,14 +71,14 @@ printf "\n"
 
 #decipher the passwords
 rm -rf passwords_decipher.txt
-openssl enc -aes-256-cbc -pbkdf2 -d -k $masterkey -in ${password_directory}passwords_encrypted -out passwords_decipher.txt
+openssl enc -aes-256-cbc -pbkdf2 -d -k $masterkey -in ${password_directory}passwords_encrypted -out ${password_directory}passwords_decipher.txt
 errorcode=$?
 
 #if the master key was correct
 if [[ $errorcode -eq 0 ]]; then
-    echo "$mysite:$mylogin:$passwordString" >> passwords_decipher.txt
-    openssl enc -aes-256-cbc -pbkdf2 -e -k $masterkey -in passwords_decipher.txt -out ${password_directory}passwords_encrypted
-    rm -rf password_decipher.txt
+    echo "$mysite:$mylogin:$passwordString" >> ${password_directory}passwords_decipher.txt
+    openssl enc -aes-256-cbc -pbkdf2 -e -k $masterkey -in ${password_directory}passwords_decipher.txt -out ${password_directory}passwords_encrypted
+    rm -rf ${password_directory}password_decipher.txt
     echo "Password added for site $mysite, login $mylogin: $passwordString"
     echo $passwordString | $copy_to_clipboard_command
 else
