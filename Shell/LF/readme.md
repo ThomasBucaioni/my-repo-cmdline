@@ -20,4 +20,4 @@
 - `# rpmbuild --rebuild -rb p7zip-16.02-16.el8.src.rpm`
 - `# root/rpmbuild>find . -name "*rpm"`
 - https://mirrors.edge.kernel.org/pub/software/scm/git/docs/
-
+- `which git`
