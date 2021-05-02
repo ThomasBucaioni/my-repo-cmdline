@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# firewall.sh
+# firewall.sh from "Administration Linux par la pratique T.2, p.50"
 
 # WAN and LAN interfaces
 IFACE_LAN=enp2s0

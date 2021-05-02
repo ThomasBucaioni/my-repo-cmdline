@@ -13,6 +13,10 @@
 2. `$ git pull`
 3. `$ git push -u origin master`
 
+### Ssh key identification
+
+`$ git remote set-url origin git@github.com:user/my-repo.git`
+
 ### Branch
 
 1. `git checkout master`
@@ -208,11 +212,13 @@ bindsym $mod+period exec makoctl invoke
 bindsym $mod+shift+comma  exec makoctl dismiss -a
 bindsym $mod+shift+period exec makoctl menu wofi -d -p 'Choose Action: '
 ```
+
 ### Wheather
 ```
 bindsym $mod+Scroll_Lock exec ~/bin/run_with_sway_command.sh 'floating enable, resize set 1200 800' \
 kitty -e zsh -c 'curl https://wttr.in/ && read "?Press enter to continue"'
 ```
+
 ### Screenshots
 ```
 # Take a screenshot with all outputs and save it into the $screenshots directory (jpeg format: -t jpeg)
