@@ -113,7 +113,7 @@ RPS1="%(?.%F{green}0.%K{red}%F{011})%(?..(%?%))%(?.%f.%f%k)%F{magenta}%K{grey}:%
 - `M-x tdoe`
 - `etags ~/dir/*.c`, `M-.`
 - `M-x transparency`
-- 
+- `C-u C-SPC`
 
 ## NeoVim
 
