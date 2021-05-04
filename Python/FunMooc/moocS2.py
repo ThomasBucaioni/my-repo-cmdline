@@ -49,3 +49,23 @@ help(random)
 random.randint? # error
 help(random.randint)
 random.randint(1, 100)
+
+
+a = []
+for n in [1, 2, '3', 4, 'FIN']:
+    a.append(str(n))
+print(",".join(a))
+
+def to_str(a):
+    tmp = []
+    for i in a:
+        tmp.append(str(i))
+    return " ".join(tmp)
+
+to_str([1, 2, 3])
+to_str(['1', '2', '3'])
+to_str('123')
+#[1, 2, 3].to_str()
+a = [1, 2, 3]
+to_str(a)
+to_str(['123'])
