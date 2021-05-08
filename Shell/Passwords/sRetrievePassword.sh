@@ -29,7 +29,7 @@ if [ -z $1 ]; then
 
     #if the master key was correct
     if [[ $errorcode -eq 0 ]]; then
-	awk -v "var=$mysite" 'BEGIN { FS = ":" } $0~var { printf "%s\t%s\n", $1, $2 }' ${password_directory}passwords_decipher.txt
+	awk -v "var=$mysite" 'BEGIN { FS = ":" } $0~var { printf "%s\t\t\t%s\n", $1, $2 }' ${password_directory}passwords_decipher.txt | uniq | sort
 	rm -rf ${password_directory}passwords_decipher.txt
     else
 	echo "Wrong password"

@@ -70,7 +70,11 @@ read -s -p "What is your master key? " masterkey
 printf "\n"
 
 #decipher the passwords
-rm -rf passwords_decipher.txt
+echo "Erase password_decipher.txt, n°1: ${password_directory}password_decipher.txt"
+rm -rf "${password_directory}passwords_decipher.txt"
+echo "Check n°1:"
+ls -l ${password_directory}
+echo "-----"
 openssl enc -aes-256-cbc -pbkdf2 -d -k $masterkey -in ${password_directory}passwords_encrypted -out ${password_directory}passwords_decipher.txt
 errorcode=$?
 
@@ -78,7 +82,12 @@ errorcode=$?
 if [[ $errorcode -eq 0 ]]; then
     echo "$mysite:$mylogin:$passwordString" >> ${password_directory}passwords_decipher.txt
     openssl enc -aes-256-cbc -pbkdf2 -e -k $masterkey -in ${password_directory}passwords_decipher.txt -out ${password_directory}passwords_encrypted
-    rm -rf ${password_directory}password_decipher.txt
+    echo "Check n°2:"
+    ls -l ${password_directory}
+    echo "Erase password_decipher.txt, n°2: ${password_directory}password_decipher.txt"
+    rm -rf "${password_directory}passwords_decipher.txt"
+    echo "Check n°3:"
+    ls -l ${password_directory}
     echo "Password added for site $mysite, login $mylogin: $passwordString"
     echo $passwordString | $copy_to_clipboard_command
 else
