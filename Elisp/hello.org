@@ -1,0 +1,57 @@
+* Heading /*italic*/ /italic/ (font Fira Code Retina issue: no italic... Call variable-pitch-mode)
+
+  Content /italic/ _underline_ *bold* =verbatim= ~code~ +strike-through+
+
+  1. one
+  2. two (press M-RET)
+  3. 
+
+** Sub-Heading
+
+   - item
+   - item (M-RET)
+   - [ ] checkbox /item/
+   - [ ] another (press M-S-RET)
+   - [X] checked checkbox (press C-c C-x C-b or call org-toggle-checkbox)
+   
+** Before
+
+   Add some _more_ *content*
+
+   A table: press | and TAB
+
+   | name        | org user |
+   | user        | yes      |
+   | other user  | no       |
+   |-------------+----------|
+   | new section |          |
+
+** After
+
+   Link: [[https://orgmode.org][org homepage]]
+
+* Inserted Heading
+
+  #+begin_src python
+    a = [1,2,3]
+    a.append(4)
+    a
+
+  #+end_src
+
+* Right after
+
+** Sub-head: M-RET M-right
+
+*** Or M-Left
+
+* Second Heading
+
+ 
+* TODO Press C-S-RET
+  
+* DONE Checked list (press C-c C-t)
+  
+* DONE Third (or S-left and S-right)
+
+* TODO Fourth
