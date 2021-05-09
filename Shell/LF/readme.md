@@ -41,4 +41,28 @@
 
 ### DPKG
 
+- `dpkg -S logrotate.conf`
+- `dpkg -L logrotate`
+- `dpkg -V logrotate`
+- `sudo dpkg -r logrotate`
+
+### Dnf
+
+- `sudo dnf update`, `check-update`, `list updates`
+- `list installed "*kernel*"`, `list installed "*kernel*"`
+- `sudo dnf search bash`, `dnf list bash`, `dnf info bash`, `dnf deplist bash`
+- `dnf grouplist`, `dnf groupinfo "Virtualization Host"`, `sudo dnf groupinstall "Virtualization Host"`, `sudo dnf groupremove "Virtualization Host"`
+- `touch /etc/yum.repos.d/webmin.repo`,
+```
+[Webmin]
+name=Webmin Distribution Neutral
+baseurl=http://download.webmin.com/download/yum
+mirrorlist=http://download.webmin.com/download/yum/mirrorlist
+enabled=1
+gpgcheck=0
+```
+- `sudo dnf install webmin`
+
+### Zypper
+
 -`
