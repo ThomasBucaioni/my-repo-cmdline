@@ -102,7 +102,7 @@
 ;; Make ESC quit prompts
 ;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-(use-package all-the-icons) ;; example: (all-the-icons-wicon   "tornado")
+(use-package all-the-icons) ;; then call M-x all-the-icons-install-fonts
 
 (use-package doom-modeline
   :ensure t
