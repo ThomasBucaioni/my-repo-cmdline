@@ -234,6 +234,29 @@
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
 
+(defun my-evil-dvorak-customizations ()
+  "My helpful evil-dvorak customizations"
+  (interactive)
+  ;;normal mode customizations
+  (evil-define-key 'normal evil-dvorak-mode-map
+    (kbd "l") 'recenter-top-bottom
+    (kbd "Q") 'anzu-query-replace-regexp)
+
+  ;;insert mode customizations
+  (evil-define-key 'insert evil-dvorak-mode-map
+    (kbd "C-d") 'delete-char
+    (kbd "C-z") 'evil-normal-state)
+
+  (evil-define-key 'visual evil-dvorak-mode-map
+    (kbd "o") 'evil-backward-word-begin
+    (kbd "e") 'evil-forward-word-begin))
+
+(use-package evil-dvorak
+  :ensure t
+  :config
+  (global-evil-dvorak-mode 1)
+  (my-evil-dvorak-customizations))
+
 (use-package evil-collection
   :after evil
   :config
@@ -356,3 +379,5 @@
 
 (use-package visual-fill-column
   :hook (org-mode . efs/org-mode-visual-fill))
+
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)

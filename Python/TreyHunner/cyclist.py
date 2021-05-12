@@ -24,6 +24,11 @@ class CyclicList:
     def __iter__(self):
         return CyclicSequenceIterator(self.data)
 
+from itertools import islice
+
+my_list = CyclicList([1, 2, 3])
+print(list(islice(my_list, 8)))
+
 class CyclicList:
 
     """List-like data structure that loops in a cyclic manner."""
@@ -36,6 +41,12 @@ class CyclicList:
         while True:
             yield self.data[i]
             i = (i + 1) % len(self.data)
+
+
+my_list = CyclicList([1, 2, 3])
+print(list(islice(my_list, 8)))
+
+exit
 
 from itertools import cycle
 
@@ -197,23 +208,23 @@ def __getitem__(self, index):
             return [self[i] for i in range(start, stop)]
         return self.data[index % len(self)]
     
-    def _slice_indices(self, obj):
-        start, stop = obj.start, obj.stop
-        if obj.step is not None:
-            raise ValueError("Step not supported")
-        if start is None:
-            start = 0
-        if stop is None:
-            stop = len(self) if start >= 0 else 0
-        return start, stop, 1
+def _slice_indices(self, obj):
+    start, stop = obj.start, obj.stop
+    if obj.step is not None:
+        raise ValueError("Step not supported")
+    if start is None:
+        start = 0
+    if stop is None:
+        stop = len(self) if start >= 0 else 0
+    return start, stop, 1
 
-    def __getitem__(self, index):
-        if isinstance(index, slice):
-            return [
-                self[i]
-                for i in range(*self._slice_indices(index))
-            ]
-        return self.data[index % len(self)]
+def __getitem__(self, index):
+    if isinstance(index, slice):
+        return [
+            self[i]
+            for i in range(*self._slice_indices(index))
+        ]
+    return self.data[index % len(self)]
 
 class CyclicList(list):
     def __iter__(self):
