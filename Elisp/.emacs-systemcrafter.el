@@ -311,8 +311,6 @@
 ;; (use-package forge
 ;;   :after magit)
 
-(setq electric-pair-mode t)
-
 ;;;;-----
 ;;;; Org-mode
 ;;;
@@ -381,3 +379,6 @@
   :hook (org-mode . efs/org-mode-visual-fill))
 
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
+(electric-pair-mode)
+
