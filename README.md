@@ -147,6 +147,19 @@ RPS1="%(?.%F{green}0.%K{red}%F{011})%(?..(%?%))%(?.%f.%f%k)%F{magenta}%K{grey}:%
 - `openssl req -new -key eccprivatekey.pem -x509 -nodes -days 365 -out ecccertificate.pem`
 - `openssl x509 -in ecccertificate.pem -text -noout`
 
+### Key generation, exchange, encryption
+
+- `cat /etc/distrib-release`, `openssl version`
+- `openssl genrsa -aes128 -out private_key.pem 1024`: 1024-bit public/private RSA key pair (+passphrase)
+- `ls -l private_key.pem`, `file private_key.pem`, `head private_key.pem`
+- `openssl rsa -in private_key.pem -noout -text`
+- `openssl rsa -in private_key.pem -pubout > public_key.pem`
+- `ls -l *.pem`
+- `openssl rsa -in public_key.pem -pubin -text -noout`
+- `echo "my text to encrypt" > secret.txt`
+- `openssl rsautl -encrypt -inkey public_key.pem -pubin -in secret.txt -out secret.enc`, `hexdump -C ./secret.enc`
+- `openssl rsautl -decrypt -inkey private_key.pem -in secret.enc > secret_decipher.txt`
+
 ## Arch
 
 1. `loadkeys dvorak`
