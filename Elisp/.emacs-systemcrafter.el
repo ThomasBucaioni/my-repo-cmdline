@@ -76,21 +76,21 @@
          :map ivy-minibuffer-map
          ("TAB" . ivy-alt-done)
          ("C-s" . ivy-alt-done)
-         ("C-t" . ivy-next-line)
-         ("C-n" . ivy-previous-line)
+         ("C-h" . ivy-next-line)
+         ("C-t" . ivy-previous-line)
          :map ivy-switch-buffer-map
-         ("C-n" . ivy-previous-line)
+         ("C-t" . ivy-previous-line)
          ("C-s" . ivy-done)
          ("C-d" . ivy-switch-buffer-kill)
          :map ivy-reverse-i-search-map
-         ("C-n" . ivy-previous-line)
+         ("C-t" . ivy-previous-line)
          ("C-d" . ivy-reverse-i-search-kill))
   :config
   (ivy-mode 1))
 
 (use-package counsel
-  :bind (("C-M-j" . 'counsel-switch-buffer)
-         ("C-x b" . 'counsel-ibuffer)
+  :bind (("C-M-j" . 'counsel-ibuffer)
+         ("C-x b" . 'counsel-switch-buffer)
          ("C-x C-f" . 'counsel-find-file)
          :map minibuffer-local-map
          ("C-r" . 'counsel-minibuffer-history))
@@ -212,8 +212,8 @@
 
 
   (efs/leader-keys
-    "t"  '(:ignore t :which-key "toggles")
-    "tt" '(counsel-load-theme :which-key "choose theme")
+    "h"  '(:ignore t :which-key "toggles")
+    "hh" '(counsel-load-theme :which-key "choose theme")
     "fde" '(lambda () (interactive) (find-file (expand-file-name "~/.emacs.d/Emacs.org")))))
 
 (use-package evil
@@ -228,13 +228,13 @@
   ;;(define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
 
   ;; Use visual line motions even outside of visual-line-mode buffers
-  (evil-global-set-key 'motion "t" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "n" 'evil-previous-visual-line)
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
 
-(defun my-evil-dvorak-customizations ()
+(defun my-evil-dvorak-customizations () ; from https://github.com/jbranso/evil-dvorak 
   "My helpful evil-dvorak customizations"
   (interactive)
   ;;normal mode customizations
@@ -256,6 +256,17 @@
   :config
   (global-evil-dvorak-mode 1)
   (my-evil-dvorak-customizations))
+;; h move the cursor one line up
+;; t move the cursor one line down
+;; n move the cursor one character to the left
+;; s move the cursor one character to the right
+;; k kill from point to the end of the line
+;; K kill from point to the beginning of the line
+;; j join the lower line to the end of this line
+;; J join the current line the end of the previous line
+;; C-h 	insert a new line below point and switch to insert state
+;; C-t 	insert a new line above point and switch to insert state. The reader should note that this conflicts with the emacs binding of (transpose-chars), which I have personally rebound to (global-set-key (kbd "C-c t") 'transpose-chars)
+(global-set-key (kbd "C-c t") 'transpose-chars)
 
 (use-package evil-collection
   :after evil
@@ -271,12 +282,12 @@
 
 (defhydra hydra-text-scale (:timeout 4)
   "scale text"
-  ("t" text-scale-increase "in")
-  ("n" text-scale-decrease "out")
+  ("h" text-scale-increase "in")
+  ("t" text-scale-decrease "out")
   ("f" nil "finished" :exit t))
 
 (efs/leader-keys
-  "ts" '(hydra-text-scale/body :which-key "scale text"))
+  "hs" '(hydra-text-scale/body :which-key "scale text"))
 
 ;;;;-----
 ;;;; Projectile #4
@@ -378,7 +389,8 @@
 (use-package visual-fill-column
   :hook (org-mode . efs/org-mode-visual-fill))
 
-(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
-
-(electric-pair-mode)
+;;;;
+;;; Other configuration
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p) ; make file executable when starting with a shebang
+(electric-pair-mode) ; make pair parentheses, quotes, double quotes, square brackets, bracketsa
 

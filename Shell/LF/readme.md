@@ -65,4 +65,121 @@ gpgcheck=0
 
 ### Zypper
 
--`
+- `zypper list-updates`
+- `zypper repos`
+- `zypper search <string>`
+- `zypper info package`
+- `zypper search --provides /usr/bin/exec`
+- `sudo zypper install package`, `sudo zypper --non-interactive install package`
+- `sudo zypper update`, `sudo zypper --non-interactive update`
+- `sudo zypper remove package`
+- `sudo zypper shell`
+- `sudo zypper addrepo URL url-alias`
+- `sudo zypper removerepo alias`
+- `sudo zypper clean [--all]`
+- `zypper search -d bash`
+- `zypper info --requires  bash`
+- `sudo zypper remove --dry-run bash`
+
+### Apt
+
+#### Resources
+
+- https://www.debian.org/distrib/packages
+- https://packages.ubuntu.com/
+
+#### Basic commands
+
+- `sudo apt-get install apt-file`, `sudo apt-file update`
+- `apt-cache search "package-name"`
+- `apt-cache show package-name`
+- `apt-cache showpkg package-name`
+- `apt-cache depends package-name`
+- `apt-cache pkgnames`, `apt-cache pkgnames "package-name"`
+- `dpkg --get-selections "*string*"`
+- `apt-file search package-file-name`
+- `apt-file list package-name`
+- `sudo apt-get remove package-name`
+- `sudo apt-get --purge remove package-name`
+- `sudo apt-get update`
+- `sudo apt-get upgrade`
+- `sudo apt-get dist-upgrade`
+- `sudo apt-get autoremove`
+- `sudo apt-get clean`
+- `apt-cache depends bash`, `apt-cache rdepends bash`
+- `apt-cache search metapackage`
+
+## System monitoring
+
+### Processes
+
+- `top`
+- `uptime`
+- `ps`
+- `pstree`
+- `mpstat`
+- `iostat`
+- `sar`
+- `numastat`
+- `strace`
+
+### Memory
+
+- `free`
+- `vmstat`
+- `pmap`
+
+### I/O
+
+- `iostat`
+- `sar`
+- `vmstat`
+
+### Network
+
+- `netstat`
+- `iptraf`
+- `tcpdump`
+- `wireshark`
+
+### Examples
+
+- `sudo sar 3 3`, `-A`, `-b`, `-B`, ...
+- `sudo tail -f /var/log/messages`, `syslog`, `boot.log`, `dmesg` , `secure`
+- `cat /etc/logrotate.conf`
+- `top`, `1`
+- `vmstat -a 2 1000`
+- `git clone git://kernel.ubuntu.com/cking/stress-ng.git`, `cd stress-ng`, `make`, `sudo make install`
+- `stress-ng --help`, `info stress-ng`
+- `stress-ng -c 8 -i 4 -m 6 -t 20s`, `stress-ng -m 4 -t 20s`
+
+## Process Monitoring
+
+- `ps aux`
+- `ps -elf` ++
+- `ps -eL`
+- `ps -C "bash"`
+- `ps -o pid,user,priority,cputime,pmem,size,command`
+- `pstree -aAp process-id`
+- `ls -l /proc/process-id/task`
+- `top`, `k`, `h`
+- `nice -n 10 bash`, `renice 15 -p process-id`
+- `dd if=/dev/urandom of=/dev/null &`, `ps -C dd -o pid,cmd,stat`
+- `fg`, `jobs`
+
+## Memory monitoring
+
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `

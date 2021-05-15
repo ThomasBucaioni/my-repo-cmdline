@@ -69,6 +69,7 @@
 - `until timeout 5s sleep 6 ; do echo $(( i=i+1 )) ; done`
 - `^foo^bar^:G`, `!!:gs/foo/bar/`
 - `line=$(sed -n '123p' file.txt | tr -s '\t' ' ' | cut -d' ' -f1)`
+- `journalctl --vacuum-time=2d`, `journalctl --vacuum-size=100M`
 
 ### Prompt
 
