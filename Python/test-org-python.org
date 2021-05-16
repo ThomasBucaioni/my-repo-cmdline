@@ -1,0 +1,68 @@
+* Test Python jupyter notebook in org-mode
+
+
+#+BEGIN_SRC jupyter-python :session py
+x = 'foo'
+y = 'bar'
+x + ' ' + y
+#+END_SRC
+
+#+RESULTS:
+: foo bar
+
+#+BEGIN_SRC jupyter-python :session py :display plain
+import pandas as pd
+data = [[1, 2], [3, 4]]
+pd.DataFrame(data, columns=["Foo", "Bar"])
+#+END_SRC
+
+#+RESULTS:
+:    Foo  Bar
+: 0    1    2
+: 1    3    4
+
+#+BEGIN_SRC jupyter-python :session py :file plot.png :results graphics file :async yes
+    import numpy as np
+    import matplotlib.pyplot as plt
+    x=np.linspace(0,6.3,1000)
+    plt.plot(x,np.sin(3*x))
+    plt.show()
+#+END_SRC
+
+#+RESULTS:
+[[file:plot.png]]
+
+#+begin_src jupyter-python :session py :file plot.png :results graphics file
+    import numpy as np
+    import matplotlib.pyplot as plt
+    x=np.linspace(0,6.3,1000)
+    plt.plot(x,np.cos(3*x))
+    plt.show() 
+#+end_src
+
+#+RESULTS:
+[[file:plot.png]]
+
+#+name: savefig
+#+begin_src python :var figname="plot.svg" width=5 height=5 :exports none :eval query-export
+  return f"""plt.savefig('{figname}', width={width}, height={height})
+  '{figname}'"""
+#+end_src
+
+#+RESULTS: savefig
+: plt.savefig('plot.svg', width=5, height=5)
+: 'plot.svg'
+
+#+header: :noweb strip-export
+#+begin_src python :results value file :session :exports both :eval query-export
+  import matplotlib, numpy
+  import matplotlib.pyplot as plt
+  fig=plt.figure(figsize=(4,2))
+  x=numpy.linspace(-15,15)
+  plt.plot(numpy.sin(x)/x)
+  fig.tight_layout()
+  <<savefig(figname="plot.png", width=10, height=5)>>
+#+end_src
+
+#+RESULTS:
+[[file:plot.png]]

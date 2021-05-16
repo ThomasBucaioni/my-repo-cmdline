@@ -76,20 +76,20 @@
          :map ivy-minibuffer-map
          ("TAB" . ivy-alt-done)
          ("C-s" . ivy-alt-done)
-         ("C-h" . ivy-next-line)
-         ("C-t" . ivy-previous-line)
+         ("C-t" . ivy-next-line)
+         ("C-h" . ivy-previous-line)
          :map ivy-switch-buffer-map
-         ("C-t" . ivy-previous-line)
+         ("C-h" . ivy-previous-line)
          ("C-s" . ivy-done)
          ("C-d" . ivy-switch-buffer-kill)
          :map ivy-reverse-i-search-map
-         ("C-t" . ivy-previous-line)
+         ("C-h" . ivy-previous-line)
          ("C-d" . ivy-reverse-i-search-kill))
   :config
   (ivy-mode 1))
 
 (use-package counsel
-  :bind (("C-M-j" . 'counsel-ibuffer)
+  :bind (("C-M-j" . 'switch-to-buffer) ;'counsel-ibuffer)
          ("C-x b" . 'counsel-switch-buffer)
          ("C-x C-f" . 'counsel-find-file)
          :map minibuffer-local-map
@@ -99,7 +99,22 @@
   :config
   (counsel-mode 1))
 
-;; Make ESC quit prompts
+(use-package company
+  :after lsp-mode
+  :hook (prog-mode . company-mode)
+  :bind (:map company-active-map
+              ;;("<tab>" . company-complete-selection)
+              ("<return>" . company-complete-selection))
+  (:map lsp-mode-map
+        ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0)
+  (global-company-mode t)
+  )
+
+;;;;
+;;; Make ESC quit prompts
 ;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (use-package all-the-icons) ;; then call M-x all-the-icons-install-fonts
@@ -189,6 +204,7 @@
 ;; trick M-: (global-unset-key (kbd "C-M-j"))
 
 (defun indent-buffer ()
+  "Indent the buffer."
   (interactive)
   (save-excursion
     (delete-trailing-whitespace)
@@ -226,16 +242,17 @@
   (evil-mode 1)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   ;;(define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+  (global-set-key (kbd "C-?") 'help-command) ; former : undefined
 
   ;; Use visual line motions even outside of visual-line-mode buffers
-  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+  (evil-global-set-key 'motion "t" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "h" 'evil-previous-visual-line)
 
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
 
-(defun my-evil-dvorak-customizations () ; from https://github.com/jbranso/evil-dvorak 
-  "My helpful evil-dvorak customizations"
+(defun my-evil-dvorak-customizations () ; from https://github.com/jbranso/evil-dvorak
+  "My helpful evil-dvorak customizations."
   (interactive)
   ;;normal mode customizations
   (evil-define-key 'normal evil-dvorak-mode-map
@@ -244,6 +261,10 @@
 
   ;;insert mode customizations
   (evil-define-key 'insert evil-dvorak-mode-map
+    (kbd "C-h") 'evil-previous-line
+    (kbd "C-t") 'evil-next-line
+    (kbd "C-N") 'evil-backward-word-begin
+    (kbd "C-S") 'evil-forward-word-end
     (kbd "C-d") 'delete-char
     (kbd "C-z") 'evil-normal-state)
 
@@ -264,8 +285,8 @@
 ;; K kill from point to the beginning of the line
 ;; j join the lower line to the end of this line
 ;; J join the current line the end of the previous line
-;; C-h 	insert a new line below point and switch to insert state
-;; C-t 	insert a new line above point and switch to insert state. The reader should note that this conflicts with the emacs binding of (transpose-chars), which I have personally rebound to (global-set-key (kbd "C-c t") 'transpose-chars)
+;; C-h  insert a new line below point and switch to insert state
+;; C-t  insert a new line above point and switch to insert state. The reader should note that this conflicts with the emacs binding of (transpose-chars), which I have personally rebound to (global-set-key (kbd "C-c t") 'transpose-chars)
 (global-set-key (kbd "C-c t") 'transpose-chars)
 
 (use-package evil-collection
@@ -389,8 +410,83 @@
 (use-package visual-fill-column
   :hook (org-mode . efs/org-mode-visual-fill))
 
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   ;;(julia . t)
+   (python . t)
+   (jupyter . t)) ; needs to be the last
+ )
+(use-package jupyter
+  :commands (jupyter-run-server-repl
+             jupyter-run-repl
+             jupyter-server-list-kernels))
+  
 ;;;;
 ;;; Other configuration
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p) ; make file executable when starting with a shebang
 (electric-pair-mode) ; make pair parentheses, quotes, double quotes, square brackets, bracketsa
+(setq python-indent-guess-indent-offset t)
+(setq python-indent-guess-indent-offset-verbose nil)
 
+
+;;;;
+;;; Lsp-mode
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (
+         (python-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration)) ;; which-key integration
+  :commands lsp)
+
+(use-package lsp-ui :commands lsp-ui-mode)
+;; (use-package lsp-ui ; to test
+;;   :hook (lsp-mode . lsp-ui-mode)
+;;   :custom
+;;   (lsp-ui-doc-position 'bottom))
+;; (setq lsp-ui-doc-enable t
+;;       lsp-ui-peek-enable t
+;;       lsp-ui-sideline-enable t
+;;       lsp-ui-imenu-enable t
+;;       lsp-ui-flycheck-enable t)
+
+;;(use-package helm-lsp :commands helm-lsp-workspace-symbol)
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+
+(use-package dap-mode ; to test
+  :commands dap-debug
+  :config
+  (dap-mode 1)
+  (dap-ui-mode 1) ; enables mouse hover support
+  (dap-tooltip-mode 1) ; use tooltips for mouse hover ; if it is not enabled `dap-mode' will use the minibuffer.
+  (tooltip-mode 1) ; displays floating panel with debug buttons
+  (dap-ui-controls-mode 1)
+  (require 'dap-python)
+  (require 'dap-hydra)
+  (require 'dap-gdb-lldb)
+  (dap-gdb-lldb-setup)
+  (general-define-key ; Bind `C-c l d` to `dap-hydra` for easy access
+   :keymaps 'lsp-mode-map
+   :prefix lsp-keymap-prefix
+   "d" '(dap-hydra t :wk "debugger"))
+  )
+
+(use-package lsp-mode
+  :hook (python-mode . lsp-deferred)
+  :commands (lsp lsp-deferred))
+
+;; flycheck syntax checker
+(use-package flycheck
+  :init (global-flycheck-mode))
+
+(use-package virtualenvwrapper
+  :config
+  (venv-initialize-interactive-shells)
+  (venv-initialize-eshell)
+  )
+(venv-workon "p3")
+(setq lsp-python-executable-cmd "python3")
+
+;;; .emacs-systemcrafter.el ends here
