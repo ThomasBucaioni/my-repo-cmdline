@@ -421,7 +421,7 @@
   :commands (jupyter-run-server-repl
              jupyter-run-repl
              jupyter-server-list-kernels))
-  
+
 ;;;;
 ;;; Other configuration
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p) ; make file executable when starting with a shebang
@@ -489,4 +489,86 @@
 (venv-workon "p3")
 (setq lsp-python-executable-cmd "python3")
 
-;;; .emacs-systemcrafter.el ends here
+                                        ;n compilation-exit-autoclose (status code msg)
+;; If M-x compile exists with a 0
+(when (and (eq status 'exit) (zerop code))
+  ;; then bury the *compilation* buffer, so that C-x b doesn't go there
+  (bury-buffer)
+  ;; and delete the *compilation* window
+  (delete-window (get-buffer-window (get-buffer "*compilation*"))))
+;; Always return the anticipated result of compilation-exit-message-function
+(cons msg code))
+;; Specify my function (maybe I should have done a lambda function)
+(setq compilation-exit-message-function 'compilation-exit-autoclose)
+;;----------
+
+;;-----
+(defun indent-buffer ()
+  (interactive)
+  (save-excursion
+    (delete-trailing-whitespace)
+    (indent-region (point-min) (point-max) nil)
+    (untabify (point-min) (point-max))))
+(global-set-key [f12] 'indent-buffer)
+
+;;----------------------------------------
+;; Règle la taille du cadre (i.e. 'frame')
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;;(setq default-frame-alist '((left . 0) (width . 65) (fullscreen . fullheight)))
+;;----------------------------------------
+
+(setq inhibit-startup-screen t)
+(menu-bar-mode -1)
+
+(load-theme 'dracula t)
+
+(defun my-count-words-buffer () ; test Elisp
+  (interactive)
+  (let ((count 0))
+    (goto-char (point-min))
+    (while (< (point) (point-max))
+      (forward-word 1)
+      (setq count (1+ count)))
+    (message "le buffer contient %d mots." count)))
+
+;;-----
+;; Add keywords
+;;-----
+(font-lock-add-keywords 'fortran-mode
+                        '(("%" . 'font-lock-keyword-face)
+                          ("::" . 'font-lock-keyword-face)
+                                        ;(":" . 'widget-documentation)
+                          ("+\\|=\\|+\\|-\\|*\\|/\\|<\\|>" . 'escape-glyph)
+                          ("," . 'widget-field)
+                          ("(\\|)" . 'secondary-selection)))
+
+(font-lock-add-keywords 'fortran-mode
+                        '(("\\<\\(FIXME\\):" 1 'font-lock-warning-face prepend)))
+;;                        ("\\<\\(and\\|or\\|not\\|%\\)\\>" . 'font-lock-keyword-face)))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(circe-default-nick "thomasb06")
+ '(circe-default-realname "Thomas.B")
+ '(circe-default-user "thomasb06")
+ '(circe-use-cycle-completion t)
+ '(column-number-mode t)
+ '(delete-selection-mode 1)
+ '(electric-pair-mode t)
+ '(global-linum-mode t)
+ '(fortran-analyze-depth 0)
+ '(fortran-line-length 132)
+ '(kill-whole-line t)
+ '(scroll-bar-mode nil)
+ '(save-place t)
+ '(show-paren-mode t)
+ ;;'(smtpmail-smtp-server "smtp.univ-cotedazur.fr")
+ ;;'(smtpmail-smtp-service 25)
+ '(tool-bar-mode nil)
+ '(tooltip-mode nil)
+ )
+
+;; .emacs-systemcrafter.el ends here
