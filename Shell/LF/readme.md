@@ -169,6 +169,31 @@ gpgcheck=0
 
 ## Memory monitoring
 
+- `cat /proc/meminfo`
+- `ls /proc/sys/vm`
+- `vmstat 2 4`, `vmstat -a 2 4`, `vmstat -SM -a 2 4`
+- `cat /proc/sys/vm/overcommit_memory`, `/proc/sys/vm/overcommit_ratio`
+- `cat /proc/[pid]/oom_score`
+
+## I/O Monitoring
+
+- `iostat`, `iotop`, `ionice`
+- `iotop -o`, `-m`, `-k`, `-N`
+- `ionice -c 2 -n 3 -p [pid]`
+- `time sudo bonnie++ -n 0 -u 0 -r 100 -f -b -d /mnt`, `bon_csv2txt < bonnie++.out > bonnie++.txt`
+
+## FS and VFS
+
+- `ln`, `ls -liF`
+- `cat /proc/filesystems`
+- `dd if=/dev/zero of=junk bs=1M count=512`, `sudo /sbin/mkfs.xfs junk`, `sudo mount junk /mnt`, `df -h`, `lsmod`
+- `sudo mkdir /mnt/tmpfs`, `sudo mount -t tmpfs none /mnt/tmpfs`, `df -h /mnt/tmpfs`, `sudo mount -t tmpfs -o size=1G none /mnt/tmpfs`, `sudo umount /mnt/tmpfs`
+- `df -h /dev/shm`, `df -h | grep 'tmpfs'`
+
+## Disk partitioning
+
+- `
+- `
 - `
 - `
 - `
