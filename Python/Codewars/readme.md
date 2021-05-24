@@ -6,11 +6,17 @@
 
 ## 7 kyu
 
-- `del l[i:j:k`]
+- `del l[i:j:k]`
+- `import copy`, `copy.copy(array)`, `copy.deepcopy(array)`, `arr[::2] + arr[1::2][::-1]`
+- `i += 1`
+- `s.translate(str.maketrans("1234567890", "9876043215"))`
+- `sum(sorted(numbers)[-2:])`
 
 ## 6 kyu
 
 - `print(i * '+')`
+- `"({}{}{}) {}{}{}-{}{}{}{}".format(*n)`
+- `def f(i,j):return(l:=len(i))*(l>j)`
 
 ## 5 kyu
 

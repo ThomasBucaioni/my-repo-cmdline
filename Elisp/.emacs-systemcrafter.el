@@ -190,8 +190,8 @@
 ;;   :init (load-theme 'doom-palenight t))
 ;; Other themes
 ;;(load-theme 'tango-dark)
-;;(load-theme 'wombat)
-(load-theme 'dracula t)
+(load-theme 'wombat)
+;;(load-theme 'dracula t)
 ;;(load-theme 'danneskjold t)
 ;; (use-package doom-themes
 ;;   :init (load-theme 'doom-dracula t))
@@ -488,48 +488,6 @@
   )
 (venv-workon "p3")
 (setq lsp-python-executable-cmd "python3")
-
-                                        ;n compilation-exit-autoclose (status code msg)
-;; If M-x compile exists with a 0
-(when (and (eq status 'exit) (zerop code))
-  ;; then bury the *compilation* buffer, so that C-x b doesn't go there
-  (bury-buffer)
-  ;; and delete the *compilation* window
-  (delete-window (get-buffer-window (get-buffer "*compilation*"))))
-;; Always return the anticipated result of compilation-exit-message-function
-(cons msg code))
-;; Specify my function (maybe I should have done a lambda function)
-(setq compilation-exit-message-function 'compilation-exit-autoclose)
-;;----------
-
-;;-----
-(defun indent-buffer ()
-  (interactive)
-  (save-excursion
-    (delete-trailing-whitespace)
-    (indent-region (point-min) (point-max) nil)
-    (untabify (point-min) (point-max))))
-(global-set-key [f12] 'indent-buffer)
-
-;;----------------------------------------
-;; Règle la taille du cadre (i.e. 'frame')
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-;;(setq default-frame-alist '((left . 0) (width . 65) (fullscreen . fullheight)))
-;;----------------------------------------
-
-(setq inhibit-startup-screen t)
-(menu-bar-mode -1)
-
-(load-theme 'dracula t)
-
-(defun my-count-words-buffer () ; test Elisp
-  (interactive)
-  (let ((count 0))
-    (goto-char (point-min))
-    (while (< (point) (point-max))
-      (forward-word 1)
-      (setq count (1+ count)))
-    (message "le buffer contient %d mots." count)))
 
 ;;-----
 ;; Add keywords
