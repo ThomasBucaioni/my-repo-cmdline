@@ -192,6 +192,25 @@ gpgcheck=0
 
 ## Disk partitioning
 
+- `sudo fdisk -l /dev/sda | grep -i sector`
+- `ls -l`, `sudo mkfs.ext4 /dev/sdxy`
+- `sudo blkid /dev/sdx*`
+- `lsblk`
+- `dd if=/dev/sda of=mbrbackup bs=512 count=1`, `sudo dd if=mbrbackup of=/dev/sdx bs=512 count=1`, `sudo sgdisk -p /dev/sda`
+- `fdisk`, `sfdisk`, `parted`, `gparted`, `gdisk`, `sgdisk`
+- `sudo partprobe -s`, `cat /proc/partitions`
+- `mkfs.ext4 /dev/sdxy`
+- `dd if=/dev/zero of=imagefile bs=1M count=1024`, `mkfs.ext4 imagefile`, `mkdir mntpoint`, `sudo mount -o loop imagefile mntpoint`, `sudo umount mntpoint`
+- `sudo losetup /dev/loop2 imagefile`, `sudo mount /dev/loop2 mntpoint`, `sudo umount mntpoint`, `sudo losetup -d /dev/loop2`
+- `sudo fdisk -C 130 imagefile`, `n`, `+256M`
+- `sudo losetup -f`, `sudo losetup /dev/loop1 imagefile`, `losetup -a`, `sudo parted -s /dev/loop1 mklabel msdos`, `sudo parted -s /dev/loop1 unit MB mkpart primary ext4 0 256`, `sudo parted -s /dev/loop1 unit MB mkpart primary ext4 256 512`, `sudo parted -s /dev/loop1 unit MB mkpart primary ext4 512 1024`, `fdisk -l /dev/loop1`, `ls -l /dev/loop1*`, `sudo mkfs.ext3 /dev/loop1p1`, `sudo mkfs.ext4 /dev/loop1p2`,`sudo mkfs.ext4 /dev/loop1p3`, `mkdir mnt1 mnt2 mnt3`, `sudo mount /dev/loop1p1 mnt1`, `sudo mount /dev/loop1p2 mnt2`, `sudo mount /dev/loop1p3 mnt3`, `df -Th`, `sudo umount mnt1 mnt2 mnt3`, `rmdir mnt1 mnt2 mnt3`, `sudo losetup -d /dev/loop1`
+
+## Filesystem features
+
+- `
+- `
+- `
+- `
 - `
 - `
 - `
