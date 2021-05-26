@@ -17,4 +17,4 @@ def solution(A):
     if a > 0:
         return a + 1
     return 1
-k
+
