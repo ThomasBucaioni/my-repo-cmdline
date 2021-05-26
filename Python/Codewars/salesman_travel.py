@@ -30,9 +30,12 @@ def travel(r, zipcode):
             #print(f'{item[0]}')
             #print(f'{item[1]}')
             s = s + item[1] + ','
-    s = s + '/'
+    s = s[:-1] + '/'
     for item in dico:
         if item[0] == zipcode:
             s = s + item[2] + ','
+    s = s[:-1]
     print(f'{s=}')
+    if s == zipcode:
+        s = s + ':/'
     return s
