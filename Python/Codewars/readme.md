@@ -17,6 +17,7 @@
 - `print(i * '+')`
 - `"({}{}{}) {}{}{}-{}{}{}{}".format(*n)`
 - `def f(i,j):return(l:=len(i))*(l>j)`
+- `s = sub(r'(.)(.*)\1', lambda x: chr((ord(x.group(1))-96)%26+97) + x.group(2),s)`
 
 ## 5 kyu
 
