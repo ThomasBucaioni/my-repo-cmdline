@@ -205,22 +205,31 @@ gpgcheck=0
 - `sudo fdisk -C 130 imagefile`, `n`, `+256M`
 - `sudo losetup -f`, `sudo losetup /dev/loop1 imagefile`, `losetup -a`, `sudo parted -s /dev/loop1 mklabel msdos`, `sudo parted -s /dev/loop1 unit MB mkpart primary ext4 0 256`, `sudo parted -s /dev/loop1 unit MB mkpart primary ext4 256 512`, `sudo parted -s /dev/loop1 unit MB mkpart primary ext4 512 1024`, `fdisk -l /dev/loop1`, `ls -l /dev/loop1*`, `sudo mkfs.ext3 /dev/loop1p1`, `sudo mkfs.ext4 /dev/loop1p2`,`sudo mkfs.ext4 /dev/loop1p3`, `mkdir mnt1 mnt2 mnt3`, `sudo mount /dev/loop1p1 mnt1`, `sudo mount /dev/loop1p2 mnt2`, `sudo mount /dev/loop1p3 mnt3`, `df -Th`, `sudo umount mnt1 mnt2 mnt3`, `rmdir mnt1 mnt2 mnt3`, `sudo losetup -d /dev/loop1`
 
-## Filesystem features
+## Filesystem features: attributes, creating, checking, mounting
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- `lsattr`, `chattr`
+- `sudo mkfs -t ext4 /dev/sdxy`, `sudo mkfs.ext4 /dev/sd`
+- `mount -t ext /dev/sdxy /home`
+- `sudo mount LABEL=`, `-L`, `UUID`, `-U`
+- `sudo mount -o remount,ro /myfs`
+- `umount /dev/sdx`, `fuser`, `lsof`
+- `sudo mount -t nfs myserver.com:/shdir /mnt/shdir​`
+- `/etc/fstab`, `LABEL=Sam128 /SAM ext4 noauto,x-systemd.automount,x-systemd.device-timeout=10,x-systemd.idle-timeout=30 0 0`, `sudo systemctl daemon-reload`, `sudo systemctl restart local-fs.target`
+- `df -h -T`
+- `sudo mount -o ro,loop,noexec ~/imagefile ~/mntpoint`
+- `/etc/fstab`, `/home/user/imagefile /home/user/mntpoint ext4 loop(defaults) 1 2`, `sudo mount -o remount ~/mntpoint`
+- `/etc/fstab`, `/home/user/imagefile /home/user/mntpoint ext4 loop(-),ro,noexec 1 2`, `sudo mount -o remount ~/mntpoint`
+
+## Filesystem features: swap, quotas, usage
+
+- `df`, `-h`, `-T`, `-i`
+- `du`, `-a`, `-h`, `-h somedir`
+- `find . -maxdepth 1 -type d -exec du -shx {} \; | sort -hr`
+- `cat /proc/swaps`, `free -m`
+- `sudo mount -o remount /home`, `sudo quotacheck -vu /home`, `sudo quotaon -vu /home`, `sudo edquota someusername`
+- `sudo quotaon -av`, `sudo quotaoff -av`, `-avu`, `-avg`
+- `sudo quota user`
+- `sudo edquota -u user`, `sudo edquota -g group`, `sudo edquota -u -p userproto user`, `sudo edquota -t`
 - `
 - `
 - `
