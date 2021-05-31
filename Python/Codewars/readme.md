@@ -17,9 +17,13 @@
 - `print(i * '+')`
 - `"({}{}{}) {}{}{}-{}{}{}{}".format(*n)`
 - `def f(i,j):return(l:=len(i))*(l>j)`
+<<<<<<< HEAD
 - `[s.split(' ') for s in s_data.split(',')]`, `sum([float(x) for m,x in data]) / len(data)`
 - `sorted({sub for sub in a1 if any(sub in s for s in a2)})`
 
+=======
+- `s = sub(r'(.)(.*)\1', lambda x: chr((ord(x.group(1))-96)%26+97) + x.group(2),s)`
+>>>>>>> 2235317fb67b8d4996310e76f5775def69cf72d9
 
 ## 5 kyu
 
