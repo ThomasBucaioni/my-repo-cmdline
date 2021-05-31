@@ -227,3 +227,20 @@ gpgcheck=0
 - `
 - `
 - `
+
+## Kernel Services and Configuration
+
+- `sudo sysctl net.ipv4.icmp_echo_ignore_all=1`,
+- `cat /etc/sysctl.conf`
+- `sudo sysctl -p`
+- `sudo sh -c 'echo 24000 > /proc/sys/kernel/pid_max'`
+
+## Kernel Modules
+
+- `lsmod`, `insmod`, `rmmod`, `modprobe`, `depmod`, `modinfo`
+- `cd /lib/modules/5.4.0-73-generic/kernel/drivers/net/ethernet/3com/`, `sudo modprobe 3c509`, `lsmod | head`, `sudo modprobe -r 3c509`, `lsmod | head`, `dmesg | tail -30`
+- `lsmod`, `sudo insmod /lib/modules/$(uname -r)/kernel/drivers/net/ethernet/intel/e100`, `sudo /sbin/modprobe e100`, `lsmod | grep e100`, `sudo rmmod e100`, `sudo modprobe -r e100`, `lsmod | grep e100`
+
+## Devices and udev
+
+- `
