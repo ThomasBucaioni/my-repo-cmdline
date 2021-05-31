@@ -113,6 +113,24 @@
   (global-company-mode t)
   )
 
+;; (use-package company-lsp ; obsolete
+;;   :after company
+;;   :config
+;;   (push 'company-lsp company-backends))
+
+;;-----
+;; Prescient
+;;
+(use-package ivy-prescient
+  :after counsel
+  :config
+  (ivy-prescient-mode 1)
+  (prescient-persist-mode 1))
+(use-package company-prescient
+  :after company
+  :config
+  (company-prescient-mode 1))
+
 ;;;;
 ;;; Make ESC quit prompts
 ;; (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -410,17 +428,20 @@
 (use-package visual-fill-column
   :hook (org-mode . efs/org-mode-visual-fill))
 
+;; (use-package jupyter
+;;   :commands (jupyter-run-server-repl
+;;              jupyter-run-repl
+;;              jupyter-server-list-kernels))
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((emacs-lisp . t)
    ;;(julia . t)
    (python . t)
-   (jupyter . t)) ; needs to be the last
+   (ipython . t)
+   ;; (jupyter . t) ; needs to be the last
+   )
  )
-(use-package jupyter
-  :commands (jupyter-run-server-repl
-             jupyter-run-repl
-             jupyter-server-list-kernels))
 
 ;;;;
 ;;; Other configuration
@@ -474,8 +495,14 @@
   )
 
 (use-package lsp-mode
-  :hook (python-mode . lsp-deferred)
-  :commands (lsp lsp-deferred))
+  :hook (python-mode . lsp-deferred) ; cf. syscrafter
+  :commands (lsp lsp-deferred)
+  :custom
+  (lsp-auto-guess-root nil) ; cf. Zaminski
+  (lsp-prefer-flymake nil)
+  ;;:bind (:map lsp-mode-map ("C-c C-f" . lsp-format-buffer))
+  :hook ((python-mode) . lsp)
+  )
 
 ;; flycheck syntax checker
 (use-package flycheck

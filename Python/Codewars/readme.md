@@ -17,6 +17,9 @@
 - `print(i * '+')`
 - `"({}{}{}) {}{}{}-{}{}{}{}".format(*n)`
 - `def f(i,j):return(l:=len(i))*(l>j)`
+- `[s.split(' ') for s in s_data.split(',')]`, `sum([float(x) for m,x in data]) / len(data)`
+- `sorted({sub for sub in a1 if any(sub in s for s in a2)})`
+
 
 ## 5 kyu
 
