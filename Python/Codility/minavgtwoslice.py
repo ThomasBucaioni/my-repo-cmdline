@@ -1,7 +1,3 @@
-# [5, 6, 3, 4, 9]
-# [-1, -10, 0, -500, -1, 0, 1]
-# [-3, -5, -8, -4, -10]
-
 def prefix_sums(A):
     n = len(A)
     P = [0] * (n + 1)
@@ -12,11 +8,12 @@ def prefix_sums(A):
 def count_total(P, x, y):
     return P[y + 1] - P[x]
 
-def solution(A):
+def solution1(A):
     n = len(A)
     result = 0
     pref = prefix_sums(A)
     i = 0
+    j = 1
     m = sum([a for a in A if a>0])
     for p in range(n-1):
         for q in range(p+1,n):
@@ -24,9 +21,11 @@ def solution(A):
             if r<m:
                 m = r
                 i = p
+                j = q
+    print(f'slice: {i=}, {j=}, {m=}')
     return i
 
-def solution(A):
+def solution2(A):
     n = len(A)
     L = 1
     l = 1
@@ -43,6 +42,7 @@ def solution(A):
     result = 0
     pref = prefix_sums(A)
     i = 0
+    j = 0
     m = sum([a for a in A if a>0])
     for p in range(n-1):
         for q in range(p+1,min(p+L,n)):
@@ -50,5 +50,23 @@ def solution(A):
             if r<m:
                 m = r
                 i = p
+                j = q
     #print(f'Min slice: {m}')
+    print(f'slice: {i=}, {j=}, {m=}')
     return i
+
+A = [5, 6, 3, 4, 9]
+print(A)
+solution1(A)
+solution2(A)
+
+A = [-1, -10, 0, -500, -1, 0, 1]
+print(A)
+solution1(A)
+solution2(A)
+
+A = [-3, -5, -8, -4, -10]
+print(A)
+solution1(A)
+solution2(A)
+
