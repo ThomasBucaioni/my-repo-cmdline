@@ -543,7 +543,7 @@
  '(column-number-mode t)
  '(delete-selection-mode 1)
  '(electric-pair-mode t)
- '(global-linum-mode t)
+ ;;'(global-linum-mode t)
  '(fortran-analyze-depth 0)
  '(fortran-line-length 132)
  '(kill-whole-line t)
