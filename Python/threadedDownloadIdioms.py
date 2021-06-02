@@ -4,11 +4,14 @@
 import requests
 import os, bs4, threading  #, pickle
 import re
+from time import sleep
+import random
 
 os.makedirs('Idioms', exist_ok=True)  # store idioms in ./Idioms
 
 
 def download(startPage, endPage):
+
     for urlNumber in range(startPage, endPage):  # Download the page.
         pageLocalName = os.path.basename(str(urlNumber)+".html")
         pageLocalPath = os.path.join('Idioms', pageLocalName)
@@ -22,7 +25,9 @@ def download(startPage, endPage):
             #print(soup.prettify())
             
         else:
-            break
+            r = random.randint(1,10)
+            sleep(r)  # not overload the server
+    
             print('Downloading page https://www.theidioms.com/list/page/%s/' % (urlNumber))
             res = requests.get('https://www.theidioms.com/list/page/%s/' % (urlNumber))
             res.raise_for_status()
@@ -32,7 +37,7 @@ def download(startPage, endPage):
             for chunk in res.iter_content(100000):
                 mFile.write(chunk)
             mFile.close()
-            print(soup.prettify())
+            #print(soup.prettify())
 
         #exit(1)
 
@@ -84,8 +89,25 @@ def download(startPage, endPage):
                 contents = mFile.read()
             print(contents)
 
-            
-# TODO: Create and start the Thread objects.
-# TODO: Wait for all threads to end.
 
-download(1,2)
+# Test
+download(1, 2)  # downloads page n°1
+
+
+# Create and start the Thread objects.
+downloadThreads = []
+# a list of all the Thread objects
+for i in range(1, 147, 10):  # loops 14 times, creates 14 threads
+    start = i
+    end = i + 9  # deal with one page at a time
+    downloadThread = threading.Thread(target=download, args=(start, end))
+    downloadThreads.append(downloadThread)
+    downloadThread.start()
+
+
+# Wait for all threads to end.
+for downloadThread in downloadThreads:
+    downloadThread.join()
+print('Done.')
+
+# TODO: merge the results
