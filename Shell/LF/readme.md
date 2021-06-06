@@ -235,10 +235,34 @@ gpgcheck=0
 
 ## The ext4 Filesystem
 
+- `sudo dumpe2fs /dev/sdb1`
+- `sudo tune2fs -c 25 /dev/sda1`
+- `sudo tune2fs -i 10 /dev/sda1`, `tune2fs -i 3w imagefile`
+- `sudo tune2fs -m 10 /dev/sda1`
+- `sudo tune2fs -l /dev/sda1`
+- `sudo e4defrag -c /var/log`
+- `dumpe2fs imagefile > dumpe2fs-output`, `grep -i  -e "Mount count" -e "Check interval" -e "Block Count" dumpe2fs-output`, `diff dumpe2fs-output-initial dumpe2fs-output-final`
+
+## The Xfs and Btrfs filesystems
+
 - `
 - `
 - `
 - `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+
+## Encrypting disks
+
+## Logical Volume Managment
+
+## Raid
 
 ## Kernel Services and Configuration
 
@@ -255,4 +279,19 @@ gpgcheck=0
 
 ## Devices and udev
 
+## Virtualization
+
 - `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+
