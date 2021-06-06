@@ -178,7 +178,7 @@ def solution3(A): # test faster algo
         if j < l:
             #print(i,j+1)
             mb = count_total(pref,i,min(j+1,l-1))/(j+2-i)#sum(A[i:j+2])/(j+2-i)
-            if mb > m:
+            if mb >= m:
                 i = j
                 j = j+1
             else:
