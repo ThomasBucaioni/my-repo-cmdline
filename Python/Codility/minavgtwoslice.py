@@ -22,7 +22,7 @@ def solution1(A):
                 m = r
                 i = p
                 j = q
-    print(f'slice: {i=}, {j=}, {m=}')
+    print(f'slice: {i=}, {j=}, {m=}, {A[i:j+1]}')
     return i
 
 def solution2(A):
@@ -70,3 +70,76 @@ print(A)
 solution1(A)
 solution2(A)
 
+import random
+random.seed(1)
+A = [random.randint(1,10) for i in range(20)]
+print(A)
+solution1(A)
+
+print('-----')
+print(f'{A=}')
+print('---')
+def solution3(A): # test faster algo
+    I = i = 0
+    J = j = 1
+    memm = sum(A[i:j+1])/(j+1-i)
+    l = len(A)
+    while i < l-1 and j < l:
+        #print(f"entrance: {i=}, {j=}, {memm=}")
+        #print('-')
+        m = sum(A[i:j+1])/(j+1-i)
+        if m < memm:
+            #print(f'better mean found: {A[i:j+1]=}, {m=}')
+            I = i
+            J = j
+            memm = m
+        #else: print('no better mean')
+        #print('-')
+        #print(f'cleaning loop: test if {i}<{j-1} -> {i<j-1}')
+        if i < j-1:
+            b = False
+            #print('-')
+            for k in range(i+1,j):
+                #print(f'cleaning loop: {k=} in [{i+1}, {j-1}]')
+                mb = sum(A[k:j+1])/(j+1-k)
+                #print(f"mean with elements before {k-1} removed : {mb=}")
+                if m > mb:
+                    #print(f'removing elements in the slice: next i={k}')
+                    i = k
+                    b = True
+            #print('-')
+            if b == True:
+                #print('continue the while loop')
+                #print(f"exit: {i=}, {j=}, {A[i:j+1]=}, {memm=}, {I=}, {J=}, {A[I:J+1]=}")
+                #input('stop')
+                #print('--')
+                continue
+        #print('-')
+        if j < l:
+            mb = sum(A[i:j+2])/(j+2-i)
+            #print(f"next mean: {mb=}")
+            if mb > m:
+                #print(f'restart from i={j+1}')
+                i = j+1
+                j = j+2
+            else:
+                j += 1
+                #print('increasing the slice')
+        #print('-')        
+        #print(f"exit: {i=}, {j=}, {A[i:j+1]=}, {memm=}, {I=}, {J=}, {A[I:J+1]=}")
+        #input('stop')
+        #print('--')
+    print(f"slice: {I=}, {J=}, m={memm}, {A[I:J+1]}")
+
+solution3(A)
+
+print('-----')
+print('-----')
+for t in range(10):
+    A = [random.randint(1,10) for i in range(20)]
+    print(A)
+    solution1(A)
+    solution3(A)
+    print('-----')
+
+A=[10, 6, 8, 5, 9, 10, 1, 7, 9, 3, 9, 9, 4, 7, 1, 8, 6, 10, 9, 4]
