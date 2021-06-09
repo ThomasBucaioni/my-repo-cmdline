@@ -230,12 +230,39 @@ gpgcheck=0
 - `sudo quotaon -av`, `sudo quotaoff -av`, `-avu`, `-avg`
 - `sudo quota user`
 - `sudo edquota -u user`, `sudo edquota -g group`, `sudo edquota -u -p userproto user`, `sudo edquota -t`
+- `cat /proc/swaps`, `dd if=/dev/zero of=swpfile bs=1M count=1024`, `mkswap swpfile`, `sudo swapon swpfile`, `sudo chown root:root swpfile`, `sudo chmod 600 swpfile`, `cat /proc/swaps`, `sudo swapoff swpfile`, `sudo rm swpfile`
+- `e /etc/fstab`, `/imagefile /mnt/tempdir ext4 loop,usrquota 1 2`, `sudo mount -o remount /mnt/tempdir`, `sudo quotacheck -u /mnt/tempdir`, `sudo quotaon -u /mnt/tempdir`, `sudo chown student.student /mnt/tempdir`, `sudo edquota -u student`, `cd /mnt/tempdir`, `dd if=/dev/zero of=bigfile1 bs=1024 count=200`, `quota`, `dd if=/dev/zero of=bigfile2 bs=1024 count=400`, `quota`, `dd if=/dev/zero of=bigfile2 bs=1024 count=600`
+
+## The ext4 Filesystem
+
+- `sudo dumpe2fs /dev/sdb1`
+- `sudo tune2fs -c 25 /dev/sda1`
+- `sudo tune2fs -i 10 /dev/sda1`, `tune2fs -i 3w imagefile`
+- `sudo tune2fs -m 10 /dev/sda1`
+- `sudo tune2fs -l /dev/sda1`
+- `sudo e4defrag -c /var/log`
+- `dumpe2fs imagefile > dumpe2fs-output`, `grep -i  -e "Mount count" -e "Check interval" -e "Block Count" dumpe2fs-output`, `diff dumpe2fs-output-initial dumpe2fs-output-final`
+
+## The Xfs and Btrfs filesystems
+
 - `
 - `
 - `
 - `
 - `
 - `
+- `
+- `
+- `
+- `
+- `
+- `
+
+## Encrypting disks
+
+## Logical Volume Managment
+
+## Raid
 
 ## Kernel Services and Configuration
 
@@ -252,4 +279,19 @@ gpgcheck=0
 
 ## Devices and udev
 
+## Virtualization
+
 - `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+
