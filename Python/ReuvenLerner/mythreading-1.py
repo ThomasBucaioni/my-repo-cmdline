@@ -11,7 +11,7 @@ class MyClass(threading.Thread):
         s = random.randint(1, 5)
         print("[{0}] Sleeping for {1}".format(tid, s))
         time.sleep(s)
-        print("[{0} ]I'm awake!".format(tid))
+        print("[{0}] I'm awake!".format(tid))
 
 print("About to launch threads")
 
