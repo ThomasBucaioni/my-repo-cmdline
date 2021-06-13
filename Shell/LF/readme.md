@@ -245,24 +245,42 @@ gpgcheck=0
 
 ## The Xfs and Btrfs filesystems
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- `man -k xfs`
+- `btrfs`, `btrfs --help`, `man -k btrfs`
 
 ## Encrypting disks
 
+- `cryptsetup --help`
+- `sudo cryptsetup luksFormat /dev/sdc12`, `sudo cryptsetup luksFormat --cipher aes /dev/sdc12`
+- `sudo cryptsetup --verbose luksOpen /dev/sdc12 SECRET`
+- `sudo mkfs.ext4 /dev/mapper/SECRET`
+- `sudo mount /dev/mapper/SECRET /mnt`
+- `sudo umount /mnt`
+- `sudo cryptsetup --verbose luksClose SECRET`
+- `/etc/fstab`, `/dev/mapper/SECRET /mnt ext4 defaults 0 0`
+- `/etc/crypttab`, `SECRET ​/dev/sdc12`
+- `man crypttab`
+- `losetup -f`, `sudo losetup /dev/loop0 imagefile`, `losetup -l`, `sudo cryptsetup luksFormat /dev/loop0`, `sudo cryptsetup luksOpen /dev/loop0 cryptimage`, `ls -l /dev/mapper/`, `sudo mkfs.ext4 /dev/mapper/cryptimage`, `sudo mount /dev/mapper/cryptimage /mnt/`, `df -h`, `sudo umount /mnt`, `sudo cryptsetup luksClose /dev/mapper/cryptimage`, `sudo losetup -d /dev/loop0`, `losetup -l` (`rm imagefile`)
+- `sudo fdisk /dev/sda`, `sudo partprobe -s`, `sudo cryptsetup luksFormat /dev/sda4`, `sudo cryptsetup luksOpen /dev/sda4 secret-disk`, `/etc/crypttab`, `sudo mkfs -t ext4 /dev/mapper/secret-disk`, `sudo mkdir -p /secret`, `/etc/fstab`, `/dev/mapper/secret-disk    /secret    ext4    defaults 1 2`, `sudo mount /secret` , `sudo mount -a`, `reboot`
+- `cat /proc/swaps`, `sudo swapoff /dev/sda11`, `sudo cryptsetup luksFormat /dev/sda11  # --cipher aes`, `sudo cryptsetup luksOpen   /dev/sda11  swapcrypt`, `sudo mkswap /dev/mapper/swapcrypt`, `sudo swapon /dev/mapper/swapcrypt`, `cat /proc/swaps`, `sudo swapoff /dev/mapper/swapcrypt`, `sudo cryptsetup luksClose swapcrypt`, `sudo mkswap /dev/sda11`, `sudo swapon -a`, `/etc/fstab`, `/dev/sda11  swap   swap  defaults 0 0`, `sudo mkswap -L SWAP /dev/sda11`, `LABEL=SWAP  swap   swap  defaults 0 0`
+
 ## Logical Volume Managment
 
+- `vgcreate`, `vgextend`, `vgreduce`
+- `pvcreate`, `pvdisplay`, `pvmove`, `pvremove`
+- `man lvm`
+- `ls -lF /sbin/lv`
+- `
+- `
+
 ## Raid
+
+- `
+- `
+- `
+- `
+- `
+- `
 
 ## Kernel Services and Configuration
 
@@ -278,6 +296,13 @@ gpgcheck=0
 - `lsmod`, `sudo insmod /lib/modules/$(uname -r)/kernel/drivers/net/ethernet/intel/e100`, `sudo /sbin/modprobe e100`, `lsmod | grep e100`, `sudo rmmod e100`, `sudo modprobe -r e100`, `lsmod | grep e100`
 
 ## Devices and udev
+
+- `
+- `
+- `
+- `
+- `
+- `
 
 ## Virtualization
 
