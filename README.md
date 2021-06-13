@@ -367,3 +367,15 @@ iptables -A FORWARD -i LAN-interface-on-GATEWAY -o WAN-interface-on-GATEWAY -j A
 
 - `sudo grub2-mkconfig -o /boot/grub2/grub.cfg`
 - `grep limit /etc/yum.conf`, `rpm -qa | grep kernel`,  `sudo package-cleanup --oldkernels --count=1`
+
+## VPN
+
+- `sudo cp file.opvn /etc/openvpn/client.conf`
+- `remote vpnaddr1`, `remote vpnaddr2`, `remote-random`
+- `auth-user-path /etc/openvpn/pass`, `login/npwd`
+- `curl ifconfig.co`, `sudo openvpn --config /etc/openvpn/client.conf --daemon`, `curl ifconfig.co`
+- `git clone https://aur.archlinux.org/openvpn-update-resolv-conf-git.git`
+
+## Swap
+
+-`sudo e /etc/sysctl.d/99-sysctl.conf`, `vm.swappiness=5`, `vm.vfs_cache_pressure=50`
