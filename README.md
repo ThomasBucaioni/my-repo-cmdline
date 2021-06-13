@@ -115,6 +115,7 @@ RPS1="%(?.%F{green}0.%K{red}%F{011})%(?..(%?%))%(?.%f.%f%k)%F{magenta}%K{grey}:%
 - `etags ~/dir/*.c`, `M-.`
 - `M-x transparency`
 - `C-u C-SPC`
+- `(setq mouse-yank-at-point t)`
 
 ## NeoVim
 
@@ -378,4 +379,10 @@ iptables -A FORWARD -i LAN-interface-on-GATEWAY -o WAN-interface-on-GATEWAY -j A
 
 ## Swap
 
--`sudo e /etc/sysctl.d/99-sysctl.conf`, `vm.swappiness=5`, `vm.vfs_cache_pressure=50`
+- `sudo e /etc/sysctl.d/99-sysctl.conf`, `vm.swappiness=5`, `vm.vfs_cache_pressure=50`
+
+## Logs
+
+- `journalctl --disk-usage`
+- `journalctl --vacuum-time=2d`, `journalctl --vacuum-size=100M`
+- `se /etc/systemd/journald.conf`, `MaxFileSec=1month` , `SystemMaxUse=200M`
