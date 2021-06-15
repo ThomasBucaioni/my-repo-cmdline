@@ -8,6 +8,7 @@ import pprint
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d, Axes3D
 import matplotlib.animation as animation
+import pathlib
 
 pp = pprint.PrettyPrinter(indent=4, width=3)
 
@@ -26,7 +27,7 @@ for i in [0,100]:
             X.append(i)
             Y.append(j)
             Z.append(k)
-# ax.plot(X,Y,Z, marker=m)
+            # ax.plot(X,Y,Z, marker=m)
 
 # ax.set_xlabel('X Label')
 # ax.set_ylabel('Y Label')
@@ -45,7 +46,8 @@ def update_lines(num, data_lines, lines):
         line.set_3d_properties(data[2, :num])
     return lines
 
-def fComputeConfiguration():
+
+def fComputeConfigurationDebug():
     p = random.randint(0, 359)*math.tau/360  # phi
     a = random.randint(-89, 89)*math.tau/360  # alpha
     t = random.randint(0, 359)*math.tau/360  # theta
@@ -53,35 +55,19 @@ def fComputeConfiguration():
     a = 35 * math.tau / 360
     t = 90 * math.tau / 360
     v1 = -np.array([math.cos(p)*math.cos(a), math.sin(p)*math.cos(a), math.sin(a)])
-    v1 = np.array([0, 1, 0])
-    v1 = np.array([1, 1, 0])/math.sqrt(2)
-    v1 = np.array([1, 2, 3])
-    v1 = - v1 / np.linalg.norm(v1)
-    ap = a+math.pi/2
-    v2 = np.array([math.cos(p)*math.cos(ap), math.sin(p)*math.cos(ap), math.sin(ap)])
-    v2 = np.array([0, 0, 1])
-    #v2 = np.array([1, -1, 0])/math.sqrt(2)
-    print(f'Scalar product: <v1,v2> = {np.dot(v1,v2)}')
-    p1 = 100 * v1
-    p3 = 100 * v2
-    p2 = p1 + p3
+
+    lf = 41
+    p1 = lf * v1
 
     u = np.cross(v1, np.array([1, 0, 0]))
-    p3 = 100 * u
-    p2 = p1 + p3
     u = u / np.linalg.norm(u)
     v = np.cross(v1, u)
+
+    p3 = lf * u
+    p2 = p1 + p3
+
     d = math.sqrt(v1[1]**2+v1[2]**2)
-    print('-----')
-    print(f'{v1=}')
-    print(f'{u=}')
-    print(f'{v=}')
-    print(f'up={[0, v1[2]/d, -v1[1]/d]}')
-    print(f'vp={[-d, v1[0]*v1[1]/d, v1[0]*v1[2]/d]}')
-    print('-----')
-    print(f'Error on u: {np.linalg.norm(u-np.array([0, v1[2]/d, -v1[1]/d]))}')
-    print(f'Error on v: {np.linalg.norm(v-np.array([-d, v1[0]*v1[1]/d, v1[0]*v1[2]/d]))}')
-    print('-----')
+
     r01 = np.matrix([
         [ 0,  1, 0],
         [-1,  0, 0],
@@ -91,9 +77,11 @@ def fComputeConfiguration():
         [ v1[2]/d, v1[0]*v1[1]/d, v1[1]],
         [-v1[1]/d, v1[0]*v1[2]/d, v1[2]]])
     mpBadB0 = mpB0Bad.T
+
     r02 = np.matmul(mpB0Bad, np.matmul(r01, mpBadB0))
     p22 = np.squeeze(np.asarray(np.matmul(r02, p2)))
     p32 = np.squeeze(np.asarray(np.matmul(r02, p3)))
+
     #-----
     # Lock
     #lock.acquire()
@@ -122,7 +110,7 @@ def fComputeConfiguration():
     pp.pprint(f'{p22}')
     print('-----')
     pp.pprint(f'{p32}, {np.dot(p32,p32.T)}')
-    
+
     #-----
     # Check
     fig = plt.figure()
@@ -172,7 +160,7 @@ def fComputeConfiguration():
         Y = [0, p1[1], p22[1], p32[1], 0]
         Z = [0, p1[2], p22[2], p32[2], 0]
         #ax.plot(X, Y, Z, color='blue')
-    
+
     lines = [ax.plot(dat[0, 0:5], dat[1, 0:5], dat[2, 0:5])[0] for dat in data]
     line_ani = animation.FuncAnimation(
         fig,
@@ -183,6 +171,113 @@ def fComputeConfiguration():
     plt.show()
 
     #lock.release()
+
+
+def fCompPhiAlpha(P,l):
+    import math
+    a = math.asin(P[2]/l)*360/math.tau
+    p = math.acos(P[0]/l/math.cos(a*math.tau/360))*360/math.tau
+    pv = math.asin(P[1]/l/math.cos(a*math.tau/360))*360/math.tau
+    if abs(p - pv) >= 1e-5 and abs(p - pv - 180) >= 1e-5:
+        print(f'BUG acos/asin: {P=}, {a=}, {p} != {pv}')
+        exit()
+        print(f'\u03C6={p}, \u03B1={a}')
+    return p, a
+
+def fComputeConfiguration():
+    p = random.randint(0, 359)*math.tau/360  # phi
+    a = random.randint(-89, 89)*math.tau/360  # alpha
+    t = random.randint(0, 359)*math.tau/360  # theta
+    p = 45 * math.tau / 360
+    a = 35 * math.tau / 360
+    t = 90 * math.tau / 360
+    v1 = np.array([math.cos(p)*math.cos(a), math.sin(p)*math.cos(a), math.sin(a)])
+
+    lf = 41
+    p1 = lf * v1
+
+    u = np.cross(v1, np.array([1, 0, 0]))
+    u = u / np.linalg.norm(u)
+    v = np.cross(v1, u)
+
+    p3 = lf * u
+    p2 = p1 + p3
+
+    d = math.sqrt(v1[1]**2+v1[2]**2)
+
+    r01 = np.matrix([
+        [ 0,  1, 0],
+        [-1,  0, 0],
+        [ 0,  0, 1]])
+    mpB0Bad = np.matrix([
+        [0       ,    -d        , v1[0]],
+        [ v1[2]/d, v1[0]*v1[1]/d, v1[1]],
+        [-v1[1]/d, v1[0]*v1[2]/d, v1[2]]])
+    mpBadB0 = mpB0Bad.T
+
+    r02 = np.matmul(mpB0Bad, np.matmul(r01, mpBadB0))
+    p22 = np.squeeze(np.asarray(np.matmul(r02, p2)))
+    p32 = np.squeeze(np.asarray(np.matmul(r02, p3)))
+
+    #-----
+    # Lock
+    lock.acquire()
+
+    name=threading.current_thread().name
+    print(f'Process name: {name}')
+    print(f'Angles: ({p}, {a}, {t})')
+    print('-----')
+    print(f'{v1=}')
+    print('-----')
+    print(f'{u=}')
+    print('-----')
+    print(f'{p1=}')
+    print('-----')
+    print(f'{p2=}')
+    print('-----')
+    print(f'{p3=}')
+    print('-----')
+    print(f'{mpB0Bad=}')
+    print('-----')
+    print(f'{mpBadB0=}')
+    print('-----')
+    print(f'{np.matmul(mpB0Bad, mpBadB0)}')
+    print('-----')
+    print(f'{r02=}')
+    print('-----')
+    print(f'{p22=}')
+    print('-----')
+    print(f'{p32=}')
+    print('-----')
+    print(f'{lf=}')
+    print('-----')
+
+    print(fCompPhiAlpha(p1,lf))
+    print('-----')
+
+    print(fCompPhiAlpha(p2-p1,lf))
+    print('-----')
+
+    print(fCompPhiAlpha(p3-p2,lf))
+    print('-----')
+
+    print(fCompPhiAlpha(-p3,lf))
+    print('-----')
+
+    pathorg = pathlib.Path.home() / 'tlmscn.dat'
+    pathdest = pathlib.Path.home() / 'tlmscn-mod.dat'
+    numLine = 0
+    with open(str(pathorg), 'r') as forg:
+        with open(str(pathdest), 'w') as fdest:
+            for line in forg:
+                numLine += 1
+                if numLine not in [5, 87, 90, 93, 141, 144, 145, 146, 147]:
+                    fdest.write(line)
+                else:
+                    fdest.write('--- line replaced ---\n')
+
+    lock.release()
+
 
 fComputeConfiguration()
 
