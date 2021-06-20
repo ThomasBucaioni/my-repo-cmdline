@@ -21,6 +21,7 @@
 - `sorted({sub for sub in a1 if any(sub in s for s in a2)})`
 - `s = sub(r'(.)(.*)\1', lambda x: chr((ord(x.group(1))-96)%26+97) + x.group(2),s)`
 - `for order in filter(None, lst.split(', ')): if not re.match('\S+ \d+ \d*\.\d+ (B|S)', order):`
+- `''.join( f'{"0"*(d.bit_length()-1)}1{d:b}' for d in map(int,s))`, `out.append( int(''.join(next(it) for _ in range(n)), 2) )`
 
 ## 5 kyu
 
