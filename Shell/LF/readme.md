@@ -269,18 +269,50 @@ gpgcheck=0
 - `vgcreate`, `vgextend`, `vgreduce`
 - `pvcreate`, `pvdisplay`, `pvmove`, `pvremove`
 - `man lvm`
-- `ls -lF /sbin/lv`
-- `
-- `
+- `ls -lF /sbin/lv*`, `ls -lF /sbin/pv*`, `ls -lF /sbin/vg*`
+- `lvcreate`, `lvdisplay`
+- `fdisk`, `8e`
+- `sudo pvcreate /dev/sdb1`
+- `sudo pvcreate /dev/sdc1`
+- `sudo vgcreate -s 16M vg /dev/sdb1`
+- `sudo vgextend vg /dev/sdc1`
+- `sudo lvcreate -L 50G -n mylvm vg`
+- `sudo mkfs -t ext4 /dev/vg/mylvm`
+- `sudo mkdir /mylvm`
+- `sudo mount /dev/vg/mylvm /mylvm`
+- `/etc/fstab`, `/dev/vg/mylvm /mylvm ext4 defaults 1 2`
+- `pvdisplay`, `pvdisplay /dev/sda5`
+- `vgdisplay`, `vgdisplay /dev/vg0`
+- `lvdisplay`, `lvdisplay /dev/vg0/lvm1`
+- `sudo lvresize -r -L 20 GB /dev/VG/mylvm`
+- `sudo lvresize -r -L +100M /dev/vg/mylvm`
+- `sudo pvmove /dev/sdc1`
+- `sudo vgreduce vg /dev/sdc1`
+- `sudo lvcreate -l 128 -s -n mysnap /dev/vg/mylvm`
+- `mkdir /mysnap`
+- `mount -o ro /dev/vg/mysnap /mysnap`
+- `sudo umount /mysnap`
+- `sudo lvremove /dev/vg/mysnap`
+- `sudo fdisk /dev/sda`, `sudo partprobe -s`, `sudo pvcreate /dev/sdaX`, `sudo pvcreate /dev/sdaY`, `sudo pvdisplay`, `sudo vgcreate myvg /dev/sdaX /dev/sdaY`, `sudo vgdisplay`, `sudo lvcreate -L 300M -n mylvm myvg`, `sudo lvdisplay`, `sudo mkfs.ext4 /dev/myvg/mylvm`, `sudo mkdir /mylvm`, `sudo mount /dev/myvg/mylvm /mylvm`, `/etc/fstab`, `/dev/myvg/mylvm /mylvm ext4 defaults 0 0`, `sudo lvdisplay`, `df -h`, `sudo lvresize -r -L 350M /dev/myvg/mylvm`, `df -h`, or `sudo lvresize -r -L +50M /dev/myvg/mylvm`, or `df -h`, `sudo lvextend -L 350M /dev/myvg/mylvm`, `sudo resize2fs /dev/myvg/mylvm`, `df -h`
 
 ## Raid
 
-- `
-- `
-- `
-- `
-- `
-- `
+- `mdadm`
+- `/dev/mdX`
+- `fdisk`, `fd`, `mdadm`, `/etc/fstab`
+- `sudo fdisk /dev/sdb`, `sudo fdisk /dev/sdc`
+- `sudo mdadm --create /dev/md0 --level=1 --raid-disks=2 /dev/sdbX /dev/sdcX`
+- `sudo mkfs.ext4 /dev/md0`
+- `sudo bash -c "mdadm --detail --scan >> /etc/mdadm.conf"`
+- `sudo mkdir /myraid`
+- `sudo mount /dev/md0 /myraid`
+- `/etc/fstab`, `/dev/md0 /myraid ext4 defaults 0 2`
+- `cat /proc/mdstat`
+- `sudo mdadm -S /dev/md0`, `cat /proc/mdstat`, `sudo systemctl start mdmonitor`, `sudo systemctl enable mdmonitor`
+- `sudo mdadm --create /dev/md0 -l 5 -n3 -x 1 /dev/sda8 /dev/sda9 /dev/sda10 /dev/sdb2`
+- `sudo mdadm --fail /dev/md0 /dev/sdb2`
+- `sudo mdadm --remove /dev/md0 /dev/sdb2`
+- `sudo mdadm --add /dev/md0 /dev/sde2`
 
 ## Kernel Services and Configuration
 
