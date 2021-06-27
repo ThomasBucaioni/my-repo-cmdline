@@ -1,3 +1,7 @@
+# L0
+
+# DevOps
+
 # L1
 
 ## Disk space
@@ -316,25 +320,39 @@ gpgcheck=0
 
 ## Kernel Services and Configuration
 
-- `sudo sysctl net.ipv4.icmp_echo_ignore_all=1`,
+- `cat /proc/cmdline`
+- `man bootparam`
+- `sysctl -a`
+- `sudo sh -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'`, `sudo sysctl net.ipv4.ip_forward=1`
+- `/etc/sysctl.conf`, `man sysctl.conf`, `sudo sysctl -p` (`/usr/lib/sysctl.d/`, `/etc/sysctl.d`)
+- `sudo sysctl net.ipv4.icmp_echo_ignore_all=1`, `ping localhost`, `se /etc/sysctl.conf`, `net.ipv4.icmp_echo_ignore_all=1`, `sysctl -p`, `sysctl net.ipv4.icmp_echo_ignore_all`, `ping localhost`
 - `cat /etc/sysctl.conf`
 - `sudo sysctl -p`
-- `sudo sh -c 'echo 24000 > /proc/sys/kernel/pid_max'`
+- `sysctl kernel.pid_max`, `cat /proc/sys/kernel/pid_max`, `cat &`, `sudo sysctl kernel.pid_max=24000`, `sudo sh -c 'echo 24000 > /proc/sys/kernel/pid_max'`, `cat /proc/sys/kernel/pid_max`, `cat &`
 
 ## Kernel Modules
 
 - `lsmod`, `insmod`, `rmmod`, `modprobe`, `depmod`, `modinfo`
+- `modprobe e1000e`, `modprobe -r e1000e`
+- `depmod`
+- `insmod /lib/modules/$(uname -r)/kernel/drivers/net/ethernet/intel/e1000.ko.xz` , `rmmod e1000`
+- `sudo /sbin/insmod <pathto>/e1000e.ko debug=2 copybreak=256`, `sudo /sbin/modprobe e1000e debug=2 copybreak=256`, `cat /sys/module/e1000e/parameters`
+- `ll /etc/modprobe.d`
 - `cd /lib/modules/5.4.0-73-generic/kernel/drivers/net/ethernet/3com/`, `sudo modprobe 3c509`, `lsmod | head`, `sudo modprobe -r 3c509`, `lsmod | head`, `dmesg | tail -30`
 - `lsmod`, `sudo insmod /lib/modules/$(uname -r)/kernel/drivers/net/ethernet/intel/e100`, `sudo /sbin/modprobe e100`, `lsmod | grep e100`, `sudo rmmod e100`, `sudo modprobe -r e100`, `lsmod | grep e100`
 
 ## Devices and udev
 
-- `
-- `
-- `
-- `
-- `
-- `
+- `ls -l /dev`
+- `sudo mknod [-m mode] /dev/name <type> </major> <minor>`: `sudo mknod -m 666 /dev/mycdrv c 254 1`
+- `ll /etc/udev/rules.d/`, `cat /etc/udev/rules.d/<rulename>.rules`
+- `/etc/udev/rules.d`, `/run/udev/rules.d`, `/usr/lib/udev/rules.d`
+- `man udev`, `SYMLINK`, `RUN`
+- `cat /usr/lib/udev/rules.d/99-fitbit.rules`, `SUBSYSTEM=="usb", ATTR{idVendor}=="2687", ATTR{idProduct}=="fb01", SYMLINK+="fitbit", MODE="0666"`
+- `cat /usr/lib/udev/rules.d/98-kexec.rules`, `SUBSYSTEM=="cpu", ACTION=="add", PROGRAM="/bin/systemctl try-restart kdump.service"`, `SUBSYSTEM=="cpu", ACTION=="remove", PROGRAM="/bin/systemctl try-restart kdump.service"`, `SUBSYSTEM=="memory", ACTION=="online", PROGRAM="/bin/systemctl try-restart kdump.service"`, `SUBSYSTEM=="memory", ACTION=="offline", PROGRAM="/bin/systemctl try-restart kdump.service"`
+- `cat /usr/lib/udev/rules.d/80-kvm.rules`, `KERNEL=="kvm", GROUP="kvm", MODE="0666"`
+- `stat --help`, `mknod --help`
+- `se /etc/udev/rules.d/75-myusb.rules`, `SUBSYSTEM=="usb", SYMLINK+="myusb"`, `ls -lF /dev | grep myusb`, `umount /media/whatever`, `ls -lF /dev | grep myusb`
 
 ## Virtualization
 
@@ -351,4 +369,43 @@ gpgcheck=0
 - `
 - `
 - `
+- `
+- `
+- `
+- `
+- `
+
+## Containers
+
+## User account management
+
+## Group management
+
+## File Permissions and ownership
+
+## Pluggable authentication modules
+
+## Network addresses
+
+## Network devices and configuration
+
+## Firewalls
+
+## System startup and shutdown
+
+## Grub
+
+## System init: systemd, systemv and upstart
+
+## Backup and recovery methods
+
+## Linux security modules
+
+## Local system security
+
+## Basic troubleshooting
+
+## System rescue
+
+# L2
 
