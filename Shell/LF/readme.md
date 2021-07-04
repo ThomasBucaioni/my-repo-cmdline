@@ -356,26 +356,26 @@ gpgcheck=0
 
 ## Virtualization
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- `sudo apt-get install qemu`, `qemu-img --help | grep formats:`, `qemu-img convert -O vmdk myvm.qcow2 myvm.vmdk`
+- `grep -e vmx -e svm /proc/cpuinfo`
+- `sudo dnf|zypper install kvm* qemu* libvirt*`
+- `sudo systemctl stop vmware` ,`sudo systemctl stop vboxdrv`
+- `sudo systemctl status libvirtd`, `sudo virt-manager`
+- `sudo qemu-img create -f qcow2 somedir/myimg.qcow2 24M`, `sudo qemu-system-x86_64 -hda somedir/myimg.qcow2 -cdrom ./os.iso  -usbdevice tablet`
 
 ## Containers
+
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
 
 ## User account management
 
