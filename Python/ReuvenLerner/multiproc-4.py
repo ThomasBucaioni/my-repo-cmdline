@@ -24,6 +24,8 @@ if __name__ == '__main__':
 
     print("Total = {}".format(word_count.value))
 
+#exit
+print('-----')
 
 def count_words(counter, filename):
     with counter.get_lock():

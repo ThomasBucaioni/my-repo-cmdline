@@ -89,7 +89,7 @@
   (ivy-mode 1))
 
 (use-package counsel
-  :bind (("C-M-j" . 'switch-to-buffer) ;'counsel-ibuffer)
+  :bind (; ("C-M-j" . 'switch-to-buffer) ;'counsel-ibuffer)
          ("C-x b" . 'counsel-switch-buffer)
          ("C-x C-f" . 'counsel-find-file)
          :map minibuffer-local-map
@@ -555,5 +555,22 @@
  '(tool-bar-mode nil)
  '(tooltip-mode nil)
  )
+
+(use-package lsp-ltex
+  :ensure t
+  :hook (text-mode . (lambda ()
+                       (require 'lsp-ltex)
+                       (lsp))))  ; or lsp-deferred
+
+(defun my-save-and-compile-command ()
+  (interactive)
+  (save-buffer)
+  (setq compile-command (concat "pdflatex -shell-escape " buffer-file-truename))
+  (call-interactively 'compile)
+  )
+(global-set-key (kbd "C-x e") 'my-save-and-compile-command)
+
+(setq compilation-scroll-output "follow")
+(setq compilation-always-kill t)
 
 ;; .emacs-systemcrafter.el ends here
