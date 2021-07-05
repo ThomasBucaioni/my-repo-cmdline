@@ -356,26 +356,25 @@ gpgcheck=0
 
 ## Virtualization
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- `sudo apt-get install qemu`, `qemu-img --help | grep formats:`, `qemu-img convert -O vmdk myvm.qcow2 myvm.vmdk`
+- `grep -e vmx -e svm /proc/cpuinfo`
+- `sudo dnf|zypper install kvm* qemu* libvirt*`
+- `sudo systemctl stop vmware` ,`sudo systemctl stop vboxdrv`
+- `sudo systemctl status libvirtd`, `sudo virt-manager`
+- `sudo qemu-img create -f qcow2 somedir/myimg.qcow2 24M`, `sudo qemu-system-x86_64 -hda somedir/myimg.qcow2 -cdrom ./os.iso  -usbdevice tablet`
 
 ## Containers
+
+- `docker`, `docker-search`, `docker-pull`, `docker-create`, `docker-run`
+- `docker <command> --help`
+- `docker rm $(docker ps -a -q)`
+- `sudo apt-get update`, `sudo apt-get install software-properties-common`, `sudo add-apt-repository ppa:projectatomic/ppa`, `sudo apt-get update`, `sudo apt-get install podman`
+- `sudo yum install docker`, `sudo dnf install podman podman-docker`
+- `sudo apt-get install docker.io`
+- `sudo zypper install docker`
+- `sudo systemctl start docker`, `systemctl status docker`
+- `sudo docker search apache`, `sudo docker pull docker.io/httpd`, `sudo docker images`, `sudo  docker images --all`, `sudo docker run httpd`, `lynx   http://172.17.0.2`, `w3m    http://172.17.0.2`, `elinks http://172.17.0.2`, `sudo docker ps`, `sudo docker stop hexid`, `sudo docker rmi -f docker.io/httpd`, `sudo docker system prune -a`, `sudo systemctl stop docker`
+- `
 
 ## User account management
 
