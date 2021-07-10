@@ -374,37 +374,255 @@ gpgcheck=0
 - `sudo zypper install docker`
 - `sudo systemctl start docker`, `systemctl status docker`
 - `sudo docker search apache`, `sudo docker pull docker.io/httpd`, `sudo docker images`, `sudo  docker images --all`, `sudo docker run httpd`, `lynx   http://172.17.0.2`, `w3m    http://172.17.0.2`, `elinks http://172.17.0.2`, `sudo docker ps`, `sudo docker stop hexid`, `sudo docker rmi -f docker.io/httpd`, `sudo docker system prune -a`, `sudo systemctl stop docker`
-- `
 
 ## User account management
 
+- `sudo useradd dexter`
+- `sudo useradd -s /bin/csh -m -k /etc/skel -c "Bullwinkle J Moose" bmoose`
+- `sudo userdel morgan`
+- `sudo usermod -L dexter`, `sudo usermod -U dexter`, `sudo chage -E 2014-09-11 morgan`
+- `sudo usermod --help`
+- `cat /etc/passwd`, `cat /etc/shadow`, `/etc/login.defs`, `/etc/group`
+- `passwd`, `sudo passwd kevin`
+- `chage [-m mindays] [-M maxdays] [-d lastday] [-I inactive] [-E expiredate] [-W warndays] user`
+- `sudo chage -l stephane`, `sudo chage -m 14 -M 30 kevlin`, `sudo chage -E 2012-4-1 isabelle`, `sudo chage -d 0 clyde`
+- `bash -r`, https://www.metahackers.pro/breakout-of-restricted-shell/, https://www.exploit-db.com/docs/english/44592-linux-restricted-shell-bypass-guide.pdf
+- `
+- `
+- `
+
 ## Group management
+
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
 
 ## File Permissions and ownership
 
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+
 ## Pluggable authentication modules
+
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
 
 ## Network addresses
 
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+
 ## Network devices and configuration
+
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
 
 ## Firewalls
 
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+
 ## System startup and shutdown
+
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
 
 ## Grub
 
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+
 ## System init: systemd, systemv and upstart
+
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
 
 ## Backup and recovery methods
 
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+
 ## Linux security modules
+
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
 
 ## Local system security
 
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+
 ## Basic troubleshooting
+
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
 
 ## System rescue
 
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+
 # L2
+
+## Linux networking: concept and review
+
+## Network configuration
+
+## Network troubleshooting and monitoring
+
+## Remote access
+
+## Domain name service
+
+## Http servers
+
+## Advanced http servers
+
+## Email servers
+
+## File sharing 
+
+## Advanced networking
+
+## Http caching
+
+## Network file systems
+
+## Network security
+
+## Firewalls
+
+## LXC virtualization
+
+## High availability
+
+## Databases
+
+## System log
+
+## Package management
+
 
