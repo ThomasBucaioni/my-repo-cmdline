@@ -162,6 +162,11 @@ RPS1="%(?.%F{green}0.%K{red}%F{011})%(?..(%?%))%(?.%f.%f%k)%F{magenta}%K{grey}:%
 - `openssl rsautl -encrypt -inkey public_key.pem -pubin -in secret.txt -out secret.enc`, `hexdump -C ./secret.enc`
 - `openssl rsautl -decrypt -inkey private_key.pem -in secret.enc > secret_decipher.txt`
 
+### Clean fingerprints
+
+- `mv ~/.ssh/known_hosts ~/.ssh/known_hosts.old`
+- `ssh-keygen -R HOSTNAME`
+
 ## Arch
 
 1. `loadkeys dvorak`
