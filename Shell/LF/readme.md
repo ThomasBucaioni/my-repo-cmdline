@@ -1,6 +1,80 @@
 # L0
 
+## Networking
+
+- `sudo ip link set eth0 up`, `sudo dhclient eth0`
+- `sudo ip link set eth0 up`, `sudo ip addr add 192.168.1.100 dev eth0`
+- `ip link`, `ip -s link`, `ip -s link show eth0`
+- `sudo ip link set eth0 down`
+- `sudo ip link set eth0 mtu 1480`
+- `sudo ip route add 172.16.1.0/24 via 192.168.1.5`
+
+## Command details
+
+### Basic commands and utilities
+
+#### File compression
+
+- `bunzip2`, `bzcat`, `bdiff`, `bzip2`, `bzless`, `gunzip`, `gzexe`, `gzip`, `zcat`, `zless`, `zip`, `upzip`, `xz`, `unxz`, `xzcat`
+
+#### File ownership, permissions and attributes
+
+- `attr`, `chgrp`, `chown`, `chmod`
+
+#### File
+
+- `awk`, `basename`, `cat`, `col`, `cp`, `cpio`, `csplit`, `cut`, `dd`, `diff`, `dirname`, `egrep`, `expand`, `file`, `fgrep`, `fmt`, `grep`, `head`, `join`, `less`, `more`, `sed`, `tail`, `ta`
+
+#### Filesystem
+
+- `cd`, `chroot`, `df`, `dirs`, `du`, `fdisk`, `fsck`, `fuser`, `ln`, `ls`, `mkdir`, `mv`, `pushd`, `popd`, `rm`, `rmdir`
+
+#### Networking
+
+- `arp`, `domainname`, `finger`, `ftp`, `host`, `hostname`, `ifconfig`, `netstat`
+
+#### Job control
+
+- `at`, `atrm`, `batch`, `crontab`, `exec`, `exit`, `ipcs`, `ipcrm`, `kill`, `killall`
+
+#### Expression evaluation
+
+- `bc`, `dc`, `eval`, `expr`, `factor`, `false`, `true`
+
+### Monitoring
+
+#### Processes and load monitoring utilities
+
+- `top`, `uptime`, `ps`, `pstree`, `mpstat`, `iostat`, `sar`, `numastat`, `strace`
+- packages: `procps`, `psmisc`, `pstree`, `sysstat`, `numactl`, `strace`
+
+#### Memory monitoring utilities
+
+- `free`, `vmstat`, `pmap`
+- package: `procps`
+
+#### I/O monitoring
+
+- `iostat`, `iotop`, `sar`, `vmstat`
+- packages: `sysstat`, `iotop`, `sysstat`, `procps`
+
+#### Network monitoring utilities
+
+- `netstat`, `iptraf`, `tcpdump`, `wireshark`
+- packages: `netstat`, `iptraf`, `tcpdump`, `wireshark`
+
+### Graphical monitoring tools
+
+- `gnome-system-monitor`
+- `ksysguard`
+
 # DevOps
+
+## Docker
+
+### Port cleaning
+
+- `sudo lsof -i tcp:8080`, `sudo kill -9 PID` 
 
 # L1
 
