@@ -466,37 +466,37 @@ gpgcheck=0
 
 ## Group management
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- `groupadd`, `groupdel`, `groupmod`, `usermod`
+- `/etc/group`
+- `sudo groupadd -r -g 215 staff`
+- `sudo groupmod -g 101 blah`
+- `sudo groupdel newgroup`
+- `sudo usermod -G student,group1,group2 student`
+- `sudo useradd -m rocky`, `sudo useradd -m bullwinkle`, `sudo passwd rocky`, `sudo passwd bullwinkle`, `ls -l /home`, `sudo groupadd friends`, `sudo groupadd -g 490 bosses`, `grep -e friends -e bosses /etc/group`, `sudo usermod -G friends,bosses rocky`, `sudo usermod -G friends bullwinkle`, `grep -e rocky -e bullwinkle /etc/group`, `groups rocky bullwinkle`, `ssh rocky@localhost`, `cd ~`, `mkdir somedir`, `chgrp bosses somedir`, `ls -l`, `chmod a+x .`, `ssh bullwinkle@localhost`, `touch /home/rocky/somedir/somefile`, `exit`, `sudo usermod -a -G bosses bullwinkle`, `ssh bullwinkle@localhost`, `touch /home/rocky/somedir/somefile`, `ls -al /home/rocky/somedir`
 
 ## File Permissions and ownership
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- `chmod`, `chown`, `chgrp`, `umask`
+- `chmod uo+x,g-w a_file`
+- `sudo chown wally somefile`
+- `sudo chgrp cleavers somefile`
+- `sudo chown wally:cleavers somefile`
+- `sudo chown -R wally:cleavers ./`
+- `sudo chown -R wally:wally subdir`
+- `umask 0022`, `umask u=r,g=w,o=rw`, `umask -S`
+- `sudo apt install acl`
+- `getfacl /home/ubuntu/`
+- `setfacl -m u:isabelle:rx /home/stephane/file1`
+- `setfacl -x u:isabelle /home/stephane/file`
+- `setfacl -m d:u:isabelle:rx somedir`
+- `chmod u=r,g=w,o=x afile`, `chmod u+w,g-w,o+rw afile`, `chmod ug=rwx,o-rw afile`, `ls -l afile`
+- `touch afile`, `ls -l afile`, `umask`, `umask 0022`, `touch afile2`, `umask 0666`, `touch afile3`, `ls -l afile*`
+- `echo This is a file > /tmp/afile`, `getfacl /tmp/afile`, `sudo useradd fool`, `sudo passwd fool`, `sudo su - fool`, `echo another line > /tmp/afile`, `setfacl -m u:fool:rw /tmp/afile`, `getfacl /tmp/afile`, `echo another line > /tmp/afile`, `setfacl -m u:fool:w /tmp/afile`, `echo another line > /tmp/afile`, `rm /tmp/afile`, `sudo userdel -r fool`
 
 ## Pluggable authentication modules
 
+- `/etc/pam.d`
+- `
 - `
 - `
 - `
