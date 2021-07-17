@@ -68,6 +68,8 @@
 - `gnome-system-monitor`
 - `ksysguard`
 
+<!--- Comment --->
+
 # DevOps
 
 ## Docker
@@ -496,32 +498,32 @@ gpgcheck=0
 ## Pluggable authentication modules
 
 - `/etc/pam.d`
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
 
 ## Network addresses
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- https://en.wikipedia.org/wiki/Reserved_IP_addresses
+- `hostname`
+- `sudo hostname lumpy`
+- `sudo hostnamectl set-hostname lumpy`
+- `/etc/sysconfig/network`, `/etc/hostname`, `/etc/HOSTNAME`
+- `hostnamectl`, `hostnamectl --help`
 
 ## Network devices and configuration
 
+- `ip`, `ifconfig`, `nmtui`, `nmcli`, `/etc`
+- `ip [ OPTIONS ] OBJECT { COMMAND | help }`, `ip [ -force ] -batch filename`
+- `ip`: `address`, `link`, `maddress`, `monitor`, `route`, `rule`, `tunnel`
+- `ip link show`, `ip -s link show eth0`, `sudo ip addr add 192.168.1.7 dev eth0`, `sudo ip link set eth0 down`, `sudo ip link set eth0 mtu 1480`, `sudo ip route add 172.16.1.0/24 via 192.168.1.5`
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
+- `
 - `
 - `
 - `
