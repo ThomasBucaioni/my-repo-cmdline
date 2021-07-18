@@ -544,33 +544,37 @@ gpgcheck=0
 
 ## Firewalls
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- `iptables`, `firewall-cmd`, `ufw`
+- `system-config-firewall`, `firewall-config`, `gufw`, `yast`
+- `/etc/firewalld`, `/usr/lib/firewalld`, `firewall-cmd --help`
+- `sudo systemctl [enable/disable] firewalld`, `sudo systemctl [start/stop] firewalld`, `sudo systemctl status firewalld`
+- `sudo firewall-cmd --state`
+- `sudo sysctl net.ipv4.ip_forward=1`, `echo 1 > /proc/sys/net/ipv4/ip_forward`
+- `sudo sysctl -p`
+- `sudo firewall-cmd --get-default-zone`, `sudo firewall-cmd --get-active-zones`, `sudo firewall-cmd --get-zones`, `sudo firewall-cmd --set-default-zone=trusted`, `sudo firewall-cmd --set-default-zone=public`, `sudo firewall-cmd --zone=internal --change-interface=eno1`, `sudo firewall-cmd --permanent --zone=internal --change-interface=eno1` (`/etc/firewalld/zones/internal.xml`), `sudo firewall-cmd --get-zone-of-interface=eno1`, `sudo firewall-cmd --zone=public --list-all`
+- `sudo firewall-cmd --permanent --zone=trusted --add-source=192.168.1.0/24`, `sudo firewall-cmd --permanent --zone=trusted --list-sources`
+- `sudo firewall-cmd --get-services`, `sudo firewall-cmd --list-services --zone=public`, `sudo firewall-cmd --permanent --zone=home --add-service=dhcp`, `sudo firewall-cmd --reload`, `/etc/firewalld/services`
+- `sudo firewall-cmd --zone=home --add-port=21/tcp`, `sudo firewall-cmd --zone=home --list-ports`, `grep "21/tcp" /etc/services`
+- `tar xvf firewalld-0.3.13.tar.bz2`, `cd firewalld-0.3.13`, `./configure`, `make`, `sudo make install`, `sudo make uninstall`
+- `man firewall-cmd`, `man firewalld`
+- `sudo firewall-cmd  --zone=public --add-service=http`, `sudo firewall-cmd  --zone=public --add-service=https`, `sudo firewall-cmd --list-services --zone=public`, `sudo firewall-cmd --reload`, `sudo firewall-cmd --list-services --zone=public`
 
 ## System startup and shutdown
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- `/usr/lib/systemd`, `/etc/systemd`
+- Red Hat: `/etc/sysconfig`, `/etc/sysconfig/selinux`
+- Debian: `/etc/default`, `/etc/default/useradd`
+- `shutdown -h +1 "Power Failure imminent"`, `shutdown -h now`, `shutdown -r now`, `shutdown now`, `/sbin/shutdown --help`, `reboot`, `halt`, `poweroff`
 
 ## Grub
 
+- `/boot/grub/grub.cfg`, `/boot/grub2/grub.cfg`, `/boot/efi/EFI/redhat/grub.cfg`
+- `update-grub`, `grub2-mkconfig`
+- `/etc/default/grub`
+- `sudo grub2-install /dev/sda`
+- `efibootmgr`
+- `
+- `
 - `
 - `
 - `
