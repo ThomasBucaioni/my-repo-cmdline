@@ -8,6 +8,7 @@
 - `sudo ip link set eth0 down`
 - `sudo ip link set eth0 mtu 1480`
 - `sudo ip route add 172.16.1.0/24 via 192.168.1.5`
+- `ip addr show eth0`, `ifconfig eth0`, `sudo ip link set eth0 down`, `sudo ip addr add 192.168.1.200 dev eth0`, `sudo ip link set eth0 up`, `sudo ifconfig eth0 down`, `sudo ifconfig eth0 up 192.168.1.100`, `sudo ip link set eth0 up`, `sudo dhclient eth0`, `sudo ifconfig eth0 up`, `sudo dhclient eth0`, `sudo reboot`
 
 ## Command details
 
@@ -127,8 +128,7 @@
 
 ## Linux filesystem
 
-
-
+<!------ DevOps ------>
 
 # DevOps
 
@@ -137,6 +137,8 @@
 ### Port cleaning
 
 - `sudo lsof -i tcp:8080`, `sudo kill -9 PID` 
+
+<!------ L1 ------>
 
 # L1
 
@@ -558,73 +560,80 @@ gpgcheck=0
 ## Pluggable authentication modules
 
 - `/etc/pam.d`
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
 
 ## Network addresses
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- https://en.wikipedia.org/wiki/Reserved_IP_addresses
+- `hostname`
+- `sudo hostname lumpy`
+- `sudo hostnamectl set-hostname lumpy`
+- `/etc/sysconfig/network`, `/etc/hostname`, `/etc/HOSTNAME`
+- `hostnamectl`, `hostnamectl --help`
 
 ## Network devices and configuration
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- `ip`, `ifconfig`, `nmtui`, `nmcli`, `/etc`
+- `ip [ OPTIONS ] OBJECT { COMMAND | help }`, `ip [ -force ] -batch filename`
+- `ip`: `address`, `link`, `maddress`, `monitor`, `route`, `rule`, `tunnel`
+- `ip link show`, `ip -s link show eth0`, `sudo ip addr add 192.168.1.7 dev eth0`, `sudo ip link set eth0 down`, `sudo ip link set eth0 mtu 1480`, `sudo ip route add 172.16.1.0/24 via 192.168.1.5`
+- `ifconfig`, `ifconfig eth0`, `sudo ifconfig eth0 192.168.1.50`, `sudo ifconfig eth0 netmask 255.255.255.0`, `sudo ifconfig eth0 up`, `sudo ifconfig eth0 down`, `sudo ifconfig eth0 mtu 1480`
+- `ip link show | grep enp`, `ifconfig | grep enp`, `lspci | grep Ethernet`
+- `ip link show | grep wl`, `lspci | grep Centrino`
+- Red Hat: `/etc/sysconfig/network`, `/etc/sysconfig/network-scripts/ifcfg-ethX`, `/etc/sysconfig/network-scripts/ifcfg-ethX:Y`, `/etc/sysconfig/network-scripts/route-ethX`
+- Debian: `/etc/network/interfaces`
+- Suse: `/etc/sysconfig/network`
+- `man nmcli-examples`
+- `route -n`, `ip route`
+- `sudo nmcli con mod virbr0 ipv4.routes 192.168.10.0/24 +ipv4.gateway 192.168.122.0`, `sudo nmcli con up virbr0`
+- `/etc/sysconfig/network`, `GATEWAY=x.x.x.x`, `/etc/sysconfig/network-scripts/ifcfg-ethX`
+- `/etc/network/interfaces`, `gateway=x.x.x.x`
+- `sudo route add default gw 192.168.1.10 enp2s0`, `route`, `sudo route add default gw 192.168.1.1 enp2s0`
+- `sudo ip route add 10.5.0.0/16 via 192.168.1.100`
+- Red Hat: `cat /etc/sysconfig/network-scripts/route-eth0`
+- Debian: `/etc/network/interfaces`, `iface eth1 inet dhcp`, `post-up route add -host 10.1.2.51 eth1`, `post-up route add -host 10.1.2.52 eth1`
+- Suse: `/etc/sysconfig/network/ifroute-eth0`, `192.168.1.150 192.168.1.1 255.255.255.255 eth0`, `10.1.1.150 192.168.233.1.1 eth0`, `10.1.1.0/24 192.168.1.1 - eth0`
+- `[dig | host | nslookup] linuxfoundation.org`
+- `/etc/hosts`, `/etc/hosts.deny`, `/etc/hosts.allow`, (`/etc/host.conf`, `/etc/nsswitch.conf`)
+- `/etc/resolv.conf`
+- `ping -c 10 linuxfoundation.org`, `traceroute linuxfoundation.org`, `mtr linuxfoundation.org`
+- `ip addr show eth0`, `ip route`, `cp /etc/resolv.conf resolv.conf.keep`, `ifconfig eth0`, `route -n`, `cp /etc/resolv.conf resolv.conf.keep`, `sudo ip link set eth0 down`, `sudo ifconfig eth0 down`; Red Hat: `/etc/sysconfig/network-scripts/ifcfg-eth0`, `DEVICE=eth0`, `BOOTPROTO=static`, `ONBOOT=yes`, `IPADDR=noted from step1`, `NETMASK=noted from step1`, `GATEWAY=noted from step1`; Suse: `/etc/sysconfig/network`, `iface eth0 inet static`, `address noted from step1`, `netmask noted from step1`, `gateway noted from step1`; Debian: `/etc/networking/interfaces`, `sudo ip link set eth0 up`, `sudo ifconfig eth0 up`, `sudo cp resolv.conf.keep /etc/resolv.conf`, `cat /etc/sysconfig/network`, `cat /etc/hosts`, `ping yourhostname`, `sudo reboot`, `ping hostname`
+- `/etc/hosts`, `sudo sh -c "echo 192.168.1.180    mysystem.mydomain >> /etc/hosts"`, `ping mysystem.mydomain`, `sudo sh -c "echo 127.0.0.1       ad.doubleclick.net >> /etc/hosts"`, `ping ad.doubleclick.net`, `wget http://winhelp2002.mvps.org/hosts.txt`, `sudo sh -c "cat hosts.txt >> /etc/hosts"`
+- `sudo nmcli con`, `sudo nmcli con show "Auto Ethernet" | grep IP4.ADDRESS`, `nmcli con show 1c46bf37-2e4c-460d-8b20-421540f7d0e2`, `sudo nmcli con modify "Auto Ethernet" +ipv4.addresses 172.16.2.140/24`, `sudo nmcli con up "Auto Ethernet"`, `sudo nmcli con modify  "Auto Ethernet" -ipv4.addresses 172.16.2.140/24`, `sudo nmcli con up "Auto Ethernet"`
+- `route`, `ip route`, `sudo nmcli conn mod "Auto Ethernet" +ipv4.routes "192.168.100.0/24 172.16.2.1"`, `route`, `sudo nmcli conn up "Auto Ethernet"`, `route`, `reboot`, `route`, `sudo nmcli conn mod "Auto Ethernet" -ipv4.routes "192.168.100.0/24 172.16.2.1"`, `sudo nmcli conn up "Auto Ethernet"`, `sudo ip route add 192.168.100.0/24 via 172.16.2.1`, `sudo route`
 
 ## Firewalls
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- `iptables`, `firewall-cmd`, `ufw`
+- `system-config-firewall`, `firewall-config`, `gufw`, `yast`
+- `/etc/firewalld`, `/usr/lib/firewalld`, `firewall-cmd --help`
+- `sudo systemctl [enable/disable] firewalld`, `sudo systemctl [start/stop] firewalld`, `sudo systemctl status firewalld`
+- `sudo firewall-cmd --state`
+- `sudo sysctl net.ipv4.ip_forward=1`, `echo 1 > /proc/sys/net/ipv4/ip_forward`
+- `sudo sysctl -p`
+- `sudo firewall-cmd --get-default-zone`, `sudo firewall-cmd --get-active-zones`, `sudo firewall-cmd --get-zones`, `sudo firewall-cmd --set-default-zone=trusted`, `sudo firewall-cmd --set-default-zone=public`, `sudo firewall-cmd --zone=internal --change-interface=eno1`, `sudo firewall-cmd --permanent --zone=internal --change-interface=eno1` (`/etc/firewalld/zones/internal.xml`), `sudo firewall-cmd --get-zone-of-interface=eno1`, `sudo firewall-cmd --zone=public --list-all`
+- `sudo firewall-cmd --permanent --zone=trusted --add-source=192.168.1.0/24`, `sudo firewall-cmd --permanent --zone=trusted --list-sources`
+- `sudo firewall-cmd --get-services`, `sudo firewall-cmd --list-services --zone=public`, `sudo firewall-cmd --permanent --zone=home --add-service=dhcp`, `sudo firewall-cmd --reload`, `/etc/firewalld/services`
+- `sudo firewall-cmd --zone=home --add-port=21/tcp`, `sudo firewall-cmd --zone=home --list-ports`, `grep "21/tcp" /etc/services`
+- `tar xvf firewalld-0.3.13.tar.bz2`, `cd firewalld-0.3.13`, `./configure`, `make`, `sudo make install`, `sudo make uninstall`
+- `man firewall-cmd`, `man firewalld`
+- `sudo firewall-cmd  --zone=public --add-service=http`, `sudo firewall-cmd  --zone=public --add-service=https`, `sudo firewall-cmd --list-services --zone=public`, `sudo firewall-cmd --reload`, `sudo firewall-cmd --list-services --zone=public`
 
 ## System startup and shutdown
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- `/usr/lib/systemd`, `/etc/systemd`
+- Red Hat: `/etc/sysconfig`, `/etc/sysconfig/selinux`
+- Debian: `/etc/default`, `/etc/default/useradd`
+- `shutdown -h +1 "Power Failure imminent"`, `shutdown -h now`, `shutdown -r now`, `shutdown now`, `/sbin/shutdown --help`, `reboot`, `halt`, `poweroff`
 
 ## Grub
 
+- `/boot/grub/grub.cfg`, `/boot/grub2/grub.cfg`, `/boot/efi/EFI/redhat/grub.cfg`
+- `update-grub`, `grub2-mkconfig`
+- `/etc/default/grub`
+- `sudo grub2-install /dev/sda`
+- `efibootmgr`
+- `
+- `
 - `
 - `
 - `
@@ -719,6 +728,8 @@ gpgcheck=0
 - `
 - `
 - `
+
+<!------ L2 ------>
 
 # L2
 
