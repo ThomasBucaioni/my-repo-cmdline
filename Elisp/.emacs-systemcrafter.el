@@ -9,6 +9,8 @@
 
 (setq visible-bell t)
 
+(setq mouse-yank-at-point t)
+
 (require 'cl-lib)
 
 ;; Adjust this font size

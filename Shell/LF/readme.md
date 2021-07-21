@@ -68,6 +68,68 @@
 - `gnome-system-monitor`
 - `ksysguard`
 
+### Modules
+
+- `insmod`, `rmod`, `lsmod`, `modprobe`, `modprode -r`
+- `sudo /sbin/modprobe module_name.ko irq=12 debug=3`
+
+### Device management
+
+- `sudo mknod [-m mode] /dev/name type major minor`, `mknod -m 666 /dev/mycdrv c 254 1`
+- `/etc/udev/udev.c`, `/etc/udev/rules.d`
+
+### Managing system services
+
+- `systemctl [options] command [name]`
+- `systemctl`
+- `systemctl list-units -t service --all`
+- `systemctl list-units -t service`
+- `sudo systemctl start foo`, `sudo systemctl start foo.service`, `sudo systemctl start /path/to/foo.service`
+- `sudo systemctl stop foo.service`
+- `sudo systemctl enable sshd.service`
+- `sudo systemctl disable sshd.service`
+
+### Stress
+
+- `sudo [dnf|yum|zypper|apt-get] install stress stress-ng`
+- `stress-ng --help`
+- `stress -c 8 -i 4 -m 6 -t 20s`
+
+## Users and groups
+
+- `sudo /usr/sbin/useradd bjmoose`
+- `sudo passwd bjmoose`
+- `sudo /usr/sbin/userdel bjmoose`, `-r`
+
+### Groups
+
+- `sudo /usr/sbin/groupadd anewgroup`
+- `sudo /usr/sbin/groupdel anewgroup`
+- `groups bjmoose`
+- `sudo /usr/sbin/usermod -aG anewgroup bjmoose`, `groups bjmoose`
+- `sudo /usr/sbin/usermod -G rjsquirrel rjsquirrel`, `groups rjsquirrel`
+- `id`
+
+### Files, users and permissions
+
+- `ls -lF file`
+
+### Su and sudo
+
+- `su -`
+- `su root -c ls`, `su - root -c ls`
+- `/etc/sudoers`
+- `/usr/sbin/visudo`, `/usr/sbin/sudoedit /etc/sudoers`
+- `man sudoers`
+- `someuser ALL=(ALL) ALL`
+- `chmod 440 /etc/sudoers.d/user`, `400`
+- `sudo su`
+
+## Linux filesystem
+
+
+
+
 # DevOps
 
 ## Docker
