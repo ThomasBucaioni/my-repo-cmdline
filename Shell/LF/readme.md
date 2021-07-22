@@ -128,6 +128,35 @@
 
 ## Linux filesystem
 
+- Btrfs: https://btrfs.wiki.kernel.org/index.php/Main_Page, https://lwn.net/Articles/575841/
+
+### Mounting filesystem
+
+- `sudo mount [-t type] [-o options] device dir`
+- `sudo mount /dev/sda8 /usr/local`
+- `/etc/fstab`
+- `sudo mount /dev/sda2   /boot`, `sudo mount LABEL=boot  /boot`, `sudo mount    -L boot  /boot`, `sudo mount UUID=26d58ee2-9d20-4dc7-b6ab-aa87c3cfb69a /boot`, `sudo mount   -U 26d58ee2-9d20-4dc7-b6ab-aa87c3cfb69a /boot`
+- `sudo mount`
+- `sudo mount 192.168.1.100:/ISO_IMAGES /mnt`
+- `dd if=/dev/zero of=/tmp/part count=500 bs=1M`, `mkfs.ext4 /tmp/part`, `mkdir /tmp/mntpart`, `sudo mount -o loop /tmp/part /tmp/mntpart`, `df -T`, `sudo umount /tmp/mntpart`, `fsck.ext4 -f /tmp/part`, `dumpe2fs /tmp/part`, `tune2fs /tmp/part`
+
+## Essential command line tools
+
+- `find`, `locate`, `grep`, `sed`
+- `ls`, `cat`, `rm`, `mv`, `mkdir`, `rmdir`, `file`, `ln`, `tail`, `head`, `less`, `more`, `touch`, `wc`
+
+### Finding files
+
+- `find [location] [criteria] [actions]`
+- `find /etc -name "*.conf"`
+- `find /etc -name "*.conf" -ls`
+- `find /tmp /etc -name "*.conf" -or -newer /tmp/.X0-lock -ls`
+- `find . -name "*~" -exec rm {} ';'`
+- `find . -name "*~" | xargs rm`
+- `for names in $(find . -name "*~" ) ; do rm $names ; done`
+- `find . -name "*~" -print0 | xargs -0 rm`
+
+
 <!------ DevOps ------>
 
 # DevOps
