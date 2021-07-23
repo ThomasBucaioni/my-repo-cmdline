@@ -147,15 +147,46 @@
 
 ### Finding files
 
+#### Command `find`
+
 - `find [location] [criteria] [actions]`
 - `find /etc -name "*.conf"`
 - `find /etc -name "*.conf" -ls`
 - `find /tmp /etc -name "*.conf" -or -newer /tmp/.X0-lock -ls`
-- `find . -name "*~" -exec rm {} ';'`
+- `find . -name "*~" -exec rm {} ';'` ++
 - `find . -name "*~" | xargs rm`
 - `for names in $(find . -name "*~" ) ; do rm $names ; done`
-- `find . -name "*~" -print0 | xargs -0 rm`
+- `find . -name "*~" -print0 | xargs -0 rm` +
 
+#### Command `locate`
+
+- `locate .conf`
+- `locate --help`
+- `sudo updatedb`
+
+#### Command `grep`
+
+- `grep pig file`
+- `grep -i -e pig -e dog -r .`
+- `grep "^dog" file`
+- `grep "dog$" file`
+- `grep d[a-p] file`
+- `-i`, `-v`, `-n`, `-H`, `-a`, `-I`, `-r`, `-l`, `-L`, `-c`, `-e`
+
+#### Command `sed`
+
+- `sed s/pig/cow/ file > newfile`
+- `sed s/pig/cow/ < file > newfile`
+- `cat file | sed s/pig/cow/ > newfile`
+- `sed s/pig/cow/g file > newfile`
+- `sed s:pig:cow:g file > newfile`
+- `sed s/'\\'/'\/'/g file > newfile`
+- `echo "$HOME"`
+- `echo '$HOME'`
+- `sed -e s/"pig"/"cow"/g -e s/"dog"/"cat"/g < file > newfile`
+- `echo hello | sed s/"hello"/"goodbye"/g`
+- `cat scriptfile`
+- `sed -f scriptfile < file > newfile`
 
 <!------ DevOps ------>
 

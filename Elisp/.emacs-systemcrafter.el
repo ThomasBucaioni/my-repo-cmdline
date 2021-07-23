@@ -577,4 +577,9 @@
 (setq compilation-scroll-output "follow")
 (setq compilation-always-kill t)
 
+(defun my-insert-comma-in-backticks () (interactive) (insert "`, `"))
+(global-set-key (kbd "<f6>") 'my-insert-comma-in-backticks)
+(defun my-insert-dash-and-backticks () (interactive) (insert "- `"))
+(global-set-key (kbd "<f5>") 'my-insert-dash-and-backticks)
+
 ;; .emacs-systemcrafter.el ends here
