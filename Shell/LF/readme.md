@@ -689,39 +689,43 @@ gpgcheck=0
 
 - `/boot/grub/grub.cfg`, `/boot/grub2/grub.cfg`, `/boot/efi/EFI/redhat/grub.cfg`
 - `update-grub`, `grub2-mkconfig`
-- `/etc/default/grub`
+- `/etc/default/grub`, `/etc/grub.d`
 - `sudo grub2-install /dev/sda`
 - `efibootmgr`
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- `/boot/loader/entries`, `/boot/grub2/grubenv`
+- `e`, ` 3`, `C-x`, `sudo systemctl start gdm`, `sudo systemctl start lightdm`, `sudo telinit 5`, `sudo service gdm restart`, `sudo service lightdm restart`
+- https://systemd.io/BOOT_LOADER_SPECIFICATION/ 
 
 ## System init: systemd, systemv and upstart
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- `/etc/hostname`, `/etc/vconsole.conf`, `/etc/sysctl.d/*.conf`, `/etc/os-release`
+- `systemctl [options] command [name]`
+- `systemctl`
+- `systemctl list-units -t service --all`
+- `systemctl list-units -t service`
+- `sudo systemctl start foo`
+- `sudo systemctl start foo.service`
+- `sudo systemctl start /path/to/foo.service`
+- `sudo systemctl stop foo.service`
+- `sudo systemctl enable sshd.service`
+- `sudo systemctl disable sshd.service`
+- https://fedoraproject.org/wiki/SysVinit_to_Systemd_Cheatsheet
+- `sudo systemctl start fake.service`, `sudo systemctl status fake.service`, `sudo systemctl stop fake.service`, `sudo systemctl daemon-reload`, `sudo tail -f /var/log/messages` (`/var/log/syslog`), `sudo systemctl enable fake.service`, `sudo systemctl disable fake.service`
 
 ## Backup and recovery methods
 
+- `cpio`, `tar`
+- `gzip`, `bzip2`, `xz`
+- `dd`
+- `rsync`
+- `dump`, `restore`
+- `mt`
+- `tar cvf  /dev/st0 /root`, `tar -cvf /dev/st0 /root`
+- `tar -cMf /dev/st0 /root`
+- `tar --compare --verbose --file /dev/st0`, `tar -dvf /dev/st0`
+- `
+- `
+- `
 - `
 - `
 - `
