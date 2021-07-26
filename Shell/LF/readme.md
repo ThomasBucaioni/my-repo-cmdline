@@ -188,6 +188,11 @@
 - `cat scriptfile`
 - `sed -f scriptfile < file > newfile`
 
+#### Examples
+
+- `find /tmp -newer /tmp/tstfile -ls`, `find /etc -name "*.conf"`, `find /etc -type d`, `find / -name "*.bak" -exec rm {}';'`
+- `grep ftp /etc/services`, `grep ftp /etc/services | grep tcp`, `grep -n ftp /etc/services | grep -v tcp`, `grep 'ˆts' /etc/services`, `grep 'st$' /etc/services`
+
 <!------ DevOps ------>
 
 # DevOps
