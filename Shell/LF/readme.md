@@ -193,6 +193,45 @@
 - `find /tmp -newer /tmp/tstfile -ls`, `find /etc -name "*.conf"`, `find /etc -type d`, `find / -name "*.bak" -exec rm {}';'`
 - `grep ftp /etc/services`, `grep ftp /etc/services | grep tcp`, `grep -n ftp /etc/services | grep -v tcp`, `grep 'ˆts' /etc/services`, `grep 'st$' /etc/services`
 
+## Bash scripting
+
+### Script basics
+
+- `$0`, `$1`, `$2`, `$*`, `$@`, `$#`
+- `shift n`
+- `. file`, `source file`
+- `set -n` (`bash -n`), `set -x` (`bash -x`), `set -v` (`bash -v`), `set -u` (`bash -u`), `set -e` (`bash -e`)
+- `set +n` (`bash +n`), `set +x` (`bash +x`), `set +v` (`bash +v`), `set +u` (`bash +u`), `set +e` (`bash +e`)
+
+### Conditionals
+
+- `if [[ -f file.c ]] ; then ; fi`
+- `if [ -f file.c ] ; then ; fi` (deprecated: `if [ $VAR == "" ]`, `​if [ "$VAR" == "" ]`)
+- `if test -f file.c ; then ; fi` (deprecated: same)
+- `$?`
+- `make && make modules_install && make install`
+- `[[ -f /etc/foo.conf ]] || echo 'default config' >/etc/foo.conf`
+- `[[ $STRING == mystring ]] && echo mystring is "$STRING"`
+
+### File conditionals
+
+- `man 1 test`
+- `-e file`, `-d file`, `-f file`, `-s file`, `-g file`, `-u file`, `-r file`, `-w file`, `-x file`
+
+### String and arithmetic comparisons
+
+- `string`, `string1 == string2`, `string1 != string2`, `-n string`, `-z string`
+- `exp1 -op exp2`, `-eq, -ne, -gt, -ge, -lt, -le`
+- `!`
+
+### Case
+
+- `#!/bin/sh`, `echo "Do you want to destroy your entire file system?`, `read response`, `case "$response" in`, `"yes") echo "I hope you know what you are doing!" ;;`, `"no" ) echo "You have some comon sense!" ;;`, `"y" | "Y" | "YES" ) echo "I hope you know what you are doing!" ;`, `echo 'I am going to type: " rm -rf /"';;`, `"n" | "N" | "NO" ) echo "You have some comon sense!" ;;`, `* ) echo "You have to give an answer!" ;;`, `esac`, `exit 0`
+
+### Loops
+
+
+
 <!------ DevOps ------>
 
 # DevOps
