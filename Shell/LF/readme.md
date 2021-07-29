@@ -268,6 +268,10 @@
 - `chgrp aproject a_file`
 - `chown coop a_file`, `chown coop.aproject a_file`, `chown -R coop.aproject .`, `chown -R coop.aproject subdir`
 - `umask`, `umask 0022`, `umask -S`, `umask u=r,g=w,o=rw`
+- `sudo chmod +s a.out`
+
+## Compiling, linking, and libraries
+
 
 
 <!------ DevOps ------>
