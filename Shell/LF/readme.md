@@ -272,7 +272,26 @@
 
 ## Compiling, linking, and libraries
 
+- `gcc`, `-Idir`, `-Ldir`, `-l`, `-M`, `-H`, `-E`, `-D def`, `-U def`, `-d`, `-v`, `-pedantic`, `-w`, `-W`, `-Wall`, `-g`, `-pg`, `-c`, `-o file`, `-x lang`, `-ansi`, `-pipe`, `-static`, `-O[lev]`, `-Os`, `-O2 -Wall -pedantic`
+- `ar rv libsubs.a *.o`, `ranlib libsubs.a`, `nm -s libsubs.a`
+- `gcc -fPIC -c func1.c`, `gcc -fPIC -c func2.c`, `gcc -fPIC -shared -Wl,-soname=libmyfuncs.so.1 *.o -o libmyfuncs.so.1.0 -lc`, `ld -shared -soname=libmyfuncs.so.1 *.o -o libmyfuncs.so.1.0 -lc`, `ln -s libmyfuncs.so.1.0 libmyfuncs.so`, `ln -s libmyfuncs.so.1.0 libmyfuncs.so.1`
+- `info libtool`
+- `ldd`, `ldconfig`, `/etc/ld.so.conf`, `ldd /usr/bin/vi`
+- `LD_LIBRARY_PATH=$HOME/foo/lib ; foo [args]`, `LD_LIBRARY_PATH=$HOME/foo/lib foo [args]`
+- `gcc -o foo foo.c -L/mypath/lib -lfoolib`, `/mypath/lib/libfoolib.so`, `/mypath/lib/libfoolib.a`
+- `info gcc`, `gcc --print-search-dirs`, `/usr/lib`, `/lib`
+- `strip foobar`
+- `LD_DEBUG=help`
+- `gdb`, `.gdbinit`
+- `ldd /usr/bin/vim`, `vim &`, `cat /proc/pid/maps`, `pmap -d 2 pid`
 
+## Java intallation and environment
+
+- `sudo dnf install java-1.8.0-openjdk`, `sudo dnf install java-1.8.0-openjdk-devel`
+- `sudo apt-get install default-jre default-jdk`, `sudo apt-get install openjdk-8-jre openjdk--jdk`
+- `sudo alternatives --config java`, `ls -l /etc/alternatives/java`, `which java`, `ls -l /usr/bin/java`, `sudo alternatives --config javac`, `export JAVA_HOME=/usr/lib/jvm/java-1.6.0-sun-1.6.0.21.x86_64/jre`, `export PATH=$JAVA_HOME/bin:$PATH`, `java -version`
+- `readlink -f $(which java)`, `CLASSPATH`
+- `sudo apt-get install netbeans`
 
 <!------ DevOps ------>
 
