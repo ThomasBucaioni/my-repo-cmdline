@@ -723,24 +723,35 @@ gpgcheck=0
 - `tar cvf  /dev/st0 /root`, `tar -cvf /dev/st0 /root`
 - `tar -cMf /dev/st0 /root`
 - `tar --compare --verbose --file /dev/st0`, `tar -dvf /dev/st0`
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- `tar cvf file.tar dir1`, `tar -cvf file.tar dir1`
+- `tar --extract --same-permissions --verbose --file /dev/st0`
+- `tar -xpvf /dev/st0`, `tar xpvf /dev/st0`
+- `tar xvf /dev/st0 somefiletorestore`
+- `tar --list --file /dev/st0`, `tar -tf /dev/st0`
+- `tar --create --newer '2011-12-1' -vzf backup1.tgz /var/tmp`, `tar --create --after-date '2011-12-1' -vzf backup1.tgz /var/tmp`
+- https://www.kernel.org/
+- `tar zcvf source.tar.gz source`, `tar jcvf source.tar.bz2 source`, `tar Jcvf source.tar.xz source`
+- `tar cvf source.tar source ; gzip -v source.tar`
+- `tar xzvf source.tar.gz`, `tar xjvf source.tar.bz2`, `tar xJvf source.tar.xz`
+- `tar xvf source.tar.gz`
+- `dd if=input-file of=output-file options`
+- `dd if=/dev/zero of=outfile bs=1M count=10`, `dd if=/dev/sda of=/dev/sdb`, `dd if=/dev/sda of=sdadisk.img`, `dd if=/dev/sda1 of=partition1.img`, `dd if=/dev/cdrom of=tgsservice.iso bs=2048`
+- `rsync [options] sourcefile destinationfile`
+- `rsync file.tar someone@backup.mydomain:/usr/local`, `rsync -r --dry-run /usr/local /BACKUP/usr`
+- `rsync -r project-X archive-machine:archives/project-X`
+- `ls | cpio --create -O /dev/st0`, `cpio -i somefile -I /dev/st0`, `cpio -t -I /dev/st0`
+- http://www.amanda.org/
+- https://www.bacula.org/7.0.x-manuals/en/main/Main_Reference.html
+- https://clonezilla.org/
+- `mkdir /tmp/backup`, `cd /usr ; tar zcvf /tmp/backup/include.tar.gz include`, `cd /usr ; tar jcvf /tmp/backup/include.tar.bz2 include`, `cd /usr ; tar Jcvf /tmp/backup/include.tar.xz include`, `tar -C /usr -zcf include.tar.gz include`, `tar -C /usr -jcf include.tar.bz2 include`, `tar -C /usr -Jcf include.tar.xz include`, `du -sh /usr/include`, `ls -lh include.tar.*`, `tar tvf include.tar.xz`, `cd .. ; mkdir restore ; cd restore`, `tar xvf ../backup/include.tar.bz2`, `diff -qr include /usr/include`
+- `(cd /usr ; find include | cpio -c -o > /home/student/backup/include.cpio)`, `(cd /usr ; find include | cpio -c -o | gzip -c > /home/student/backup/include.cpio.gz)`, `ls -lh include*`, `cpio -ivt < include.cpio`, `cd ../restore`, `cat ../backup/include.cpio | cpio -ivt`, `gunzip -c include.cpio.gz | cpio -ivt`, `rm -rf include`, `cpio -id < ../backup/include.cpio`, `ls -lR include`, `cpio -idv < ../backup/include.cpio`, `diff -qr include /usr/include`
+- `rm -rf include`, `rsync -av /usr/include .`, `rsync -av /usr/include .`, `rsync -av /usr/include include`, `rsync -av --delete /usr/include .`, `rm -rf include/xen`, `rsync -av --delete --dry-run /usr/include .`, `rsync -av --delete  /usr/include .`
+- `#!/bin/sh`, `set -x`, `rsync --progress -avrxH --delete $*`
 
 ## Linux security modules
 
+- `
+- `
 - `
 - `
 - `
