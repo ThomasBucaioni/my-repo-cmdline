@@ -188,6 +188,111 @@
 - `cat scriptfile`
 - `sed -f scriptfile < file > newfile`
 
+#### Examples
+
+- `find /tmp -newer /tmp/tstfile -ls`, `find /etc -name "*.conf"`, `find /etc -type d`, `find / -name "*.bak" -exec rm {}';'`
+- `grep ftp /etc/services`, `grep ftp /etc/services | grep tcp`, `grep -n ftp /etc/services | grep -v tcp`, `grep 'ˆts' /etc/services`, `grep 'st$' /etc/services`
+
+## Bash scripting
+
+### Script basics
+
+- `$0`, `$1`, `$2`, `$*`, `$@`, `$#`
+- `shift n`
+- `. file`, `source file`
+- `set -n` (`bash -n`), `set -x` (`bash -x`), `set -v` (`bash -v`), `set -u` (`bash -u`), `set -e` (`bash -e`)
+- `set +n` (`bash +n`), `set +x` (`bash +x`), `set +v` (`bash +v`), `set +u` (`bash +u`), `set +e` (`bash +e`)
+
+### Conditionals
+
+- `if [[ -f file.c ]] ; then ; fi`
+- `if [ -f file.c ] ; then ; fi` (deprecated: `if [ $VAR == "" ]`, `​if [ "$VAR" == "" ]`)
+- `if test -f file.c ; then ; fi` (deprecated: same)
+- `$?`
+- `make && make modules_install && make install`
+- `[[ -f /etc/foo.conf ]] || echo 'default config' >/etc/foo.conf`
+- `[[ $STRING == mystring ]] && echo mystring is "$STRING"`
+
+### File conditionals
+
+- `man 1 test`
+- `-e file`, `-d file`, `-f file`, `-s file`, `-g file`, `-u file`, `-r file`, `-w file`, `-x file`
+
+### String and arithmetic comparisons
+
+- `string`, `string1 == string2`, `string1 != string2`, `-n string`, `-z string`
+- `exp1 -op exp2`, `-eq, -ne, -gt, -ge, -lt, -le`
+- `!`
+
+### Case
+
+- `#!/bin/sh`, `echo "Do you want to destroy your entire file system?`, `read response`, `case "$response" in`, `"yes") echo "I hope you know what you are doing!" ;;`, `"no" ) echo "You have some comon sense!" ;;`, `"y" | "Y" | "YES" ) echo "I hope you know what you are doing!" ;`, `echo 'I am going to type: " rm -rf /"';;`, `"n" | "N" | "NO" ) echo "You have some comon sense!" ;;`, `* ) echo "You have to give an answer!" ;;`, `esac`, `exit 0`
+
+### Loops
+
+#### For
+
+- `for file in $(find . -name "*.o")`, `do`, `echo "I am removing file: $file"`, `rm -f "$file"`, `done`
+- `find . -name "*.o" -exec rm {} ';'`
+- `find . -name "*.o" | xargs rm`
+
+#### While
+
+- `​#!/bin/sh`, `ntry_max=4 ; ntry=0 ; password=' '`, `while [[ $ntry -lt $ntry_max ]] ; do`, `ntry=$(( $ntry + 1 ))`, `echo -n 'Give password:  '`, `read password`, `if  [[ $password == "linux" ]] ; then`, `echo "Congratulations: You gave the right password on try $ntry!"`, `exit 0`, `fi`, `echo "You failed on try $ntry; try again!"`, `done`, `echo "you failed $ntry_max times; giving up"`, `exit -1`
+
+#### Until
+
+- `#!/bin/sh`, `ntry_max=4 ; ntry=0 ; password=' '`, `until [[ $ntry -ge $ntry_max ]] ; do`, `ntry=$(( $ntry + 1 ))`, `echo -n 'Give password:  '`, `read password`, `if [[ $password == "linux" ]] ; then`, `echo "Congratulations: You gave the right password on try $ntry!"`, `exit 0`, `fi`, `echo "You failed on try $ntry; try again!"`, `done`, `echo "you failed $ntry_max times; giving up"`, `exit -1`
+
+### Functions
+
+- `#!/bin/sh`, `test_fun1(){`, `var=FUN_VAR`, `shift`, `echo " PARS after fun shift: $0 $1 $2 $3 $4 $5"`, `}`, `var=MAIN_VAR`, `echo ' '`, `echo "BEFORE FUN MAIN, VAR=$var"`, `echo " PARS starting in main: $0 $1 $2 $3 $4 $5"`, `test_fun1 "$@"`, `echo " PARS after fun in main: $0 $1 $2 $3 $4 $5"`, `echo "AFTER FUN MAIN, VAR=$var"`, `exit 0`
+- `function fun_foobar(){`, `statements`, `}`, `function fun_foobar{`, `statements`, `}` (not in sh)
+
+### Examples
+
+#### Simple bash script
+
+- `#!/bin/sh`, `nproc=$(ps | wc -l)`, `echo "You are running $nproc processes"`, `exit 0`
+
+#### Simple backup script
+
+- `#!/bin/sh`, `usage="Usage: Backup Source Target"`, `if [[ $# -lt 2 ]] ; then`, `echo -e '\n'    $usage '\n'`, `exit 1 `, `fi`, `if ! [[ -d $1 ]] ; then`, `echo -e '\n' ERROR: First argument must be a Directory that exists: quitting'\n'`, `exit 1`, `fi`, `SOURCE=$1`, `TARGET=$2`, `DIRLIST=$(cd $SOURCE ; find . -type d )`, `for NAMES in $DIRLIST`, `do`, `SOURCE_DIR=$SOURCE/$NAMES`, `TARGET_DIR=$TARGET/$NAMES`, `echo "SOURCE= $SOURCE_DIR      TARGET=$TARGET_DIR"`, `FILELIST=$( (cd $SOURCE_DIR ; find . -maxdepth 1 ! -type d ) )`, `mkdir -p $TARGET_DIR`, `OLDIFS=$IFS`, `IFS=''`, `tar -zcvf $TARGET_DIR/Backup.tar.gz  -C $SOURCE_DIR $FILELIST`, `IFS=$OLDIFS`, `done`
+
+## Files and filesystem
+
+- `ls -lF`, `-`, `d`, `l`, `p`, `s`, `b`, `c`
+- `file *`
+- `ls -l a_file`
+- `chmod uo+x,g-w a_file`, `chmod 755 a_file`
+- `chgrp aproject a_file`
+- `chown coop a_file`, `chown coop.aproject a_file`, `chown -R coop.aproject .`, `chown -R coop.aproject subdir`
+- `umask`, `umask 0022`, `umask -S`, `umask u=r,g=w,o=rw`
+- `sudo chmod +s a.out`
+
+## Compiling, linking, and libraries
+
+- `gcc`, `-Idir`, `-Ldir`, `-l`, `-M`, `-H`, `-E`, `-D def`, `-U def`, `-d`, `-v`, `-pedantic`, `-w`, `-W`, `-Wall`, `-g`, `-pg`, `-c`, `-o file`, `-x lang`, `-ansi`, `-pipe`, `-static`, `-O[lev]`, `-Os`, `-O2 -Wall -pedantic`
+- `ar rv libsubs.a *.o`, `ranlib libsubs.a`, `nm -s libsubs.a`
+- `gcc -fPIC -c func1.c`, `gcc -fPIC -c func2.c`, `gcc -fPIC -shared -Wl,-soname=libmyfuncs.so.1 *.o -o libmyfuncs.so.1.0 -lc`, `ld -shared -soname=libmyfuncs.so.1 *.o -o libmyfuncs.so.1.0 -lc`, `ln -s libmyfuncs.so.1.0 libmyfuncs.so`, `ln -s libmyfuncs.so.1.0 libmyfuncs.so.1`
+- `info libtool`
+- `ldd`, `ldconfig`, `/etc/ld.so.conf`, `ldd /usr/bin/vi`
+- `LD_LIBRARY_PATH=$HOME/foo/lib ; foo [args]`, `LD_LIBRARY_PATH=$HOME/foo/lib foo [args]`
+- `gcc -o foo foo.c -L/mypath/lib -lfoolib`, `/mypath/lib/libfoolib.so`, `/mypath/lib/libfoolib.a`
+- `info gcc`, `gcc --print-search-dirs`, `/usr/lib`, `/lib`
+- `strip foobar`
+- `LD_DEBUG=help`
+- `gdb`, `.gdbinit`
+- `ldd /usr/bin/vim`, `vim &`, `cat /proc/pid/maps`, `pmap -d 2 pid`
+
+## Java intallation and environment
+
+- `sudo dnf install java-1.8.0-openjdk`, `sudo dnf install java-1.8.0-openjdk-devel`
+- `sudo apt-get install default-jre default-jdk`, `sudo apt-get install openjdk-8-jre openjdk--jdk`
+- `sudo alternatives --config java`, `ls -l /etc/alternatives/java`, `which java`, `ls -l /usr/bin/java`, `sudo alternatives --config javac`, `export JAVA_HOME=/usr/lib/jvm/java-1.6.0-sun-1.6.0.21.x86_64/jre`, `export PATH=$JAVA_HOME/bin:$PATH`, `java -version`
+- `readlink -f $(which java)`, `CLASSPATH`
+- `sudo apt-get install netbeans`
+
 <!------ DevOps ------>
 
 # DevOps
