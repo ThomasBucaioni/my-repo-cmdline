@@ -855,18 +855,35 @@ gpgcheck=0
 
 ## Linux security modules
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- https://selinuxproject.org/page/Main_Page
+- https://gitlab.com/apparmor
+- http://schaufler-ca.com/
+- https://tomoyo.osdn.jp/
+- https://www.starlab.io/blog/a-brief-tour-of-linux-security-modules
+- https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/index
+- `sudo apt install policycoreutils selinux-utils selinux-basics`
+- `sestatus`
+- CentOS, Suse: `/etc/sysconfig/selinux`, Ubuntu: `/etc/selinux/config`
+- `sudo selinux-activate`
+- `getenforce`, `sudo setenforce Permissive`, `Enforcing`, `Disabled`
+- `/etc/selinux/config`, `SELINUX=disabled`, `selinux=0`
+- `etc/selinux/[SELINUXTYPE]`, `targeted`, `minimum`, `MLS`
+- `ls -Z`, `ps auZ`
+- `chcon -t etc_t somefile`, `chcon --reference somefile someotherfile`, `ls -Z`
+- `cd /tmp/`, `touch tmpfile`, `ls -Z tmpfile`, `cd`, `touch homefile`, `ls -Z homefile`, `mv /tmp/tmpfile .`, `ls -Z`
+- `ls -Z`, `restorecon -Rv /home/user`, `ls -Z`
+- `policycoreutils-python`, `semanage fcontext`
+- `mkdir /virtualHosts`, `ls -Z`, `semanage fcontext -a -t httpd_sys_content_t /virtualHosts`, `ls -Z`, `restorecon -RFv /virtualHosts`, `ls -Z`
+- `getsebool`, `setsebool`, `semanage boolean -l`
+- `setsebool allow_ftpd_anon_write on`, `getsebool allow_ftpd_anon_write`
+- `echo 'File created at /root' > rootfile`, `mv rootfile /var/www/html/`, `wget -O - localhost/rootfile`, `tail /var/log/messages`
+- `sudo systemctl [start|stop|restart|status] apparmor`, `sudo systemctl [enable|disable] apparmor`, `sudo apparmor_status`, `ps aux | grep libvirtd`
+- `aa-enforce`, `aa-complain`, `/etc/apparmor.d`, apparmor-profiles: `ls /etc/apparmor.d`
+- `man apparmor.d`
+- `rpm -qil apparmor-utils | grep bin`, `ls -l /usr/sbin/*complain`
+- `apparmor_status`, `apparmor_notify`, `complain`, `enforce`, `disable`, `logprof`, `easyprof`
+- `sudo dnf install  httpd`, `elinks http:/localhost`, `sudo sh -c "echo file1 > /var/www/html/file1.html"`, `elinks -dump http://localhost/file1.html`, `sudo cd /root`, `sudo sh -c "echo file2 > file2.html"`, `sudo mv file2.html /var/www/html`, `elinks -dump http://localhost/file2.html`, `cd  /var/www/html`, `ls -Z file*html`, `sudo chcon -t httpd_sys_content_t file2.html`, `elinks http://localhost/file2.html`
+- `sudo apt-get install apparm*`, `sudo cp /bin/ping /bin/ping-x`, `sudo ls -l /bin/ping-x`, `sudo getcap /bin/ping-x`, `ping-x -c3 -4 127.0.0.1`, `sudo setcap cap_net_raw+ep  /bin/ping-x`, `ping-x  -c3 -4 127.0.0.1`, `sudo aa-status`, `sudo aa-status | grep -e "ˆ[[:alnum:]]" -e ping`, `sudo aa-genprof /bin/ping-x`, `ping-x  -c3 -4 127.0.0.1`, `AAASF`, `sudo cat /etc/apparmor.d/bin.ping-x`, `ping-x -c3 -4 127.0.0.1`, `ping-x -c3  -6 ::1`
 
 ## Local system security
 
