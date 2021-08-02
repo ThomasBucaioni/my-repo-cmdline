@@ -74,6 +74,8 @@
 
 ### Prompt
 
+- `export TERM=xterm-256color`
+
 1. Bash
 
 ```
