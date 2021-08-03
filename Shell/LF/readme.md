@@ -883,18 +883,18 @@ gpgcheck=0
 - `rpm -qil apparmor-utils | grep bin`, `ls -l /usr/sbin/*complain`
 - `apparmor_status`, `apparmor_notify`, `complain`, `enforce`, `disable`, `logprof`, `easyprof`
 - `sudo dnf install  httpd`, `elinks http:/localhost`, `sudo sh -c "echo file1 > /var/www/html/file1.html"`, `elinks -dump http://localhost/file1.html`, `sudo cd /root`, `sudo sh -c "echo file2 > file2.html"`, `sudo mv file2.html /var/www/html`, `elinks -dump http://localhost/file2.html`, `cd  /var/www/html`, `ls -Z file*html`, `sudo chcon -t httpd_sys_content_t file2.html`, `elinks http://localhost/file2.html`
-- `sudo apt-get install apparm*`, `sudo cp /bin/ping /bin/ping-x`, `sudo ls -l /bin/ping-x`, `sudo getcap /bin/ping-x`, `ping-x -c3 -4 127.0.0.1`, `sudo setcap cap_net_raw+ep  /bin/ping-x`, `ping-x  -c3 -4 127.0.0.1`, `sudo aa-status`, `sudo aa-status | grep -e "ˆ[[:alnum:]]" -e ping`, `sudo aa-genprof /bin/ping-x`, `ping-x  -c3 -4 127.0.0.1`, `AAASF`, `sudo cat /etc/apparmor.d/bin.ping-x`, `ping-x -c3 -4 127.0.0.1`, `ping-x -c3  -6 ::1`
+- `sudo apt-get install apparm*`, `sudo cp /bin/ping /bin/ping-x`, `sudo ls -l /bin/ping-x`, `sudo getcap /bin/ping-x`, `ping-x -c3 -4 127.0.0.1`, `sudo setcap cap_net_raw+ep  /bin/ping-x`, `ping-x  -c3 -4 127.0.0.1`, `sudo aa-status`, `sudo aa-status | grep -e "ˆ[[:alnum:]]" -e ping`, `sudo aa-genprof /bin/ping-x`, `ping-x  -c3 -4 127.0.0.1`, `AASF`, `sudo cat /etc/apparmor.d/bin.ping-x`, `ping-x -c3 -4 127.0.0.1`, `ping-x -c3  -6 ::1`
 
 ## Local system security
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- https://help.ubuntu.com/community/Grub2/Passwords
+- `/etc/fstab`, `nodev`, `nosuid`, `noexec`, `ro`
+- `mount -o ro,noexec,nodev /dev/sda2 /edsel`
+- `/dev/sda2 /edsel  ext4 ro,noexec,nodev 0 0`
+- `chmod u+s somefile`, `chmod g+s somefile`, `chmod g+s somedir`
+- `setuid`, `setgid`
+- `dd if=/dev/zero of=image bs=1M count=100`, `sudo mkfs.ext3 image`, `mkdir mountpoint`, `sudo mount -o loop image mountpoint`, `sudo cp /bin/ls mountpoint`, `mountpoint/ls`, `sudo umount mountpoint ; sudo mount -o noexec,loop image mountpoint` or `sudo mount -o noexec,remount image mountpoint`, `mountpoint/ls`, `sudo umount mountpoint`, `rm image`, `rmdir mountpoint`
+- `/home/student/image  /home/student/mountpoint    ext3    loop,rw,noexec 0 0`
 - `
 - `
 - `
