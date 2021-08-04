@@ -916,10 +916,10 @@ gpgcheck=0
 - `bash`, `chroot`, `ps`, `kill`, `vi`, `dd`, `tar`, `cpio`, `gzip`, `rpm`, `mkdir`, `ls`, `cp`, `mv`, `rm`
 - `/mnt/sysimage`, `sudo chroot /mnt/sysimage`, `/mnt/source`
 - `sudo rpm -ivh --force --root=/mnt/sysimage /mnt/source/Packages/vsftpd-2*.rpm`
-- `
-- `
-- `
-- `
+- `dd if=boot.iso of=/dev/sdX`
+- `livecd-tools`, `liveusb-creator`
+- `e`, `emergency`, `single`
+- `dd if=/dev/sda of=/root/mbrsave bs=446 count=1`, `sudo ls -l /root/mbrsave`, `dd if=/dev/zero of=/dev/sda bs=446 count=1`, `dd if=/mnt/sysimage/root/mbrsave of=/dev/sda bs=446 count=1`
 - `
 - `
 - `
