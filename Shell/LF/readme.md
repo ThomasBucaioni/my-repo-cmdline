@@ -895,28 +895,27 @@ gpgcheck=0
 - `setuid`, `setgid`
 - `dd if=/dev/zero of=image bs=1M count=100`, `sudo mkfs.ext3 image`, `mkdir mountpoint`, `sudo mount -o loop image mountpoint`, `sudo cp /bin/ls mountpoint`, `mountpoint/ls`, `sudo umount mountpoint ; sudo mount -o noexec,loop image mountpoint` or `sudo mount -o noexec,remount image mountpoint`, `mountpoint/ls`, `sudo umount mountpoint`, `rm image`, `rmdir mountpoint`
 - `/home/student/image  /home/student/mountpoint    ext3    loop,rw,noexec 0 0`
-- `
-- `
-- `
-- `
 
 ## Basic troubleshooting
 
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
-- `
+- `/var/log/messages`, `/var/log/secure`
+- `ifconfig`, `ip`
+- `lsmod`, `/proc`, `/sys`, `/proc/interrupts`, `/sys/class/net`
+- `ping`, `traceroute`, `mtr`
+- `route -n`
+- `dig`, `host`
+- `rpm -V some_package`, `rpm -Va`, `debsums options some_package`, `aide --check`
+- `/etc/fstab`
+- `sudo mount -o remount,rw /`, `sudo mount -a`
+- `Ctrl-Alt-FX`
 
 ## System rescue
 
-- `
-- `
+- `fdisk`, `mdadm`, `pvcreate`, `vgcreate`, `lvcreate`, `mkfs`
+- `ifconfig`, `route`, `traceroute`, `mtr`, `host`, `ftp`, `scp`, `ssh`
+- `bash`, `chroot`, `ps`, `kill`, `vi`, `dd`, `tar`, `cpio`, `gzip`, `rpm`, `mkdir`, `ls`, `cp`, `mv`, `rm`
+- `/mnt/sysimage`, `sudo chroot /mnt/sysimage`, `/mnt/source`
+- `sudo rpm -ivh --force --root=/mnt/sysimage /mnt/source/Packages/vsftpd-2*.rpm`
 - `
 - `
 - `
