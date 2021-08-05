@@ -75,6 +75,7 @@
 ### Prompt
 
 - `export TERM=xterm-256color`
+- `setxkbmap us -variant dvorak`
 
 1. Bash
 
