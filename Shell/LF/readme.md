@@ -293,6 +293,21 @@
 - `readlink -f $(which java)`, `CLASSPATH`
 - `sudo apt-get install netbeans`
 
+## Building RPM and Debian packages
+
+- `rpm -qil rpm-build | grep bin`
+- `rpm -qil rpm | grep bin`
+- `rpmbuild -ba specFile`
+- `rpmbuild --rebuild SourceRPM`
+- `rpm -i data`
+- `rpm -qi package`
+- `rpm -qR package`
+- `rpm -q --provides gzip`
+- `find-requires`, `find-provides`, `requires: package`, `requires: package >= version`, `requires: package >= version-build`
+- https://www.debian.org/doc/manuals/maint-guide/
+- `debuild`, `cdbs`
+- `
+
 <!------ DevOps ------>
 
 # DevOps
@@ -920,16 +935,17 @@ gpgcheck=0
 - `livecd-tools`, `liveusb-creator`
 - `e`, `emergency`, `single`
 - `dd if=/dev/sda of=/root/mbrsave bs=446 count=1`, `sudo ls -l /root/mbrsave`, `dd if=/dev/zero of=/dev/sda bs=446 count=1`, `dd if=/mnt/sysimage/root/mbrsave of=/dev/sda bs=446 count=1`
-- `
-- `
-- `
-- `
+- `mount /dev/cdrom /mnt/source`, `mount /dev/sdXY /mnt/mysys`, `rpm -ivh --force --root /mnt/mysys /mnt/source/Packages/zsh*.rpm`
 
 <!------ L2 ------>
 
 # L2
 
 ## Linux networking: concept and review
+
+- `
+- `
+- `
 
 ## Network configuration
 
