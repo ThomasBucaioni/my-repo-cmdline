@@ -1,5 +1,9 @@
 # L0
 
+## Shell, bash and the command line
+
+- `>&`, `2>&1`: `foo &> file` = `foo > file 2>&1`
+
 ## Networking
 
 - `sudo ip link set eth0 up`, `sudo dhclient eth0`
