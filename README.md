@@ -121,6 +121,10 @@ RPS1="%(?.%F{green}0.%K{red}%F{011})%(?..(%?%))%(?.%f.%f%k)%F{magenta}%K{grey}:%
 - `C-u C-SPC`
 - `(setq mouse-yank-at-point t)`
 
+### Evil
+
+- `~`, `g~` ; visual `u`, `U`, `guw`, `vim :help ~`
+
 ## NeoVim
 
 - `"+y`, `"+p`
