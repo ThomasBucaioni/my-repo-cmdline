@@ -471,6 +471,39 @@ git commit -a -m "This is the fourth commit"
 - `git bisect reset`
 - `git bisect run ./myscript.sh`
 
+## Branches
+
+- `git branch [branch_name] [starting_point]`, `git/refs/heads`
+- `git show-branch`
+- `git branch devel`
+- `git branch -d devel`
+
+### Checkout
+
+- `git checkout devel`, `git checkout main`, `.git/HEAD`
+- `git checkout -b newbranch startpoint`
+
+### Earlier file version
+
+- `git show v1.1.1:src/myfile.c`
+- `git checkout v1.1.1 src/myfile.c`
+
+## Diffs
+
+- `diff file1 file2`
+- `diff -u file1 file2`
+- `diff -Nur directory1 directory2`
+- `git diff`
+- `git diff earlier_commit`
+- `git diff --cached earlier_commit`, `--staged`
+- `git diff one_commit another_commit`, `--ignore-all-space`, `--stat`, `--numstat`
+- `git diff v4.2.1 v4.2.2 Documentation/vm`
+- `git diff --stat v4.2.1 v4.2.2 arch/x86_64`
+
+## Merge
+
+- `git checkout main`, `git merge devel`, `git status` ; `git merge devel`, `git ls-files`, `cat file`
+- `git reset --hard main`
 
 
 
