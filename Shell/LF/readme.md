@@ -308,6 +308,33 @@
 - `debuild`, `cdbs`
 - `
 
+## Git
+
+### Available revision control systems
+
+- https://www.gnu.org/software/rcs/
+- http://savannah.nongnu.org/projects/cvs
+- https://subversion.apache.org/
+- https://mirrors.edge.kernel.org/pub/software/scm/git/
+- http://bazaar.canonical.com/en/
+- https://www.monotone.ca/
+- https://www.mercurial-scm.org/
+- http://prcs.sourceforge.net/
+
+### Graphical interfaces
+
+- `git-gui`, `gitk`, `cgit`, `gitweb`
+
+### Books and online resources
+
+- https://mirrors.edge.kernel.org/pub/software/scm/git/docs/user-manual.html
+- Loeliger, J. & McCullough, M. (2012). Version control with Git: Powerful tools and techniques for collaborative software development (2nd ed.). Sebastopol, CA: O'Reilly Media, Inc.
+- https://git-scm.com/
+- https://training.linuxfoundation.org/cm/prep/talks/ESC.pdf
+- https://training.linuxfoundation.org/resources/webinars/introduction-to-git/
+
+
+
 <!------ DevOps ------>
 
 # DevOps
