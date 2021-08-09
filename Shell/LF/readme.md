@@ -1,5 +1,9 @@
 # L0
 
+## Shell, bash and the command line
+
+- `>&`, `2>&1`: `foo &> file` = `foo > file 2>&1`
+
 ## Networking
 
 - `sudo ip link set eth0 up`, `sudo dhclient eth0`
@@ -332,6 +336,141 @@
 - https://git-scm.com/
 - https://training.linuxfoundation.org/cm/prep/talks/ESC.pdf
 - https://training.linuxfoundation.org/resources/webinars/introduction-to-git/
+
+### Cgit example
+
+- https://git.kernel.org
+- not cgit: https://www.kernel.org
+
+### Installation
+
+- `which git`, `/usr/bin/git`
+- `sudo [dnf|yum] list git*`, `sudo [dnf|yum] install git* cgit`
+- `sudo zypper search git`, `sudo zypper install git git-core`
+- `sudo apt-get install git-core git-gui gitweb cgit gitk git-daemon-run git-cvs git-svn gettext`
+- `sudo emerge -a dev-util/git`
+- https://cygwin.com/
+- https://gitforwindows.org/
+- `git clone -v https://github.com/git/git.git`, `cd git`, `./configure`, `make`, `sudo make install`; `make prefix=/usr`, `sudo make install`
+- https://github.com/git/git
+- https://git-scm.com/
+- `git --version`
+- `git tag`, `git log`
+- `make prefix=/usr/local` or `make prefix=/opt`, `export PATH=/opt/bin:$PATH`
+
+### Converting between different systems
+
+- `git svn clone  https://svn.apache.org/repos/asf/subversion/trunk/doc my_svn_repo`
+- `svn log  https://svn.apache.org/repos/asf/subversion/trunk/doc | head`
+- `git svn clone -rXYZ   https://svn.apache.org/repos/asf/subversion/trunk/doc my_svn_repo`
+- `svn checkout https://svn.apache.org/repos/asf/subversion/trunk/doc doc`
+- `diff -qr my_svn_repo/ doc/git.tex`
+
+### An example
+
+- `git --version`
+- `git help [subcommand]`, `git help status`, `man git-status`, `git`, `git help --all`
+- https://inclusivenaming.org/language/word-list/
+- https://github.com/github/renaming
+- `git init`
+- `git checkout -b main`
+- `git checkout master`, `git branch -m master main`, `git push -u origin main`, `git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main`, `git branch -a`
+- `git checkout master`, `git branch main`, `git checkout main`, `git push -u origin main`
+- `mkdir git-test`
+- `cd git-test`
+- `git init`
+- `ls -l .git`
+- `echo some junk > somejunkfile`
+- `git add somejunkfile`
+- `git status`
+- `git config user.name "Another Genius"`
+- `git config user.email "b_genius@linux.com"`
+- `echo another line >> somejunkfile`
+- `git diff`
+- `git add somejunkfile`
+- `git commit -m "My initial commit"`
+- `git log`
+
+### Concepts and architecture
+
+- blobs
+
+### Managing files and the index
+
+- `.gitignore`
+- `git add`, `git help add`, `-i`, `-u`
+- `git rm`, `git rm myfile --cached`
+- `git mv`, `git mv oldfile newfile` = `mv oldfile newfile ; git rm oldfile ; git add newfile`
+- `git ls-files`, `git ls-files --others --exclude-standard`, `-t -c -o -s`,
+
+### Commits
+
+- `git commit file1`
+- `git commit`, `git commit ./`, `git commit -a`
+- `git diff`
+
+#### Identifiers and tags
+
+- `git log | grep "^commit" | head -10`
+- `git tag ver_10 longhexstring`, `git tag ver_10 shorthexstring`, `.git/refs/tags`
+
+#### Viewing the commit history
+
+```
+#!/bin/bash
+
+rm -rf git-test
+mkdir git-test
+
+cd git-test
+git init
+
+git config user.name "A Smart Guy"
+git config user.email "asmartguy@linux.com"
+
+echo file1 > file1
+git add file1
+git commit file1 -m "This is the first commit"
+
+echo file2 > file2
+git add file2
+git commit . -m "This is the second commit"
+
+echo file3 > file3
+echo another line for file3 >> file3
+git add .
+git commit . -m "This is the third commit"
+
+echo another line for file2 >> file2
+git add .
+git commit -a -m "This is the fourth commit"
+```
+- `git log`
+- `git log --pretty=oneline`
+- `git log -p shorthexstring`
+- `git help log`, `man git log`
+
+#### Reverting and resetting commits
+
+- `git revert commit_name`, `HEAD`, `HEAD~`, `HEAD~~` = `HEAD~2`, `{hash number}`, `{tag name}`
+- `git reset HEAD~2`, `--soft`, `--mixed`, `--hard`, `--merge`, `--keep`
+
+#### Tydying
+
+- `du -shc .git`, `git gc`, `du -shc .git`
+- `git prune -n`, `git prune`
+- `git fsck`
+
+#### Blame
+
+- `git blame file`, `git blame -L 3107,3121 kernel/sched/core.c​`
+
+#### Bisecting
+
+- `git bisect start`, `git bisect bad`, `git bisect good mytag`
+- `git bisect reset`
+- `git bisect run ./myscript.sh`
+
 
 
 
