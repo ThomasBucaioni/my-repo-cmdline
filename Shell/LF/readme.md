@@ -509,6 +509,10 @@ git commit -a -m "This is the fourth commit"
 
 ## Repositories
 
+- `git clone`
+- `git pull`, `git fetch`
+- `git push`
+- `
 
 
 <!------ DevOps ------>
