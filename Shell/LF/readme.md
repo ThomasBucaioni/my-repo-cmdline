@@ -512,8 +512,69 @@ git commit -a -m "This is the fourth commit"
 - `git clone`
 - `git pull`, `git fetch`
 - `git push`
-- `
+- `git clone git://git.kernel.org/pub/scm/git/git.git`, `file:///path/to/repo.git`, `ssh://user@remotesite.org[:port]/path/to/repo.git`, `user@remotesite.org:/path/to/repo.git`, `ht‌tp://remotesite.org/path/to/repo.git`, `ht‌tps://remotesite.org/path/to/repo.git`, `rsync://remotesite.org/path/to/repo.git`
+- `--no-hardlinks`
+- `git show-ref`
+- `git ls-remote git://git.kernel.org/pub/scm/git/git.git`
+- `git pull`
 
+### Publishing
+
+- `git clone --bare git-test /tmp/git-test`, `git clone /tmp/git-test my-git`
+- `touch /tmp/git-test/git-daemon-export-ok`
+- `git daemon &`
+- `git clone 192.168.1.100:/tmp/git-test my-git`
+- `git daemon --enable=receive-pack`, `[daemon] receivepack = true`
+- `/var/www/html`, `/home/username/public_html`
+- `git --bare update-server-info`
+- `git clone https://192.168.1.100/git-test my-git`, `git clone https://192.168.1.100/~username/public_html`
+- `git archive --verbose HEAD | bzip2 > myproject.tar.bz2`, `git archive --verbose v1.7.1 | bzip2 > myproject_v1.7.1.tar.bz2`
+
+### Fetching, pulling and pushing
+
+- `git fetch ; git merge origin/main` = `git pull origin main`
+- `git pull . branch`, `git merge branch`
+- `git push git://remotesite.org/path/to/repo.git main`
+- `git clone --bare <pathto>/git-test /tmp/my-remote-git-repo`, `git daemon`, `git clone git://ipaddress:/tmp/my-remote-git-repo`, `git daemon --base-path=/tmp`, `git clone git://ipaddress:/my-remote-git-repo`
+- `git clone ssh://user@ipaddress:/tmp/my-remote-git-repo`, `git clone user@ipaddress:/tmp/my-remote-git-repo /tmp/my-remote-git-repo2`, `sudo dnf install openssh-server`, `sudo apt-get install openssh-server`
+
+## Patches
+
+- `diff -Nur stable_tree modified_tree > /path/to/my_patch`
+- `diff -u original_file modified_file > /path/to/my_patch`
+- `cd stable ; patch -p1 < /path/to/my_patch`
+- `git format-patch -3`
+- `git format-patch main`
+- `git send-email -to linux-kernel@vger.kernel.org 0001-This-is-the-first-commit.patch`
+- `git am 0002-This-is-the-second-commit.patch`
+- `git am --resolved`
+- `git am --skip`
+- `git am --abort`
+- `patch --dry-run < 0002-This-is-the-second-commit.patch`, `git add`, `git commit`
+- `git apply --check 0002-This-is-the-second-commit.patch`, `git add`, `git commit`
+```
+rm -rf git-test ; mkdir git-test ; cd git-test
+git init
+git config user.name "A Smart Guy"
+git config user.email "asmartguy@linux.com"
+echo file1 > file1
+echo file2 > file2
+git add file1 file2
+git commit . -m "This is our first commit"
+cd ..
+git clone git-test git-newer
+cd git-newer
+echo another line >> file2
+echo a third file > file3
+git add file2 file3
+git commit -m"modifications from the new clone"
+git format-patch -1 -s
+mv 00* ..
+cd ..
+cd git-test
+git apply --check ../00*
+git am ../00*
+```
 
 <!------ DevOps ------>
 
