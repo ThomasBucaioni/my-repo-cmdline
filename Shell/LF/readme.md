@@ -504,6 +504,8 @@ git commit -a -m "This is the fourth commit"
 
 - `git checkout main`, `git merge devel`, `git status` ; `git merge devel`, `git ls-files`, `cat file`
 - `git reset --hard main`
+- `git checkout -b devel origin`, ..., `git checkout devel`, `git rebase main devel`, `git rebase --continue`
+- `git rebase --abort`
 
 
 
