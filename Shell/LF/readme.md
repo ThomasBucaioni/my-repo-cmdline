@@ -529,6 +529,7 @@ git commit -a -m "This is the fourth commit"
 - `git --bare update-server-info`
 - `git clone https://192.168.1.100/git-test my-git`, `git clone https://192.168.1.100/~username/public_html`
 - `git archive --verbose HEAD | bzip2 > myproject.tar.bz2`, `git archive --verbose v1.7.1 | bzip2 > myproject_v1.7.1.tar.bz2`
+- https://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/
 
 ### Fetching, pulling and pushing
 
@@ -575,6 +576,10 @@ cd git-test
 git apply --check ../00*
 git am ../00*
 ```
+
+## Gerrit
+
+- `
 
 <!------ DevOps ------>
 
