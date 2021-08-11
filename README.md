@@ -71,6 +71,7 @@
 - `line=$(sed -n '123p' file.txt | tr -s '\t' ' ' | cut -d' ' -f1)`
 - `journalctl --vacuum-time=2d`, `journalctl --vacuum-size=100M`
 - `for file in /proc/*/status ; do awk '/VmSwap|Name/{printf $2 " " $3}END{ print ""}' $file; done | sort -k 2 -n -r | less`
+- `du --separate-dirs --all --time --threshold=1G --human-readable`
 
 ### Prompt
 
