@@ -207,6 +207,7 @@
 - `find . -name "*~" | xargs rm`
 - `for names in $(find . -name "*~" ) ; do rm $names ; done`
 - `find . -name "*~" -print0 | xargs -0 rm` +
+- `find /tmp -newer /tmp/tstfile -ls`, `find /etc -name "*.conf"`, `find /etc -type d`, `find / -name "*.bak" -exec rm {} ';'`
 
 #### Command `locate`
 
@@ -222,6 +223,7 @@
 - `grep "dog$" file`
 - `grep d[a-p] file`
 - `-i`, `-v`, `-n`, `-H`, `-a`, `-I`, `-r`, `-l`, `-L`, `-c`, `-e`
+- `grep ftp /etc/services | grep tcp`, `grep -n ftp /etc/services | grep -v tcp`, `grep'ˆts'/etc/services`, `grep'st$'/etc/services`
 
 #### Command `sed`
 
