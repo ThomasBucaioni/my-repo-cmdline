@@ -2,7 +2,53 @@
 
 ## Shell, bash and the command line
 
+- `/etc/profile`, `~/.bash_profile`, `~/.bash_login`, `~/.profile`, `~/.bash_logout`, `~/.bashrc`
 - `>&`, `2>&1`: `foo &> file` = `foo > file 2>&1`
+- `alias diffside='diff --side-by-side --ignore-all-space'`
+- `PAGER=/usr/bin/less`, `NCPUS=$(grep ˆprocessor /proc/cpuinfo | wc -l)`
+- `PS1="\h:\u:\w>"`, `\t`, `\d`, `\n`, `\s`, `\w`, `\W`, `\u`, `\h`, `\#`, `\!`
+- `\#>` (Default # = 1, stdout)
+- `foobar 2>&1 | tee filename`
+- `ls -l ``which --skip-alias emacs`` `, `ls -l $(which --skip-alias emacs)`
+
+## Filesystem layout
+
+- https://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.pdf
+- `sudo /sbin/fdisk -l`
+- `sudo mkfs -t ext4 /dev/sda10`, `sudo mkfs.ext4 /dev/sda10`
+
+### Paths
+
+- `echo $PATH`
+- `which --skip-alias emacs`
+- `export CDPATH=/usr:$CDPATH`, `cd bin`
+
+### Hard and soft links
+
+- `ln file1 file2`, `ls -li file1 file2`, `ls -li /bin/g*zip`
+- `ln -s file1 file2`, `ls -li file1 file2`
+- `symlinks -rv /etc`
+
+## System boot
+
+- `/boot/grub/grub.cfg`, `/boot/grub2/grub.cfg`
+- `/etc/grub.d`, `/etc/default/grub`
+- `/boot/efi/EFI/redhat/grub.cfg`
+- `vmlinuz`, `initramfs`, `config`, `System.map`
+- `/sbin/init`
+- `sudo systemctl stop gdm`, `sudo systemctl start gdm`
+
+## Memory
+
+- `free -mt`
+- `sudo su`, `echo 3 > /proc/sys/vm/drop_caches`, `free -mt`
+- `cat /proc/meminfo`
+- http://people.redhat.com/drepper/cpumemory.pdf
+- `cat /proc/swaps`
+- `mkswap`, `swapon`, `swapoff`
+- `clone()`, `pthread_create()`
+
+
 
 ## Networking
 
@@ -184,7 +230,7 @@
 - `cat file | sed s/pig/cow/ > newfile`
 - `sed s/pig/cow/g file > newfile`
 - `sed s:pig:cow:g file > newfile`
-- `sed s/'\\'/'\/'/g file > newfile`
+- `sed s/'\\'/'\/'/g file > newfile` ++
 - `echo "$HOME"`
 - `echo '$HOME'`
 - `sed -e s/"pig"/"cow"/g -e s/"dog"/"cat"/g < file > newfile`
@@ -201,11 +247,12 @@
 
 ### Script basics
 
-- `$0`, `$1`, `$2`, `$*`, `$@`, `$#`
+- `$0`, `$1`, `$2`, `$*`, `$@`, `$#`: `man bash`
 - `shift n`
 - `. file`, `source file`
 - `set -n` (`bash -n`), `set -x` (`bash -x`), `set -v` (`bash -v`), `set -u` (`bash -u`), `set -e` (`bash -e`)
 - `set +n` (`bash +n`), `set +x` (`bash +x`), `set +v` (`bash +v`), `set +u` (`bash +u`), `set +e` (`bash +e`)
+- `man set`
 
 ### Conditionals
 
