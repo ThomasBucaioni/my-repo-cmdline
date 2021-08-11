@@ -579,7 +579,8 @@ git am ../00*
 
 ## Gerrit
 
-- `
+- https://gerrit-review.googlesource.com/Documentation/
+- https://gerrit-review.googlesource.com/Documentation/intro-gerrit-walkthrough.html
 
 <!------ DevOps ------>
 
