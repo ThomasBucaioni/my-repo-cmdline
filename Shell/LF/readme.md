@@ -1,5 +1,79 @@
 # L0
 
+## OSS projects
+
+- https://www.kernel.org/
+- https://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+- https://www.apache.org/
+- https://httpd.apache.org/
+- https://www.apache.org/licenses/
+- https://www.openstack.org/
+- https://kubernetes.io/
+- https://www.onap.org/
+- https://www.hyperledger.org/
+- https://nodejs.org/en/
+- https://xenproject.org/
+- https://www.coreinfrastructure.org/
+- https://www.automotivelinux.org/
+
+## Continuous integration
+
+- https://www.jenkins.io/
+- https://jenkins-x.io/
+- https://spinnaker.io/
+- https://cloud.google.com/tekton/
+- https://www.linuxfoundation.org/press-release/2019/03/the-linux-foundation-announces-new-foundation-to-support-continuous-delivery-collaboration/
+- https://cd.foundation/
+- https://stackify.com/top-continuous-integration-tools/
+- https://travis-ci.org/
+- https://www.jetbrains.com/teamcity/
+- https://www.gocd.org/
+- https://about.gitlab.com/stages-devops-lifecycle/continuous-integration/
+- https://www.atlassian.com/software/bamboo
+- https://www.cloudbees.com/products/codeship
+- https://circleci.com/
+- https://kernelci.org/
+- https://www.linaro.org/
+- https://foundation.kernelci.org/
+- https://en.wikipedia.org/wiki/Comparison_of_free_and_open-source_software_licenses
+- https://openinventionnetwork.com/
+- http://oss-watch.ac.uk/apps/licdiff/
+- https://opensource.org/licenses/category
+- https://choosealicense.com/
+- https://tldrlegal.com/licenses/browse
+- https://www.gnu.org/licenses/license-list.en.html
+- https://fedoraproject.org/wiki/Licensing:Main?rd=Licensing#SoftwareLicenses
+- https://wiki.debian.org/DFSGLicenses
+- https://source.android.com/setup/start/licenses
+- https://www.apache.org/legal/resolved.html
+
+## GitHub
+
+- https://about.gitlab.com/
+- https://www.gitkraken.com/
+- https://launchpad.net/
+
+## Linux and the operating system
+
+- https://askubuntu.com/questions/161511/are-the-linux-utilities-parts-of-the-kernel-shell
+- https://www.linuxfoundation.org/
+- https://lwn.net/Distributions/
+- https://distrowatch.com/
+- https://wiki.linuxfoundation.org/lsb/start
+
+## Graphical environments and interfaces
+
+- https://www.x.org/wiki/
+- https://wayland.freedesktop.org/
+
+## System administration
+
+- https://fedoraproject.org/wiki/EPEL
+
+## Text editors
+
+- https://www.openvim.com/
+
 ## Shell, bash and the command line
 
 - `/etc/profile`, `~/.bash_profile`, `~/.bash_login`, `~/.profile`, `~/.bash_logout`, `~/.bashrc`
@@ -52,6 +126,8 @@
 
 ## Networking
 
+- `ip -s link`, `ifconfig`
+- `ls -l /sys/class/net/eno1/statistics`
 - `sudo ip link set eth0 up`, `sudo dhclient eth0`
 - `sudo ip link set eth0 up`, `sudo ip addr add 192.168.1.100 dev eth0`
 - `ip link`, `ip -s link`, `ip -s link show eth0`
@@ -131,6 +207,7 @@
 
 ### Managing system services
 
+- https://fedoraproject.org/wiki/SysVinit_to_Systemd_Cheatsheet
 - `systemctl [options] command [name]`
 - `systemctl`
 - `systemctl list-units -t service --all`
@@ -279,7 +356,20 @@
 
 ### Case
 
-- `#!/bin/sh`, `echo "Do you want to destroy your entire file system?`, `read response`, `case "$response" in`, `"yes") echo "I hope you know what you are doing!" ;;`, `"no" ) echo "You have some comon sense!" ;;`, `"y" | "Y" | "YES" ) echo "I hope you know what you are doing!" ;`, `echo 'I am going to type: " rm -rf /"';;`, `"n" | "N" | "NO" ) echo "You have some comon sense!" ;;`, `* ) echo "You have to give an answer!" ;;`, `esac`, `exit 0`
+```
+#!/bin/sh
+echo "Do you want to destroy your entire file system?
+read response
+case "$response" in
+  "yes") echo "I hope you know what you are doing!" ;;
+  "no" ) echo "You have some comon sense!" ;;
+  "y" | "Y" | "YES" ) echo "I hope you know what you are doing!" ;
+     echo 'I am going to type: " rm -rf /"';;
+  "n" | "N" | "NO" ) echo "You have some comon sense!" ;;
+  * ) echo "You have to give an answer!" ;;
+esac
+exit 0
+```
 
 ### Loops
 
@@ -291,26 +381,111 @@
 
 #### While
 
-- `​#!/bin/sh`, `ntry_max=4 ; ntry=0 ; password=' '`, `while [[ $ntry -lt $ntry_max ]] ; do`, `ntry=$(( $ntry + 1 ))`, `echo -n 'Give password:  '`, `read password`, `if  [[ $password == "linux" ]] ; then`, `echo "Congratulations: You gave the right password on try $ntry!"`, `exit 0`, `fi`, `echo "You failed on try $ntry; try again!"`, `done`, `echo "you failed $ntry_max times; giving up"`, `exit -1`
+```
+​#!/bin/sh
+ntry_max=4 ; ntry=0 ; password=' '
+while [[ $ntry -lt $ntry_max ]] ; do
+  ntry=$(( $ntry + 1 ))
+  echo -n 'Give password:  '
+  read password
+  if  [[ $password == "linux" ]] ; then
+    echo "Congratulations: You gave the right password on try $ntry!"
+    exit 0
+  fi
+  echo "You failed on try $ntry; try again!"
+done
+echo "you failed $ntry_max times; giving up"
+exit -1
+```
 
 #### Until
 
-- `#!/bin/sh`, `ntry_max=4 ; ntry=0 ; password=' '`, `until [[ $ntry -ge $ntry_max ]] ; do`, `ntry=$(( $ntry + 1 ))`, `echo -n 'Give password:  '`, `read password`, `if [[ $password == "linux" ]] ; then`, `echo "Congratulations: You gave the right password on try $ntry!"`, `exit 0`, `fi`, `echo "You failed on try $ntry; try again!"`, `done`, `echo "you failed $ntry_max times; giving up"`, `exit -1`
+```
+#!/bin/sh
+ntry_max=4 ; ntry=0 ; password=' '
+until [[ $ntry -ge $ntry_max ]] ; do
+  ntry=$(( $ntry + 1 ))
+  echo -n 'Give password:  '
+  read password
+  if [[ $password == "linux" ]] ; then
+    echo "Congratulations: You gave the right password on try $ntry!"
+    exit 0
+  fi
+  echo "You failed on try $ntry; try again!"
+done
+echo "you failed $ntry_max times; giving up"
+exit -1
+```
 
 ### Functions
 
-- `#!/bin/sh`, `test_fun1(){`, `var=FUN_VAR`, `shift`, `echo " PARS after fun shift: $0 $1 $2 $3 $4 $5"`, `}`, `var=MAIN_VAR`, `echo ' '`, `echo "BEFORE FUN MAIN, VAR=$var"`, `echo " PARS starting in main: $0 $1 $2 $3 $4 $5"`, `test_fun1 "$@"`, `echo " PARS after fun in main: $0 $1 $2 $3 $4 $5"`, `echo "AFTER FUN MAIN, VAR=$var"`, `exit 0`
-- `function fun_foobar(){`, `statements`, `}`, `function fun_foobar{`, `statements`, `}` (not in sh)
+```
+#!/bin/sh
+test_fun1(){
+var=FUN_VAR
+shift
+echo " PARS after fun shift: $0 $1 $2 $3 $4 $5"
+}
+var=MAIN_VAR
+echo ' '
+echo "BEFORE FUN MAIN, VAR=$var"
+echo " PARS starting in main: $0 $1 $2 $3 $4 $5"
+test_fun1 "$@"
+echo " PARS after fun in main: $0 $1 $2 $3 $4 $5"
+echo "AFTER FUN MAIN, VAR=$var"
+exit 0
+```
+
+```
+function fun_foobar(){
+statements
+}
+function fun_foobar{
+statements
+}
+```
+(not in sh)
 
 ### Examples
 
 #### Simple bash script
 
-- `#!/bin/sh`, `nproc=$(ps | wc -l)`, `echo "You are running $nproc processes"`, `exit 0`
+```
+#!/bin/sh
+nproc=$(ps | wc -l)
+echo "You are running $nproc processes"
+exit 0
+```
 
 #### Simple backup script
 
-- `#!/bin/sh`, `usage="Usage: Backup Source Target"`, `if [[ $# -lt 2 ]] ; then`, `echo -e '\n'    $usage '\n'`, `exit 1 `, `fi`, `if ! [[ -d $1 ]] ; then`, `echo -e '\n' ERROR: First argument must be a Directory that exists: quitting'\n'`, `exit 1`, `fi`, `SOURCE=$1`, `TARGET=$2`, `DIRLIST=$(cd $SOURCE ; find . -type d )`, `for NAMES in $DIRLIST`, `do`, `SOURCE_DIR=$SOURCE/$NAMES`, `TARGET_DIR=$TARGET/$NAMES`, `echo "SOURCE= $SOURCE_DIR      TARGET=$TARGET_DIR"`, `FILELIST=$( (cd $SOURCE_DIR ; find . -maxdepth 1 ! -type d ) )`, `mkdir -p $TARGET_DIR`, `OLDIFS=$IFS`, `IFS=''`, `tar -zcvf $TARGET_DIR/Backup.tar.gz  -C $SOURCE_DIR $FILELIST`, `IFS=$OLDIFS`, `done`
+```
+#!/bin/sh
+usage="Usage: Backup Source Target"
+if [[ $# -lt 2 ]] ; then
+  echo -e '\n'    $usage '\n'
+  exit 1 
+fi
+if ! [[ -d $1 ]] ; then
+  echo -e '\n' ERROR: First argument must be a Directory that exists: quitting'\n'
+  exit 1
+fi
+SOURCE=$1
+TARGET=$2
+DIRLIST=$(cd $SOURCE ; find . -type d )
+for NAMES in $DIRLIST
+do
+  SOURCE_DIR=$SOURCE/$NAMES
+  TARGET_DIR=$TARGET/$NAMES
+  echo "SOURCE= $SOURCE_DIR      TARGET=$TARGET_DIR"
+  FILELIST=$( (cd $SOURCE_DIR ; find . -maxdepth 1 ! -type d ) )
+  mkdir -p $TARGET_DIR
+  OLDIFS=$IFS
+  IFS=''
+  tar -zcvf $TARGET_DIR/Backup.tar.gz  -C $SOURCE_DIR $FILELIST
+  IFS=$OLDIFS
+done
+```
 
 ## Files and filesystem
 
@@ -325,6 +500,11 @@
 
 ## Compiling, linking, and libraries
 
+
+- http://gcc.gnu.org/
+- https://clangbuiltlinux.github.io/
+- https://software.intel.com/content/www/us/en/develop/tools/oneapi/all-toolkits.html#gs.8sct28
+- https://software.intel.com/content/www/us/en/develop/articles/free-intel-software-developer-tools.html
 - `gcc`, `-Idir`, `-Ldir`, `-l`, `-M`, `-H`, `-E`, `-D def`, `-U def`, `-d`, `-v`, `-pedantic`, `-w`, `-W`, `-Wall`, `-g`, `-pg`, `-c`, `-o file`, `-x lang`, `-ansi`, `-pipe`, `-static`, `-O[lev]`, `-Os`, `-O2 -Wall -pedantic`
 - `ar rv libsubs.a *.o`, `ranlib libsubs.a`, `nm -s libsubs.a`
 - `gcc -fPIC -c func1.c`, `gcc -fPIC -c func2.c`, `gcc -fPIC -shared -Wl,-soname=libmyfuncs.so.1 *.o -o libmyfuncs.so.1.0 -lc`, `ld -shared -soname=libmyfuncs.so.1 *.o -o libmyfuncs.so.1.0 -lc`, `ln -s libmyfuncs.so.1.0 libmyfuncs.so`, `ln -s libmyfuncs.so.1.0 libmyfuncs.so.1`
@@ -336,15 +516,20 @@
 - `strip foobar`
 - `LD_DEBUG=help`
 - `gdb`, `.gdbinit`
+- https://www.eclipse.org/
+- https://www.gnu.org/software/ddd/
 - `ldd /usr/bin/vim`, `vim &`, `cat /proc/pid/maps`, `pmap -d 2 pid`
 
 ## Java intallation and environment
 
+- https://www.oracle.com/java/technologies/javase-downloads.html
+- https://www.ibm.com/support/pages/java-sdk-downloads
 - `sudo dnf install java-1.8.0-openjdk`, `sudo dnf install java-1.8.0-openjdk-devel`
 - `sudo apt-get install default-jre default-jdk`, `sudo apt-get install openjdk-8-jre openjdk--jdk`
 - `sudo alternatives --config java`, `ls -l /etc/alternatives/java`, `which java`, `ls -l /usr/bin/java`, `sudo alternatives --config javac`, `export JAVA_HOME=/usr/lib/jvm/java-1.6.0-sun-1.6.0.21.x86_64/jre`, `export PATH=$JAVA_HOME/bin:$PATH`, `java -version`
 - `readlink -f $(which java)`, `CLASSPATH`
 - `sudo apt-get install netbeans`
+- https://netbeans.apache.org//
 
 ## Building RPM and Debian packages
 
@@ -388,10 +573,10 @@
 
 ### Cgit example
 
-- https://git.kernel.org
+- cgit: https://git.kernel.org
 - not cgit: https://www.kernel.org
 
-### Installation
+## Installation
 
 - `which git`, `/usr/bin/git`
 - `sudo [dnf|yum] list git*`, `sudo [dnf|yum] install git* cgit`
@@ -407,6 +592,10 @@
 - `git tag`, `git log`
 - `make prefix=/usr/local` or `make prefix=/opt`, `export PATH=/opt/bin:$PATH`
 
+## Git and revision control systems
+
+-https://www.bitkeeper.org/ `
+
 ### Converting between different systems
 
 - `git svn clone  https://svn.apache.org/repos/asf/subversion/trunk/doc my_svn_repo`
@@ -415,7 +604,7 @@
 - `svn checkout https://svn.apache.org/repos/asf/subversion/trunk/doc doc`
 - `diff -qr my_svn_repo/ doc/git.tex`
 
-### An example
+## An example
 
 - `git --version`
 - `git help [subcommand]`, `git help status`, `man git-status`, `git`, `git help --all`
@@ -440,11 +629,11 @@
 - `git commit -m "My initial commit"`
 - `git log`
 
-### Concepts and architecture
+## Concepts and architecture
 
 - blobs
 
-### Managing files and the index
+## Managing files and the index
 
 - `.gitignore`
 - `git add`, `git help add`, `-i`, `-u`
@@ -452,18 +641,18 @@
 - `git mv`, `git mv oldfile newfile` = `mv oldfile newfile ; git rm oldfile ; git add newfile`
 - `git ls-files`, `git ls-files --others --exclude-standard`, `-t -c -o -s`,
 
-### Commits
+## Commits
 
 - `git commit file1`
 - `git commit`, `git commit ./`, `git commit -a`
 - `git diff`
 
-#### Identifiers and tags
+### Identifiers and tags
 
 - `git log | grep "^commit" | head -10`
 - `git tag ver_10 longhexstring`, `git tag ver_10 shorthexstring`, `.git/refs/tags`
 
-#### Viewing the commit history
+### Viewing the commit history
 
 ```
 #!/bin/bash
@@ -499,22 +688,22 @@ git commit -a -m "This is the fourth commit"
 - `git log -p shorthexstring`
 - `git help log`, `man git log`
 
-#### Reverting and resetting commits
+### Reverting and resetting commits
 
 - `git revert commit_name`, `HEAD`, `HEAD~`, `HEAD~~` = `HEAD~2`, `{hash number}`, `{tag name}`
 - `git reset HEAD~2`, `--soft`, `--mixed`, `--hard`, `--merge`, `--keep`
 
-#### Tydying
+### Tydying
 
 - `du -shc .git`, `git gc`, `du -shc .git`
 - `git prune -n`, `git prune`
 - `git fsck`
 
-#### Blame
+### Blame
 
 - `git blame file`, `git blame -L 3107,3121 kernel/sched/core.c​`
 
-#### Bisecting
+### Bisecting
 
 - `git bisect start`, `git bisect bad`, `git bisect good mytag`
 - `git bisect reset`
@@ -639,13 +828,19 @@ git am ../00*
 
 ### Port cleaning
 
-- `sudo lsof -i tcp:8080`, `sudo kill -9 PID` 
+- `sudo lsof -i tcp:8080`, `sudo kill -9 PID`
 
 <!------ L1 ------>
 
 # L1
 
-## Disk space
+## Linux filesystem tree layout
+
+- https://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.pdf
+- `/`, `/bin`, `/boot` (kernel vmlinuz, initrd or initramfs), `/dev`, `/etc`, `/home`, `/lib`, `/lib64`, `/media`, `/mnt`, `/opt`, `/proc`, `/run`, `/sys`, `/root`, `/sbin`, `/srv`, `/tmp`, `/usr`, `/var`
+- https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s17.html
+
+### Disk space
 
 - `ls -F`
 - `sudo du -shxc --exclude=proc *`
@@ -653,12 +848,68 @@ git am ../00*
 - `sudo du --max-depth=1 -hx /`
 - https://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.pdf
 
+### Proc filesystem
+
+- `cd /proc`, `ls -F`
+- `/proc/meminfo`
+- `/proc/mounts`
+- `/proc/cpuinfo`
+- `/proc/swaps`
+- `/proc/version`
+- `/proc/partitions`
+- `/proc/interrupts`
+
+## Processes
+
+### Controlling processes with ulimit
+
+- `ulimit [options] [limit]`: `ulimit -n 1600`
+- `ulimit -H -n`
+- `ulimit -S -n`
+
+### Using nice to set priorities
+
+- `nice -n 5 command [ARGS]` = `nice 5 command [ARGS]`
+- `nice cat &`, `ps -l`
+- `renice --help`
+- `renice +5 -p 20003`, `ps -lf`
+- `gnome-system-monitor`
+
+### Static and shared libraries
+
+- `ls -l /usr/lib64/libpthread.*`, `libcrypt.*`
+- `ldd /usr/bin/vi`
+- `ldconfig`, `/etc/ld.so.conf`
+- `LD_LIBRARY_PATH=$HOME/foo/lib ; foo [args]`, `LD_LIBRARY_PATH=$HOME/foo/lib foo [args]`
+
+```
+bash
+ulimit -n
+ulimit -S -n
+ulimit -H -n
+ulimit -n hard
+ulimit -n
+ulimit -n 2048
+ulimit -n
+ulimit -n 4096
+ulimit -n
+```
+
+```
+ipcs
+ipcs -p
+ps aux |grep -e pid1 -e pid2
+```
+
 ## Signals
 
+- `pkill [-signal] [options] [pattern]`
 - `SIGKILL=9`, `SIGSTOP=19`, `SIGTERM=15`
 - `kill -l`
 - `man 7 signal`
 - `killall`, `pkill`
+- `kill pid`, `kill -SIGTERM pid`, `kill -9 pid`
+- `pkill -HUP rsyslogd`
 
 ## Package management
 
@@ -667,7 +918,7 @@ git am ../00*
 - https://mirrors.edge.kernel.org/pub/software/scm/git/docs/
 - `which git`, `git diff`, `git log`
 
-### RPM
+### Rpm
 
 - https://rpm.org/
 - `ls /usr/lib/rpm | wc -l`, `cat /usr/lib/rpm/rpmrc`
@@ -684,12 +935,18 @@ git am ../00*
 - `rpm -qilp package.rpm`
 - `cd /var/lib`, `sudo cp -a rpm rpm_BACKUP`, `sudo rpm --rebuilddb`, `ls -l rpm rpm_BACKUP`, `rpm -qa | tee /tmp/rpm-qa.output`, `ls -l rpm rpm_BACKUP`, `sudo rm -rf rpm_BACKUP`
 
-### DPKG
+### Dpkg
 
+- `/var/lib/dpkg`
+- `dpkg -l`
+- `dpkg -s wget`
 - `dpkg -S logrotate.conf`
 - `dpkg -L logrotate`
 - `dpkg -V logrotate`
+- `sudo dpkg -i foobar.deb`
 - `sudo dpkg -r logrotate`
+- `sudo dpkg -P package`
+
 
 ### Dnf
 
@@ -753,7 +1010,27 @@ gpgcheck=0
 - `sudo apt-get clean`
 - `apt-cache depends bash`, `apt-cache rdepends bash`
 - `apt-cache search metapackage`
-
+```
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get -u upgrade
+apt-cache search "kernel"
+apt-cache search -n "kernel"
+apt-cache pkgnames "kernel"
+dpkg --get-selections "*kernel*"
+sudo apt-get install apache2-dev
+```
+```
+apt-cache search bash # search in name and description
+apt-cache search -n bash # search installed or available (strict name)
+apt-cache show bash # full description
+apt-cache depends bash # dependencies
+apt-cache rdepends bash # reverse dependencies
+```
+```
+apt-cache search metapackage
+sudo apt-get install bacula-client
+```
 ## System monitoring
 
 ### Processes
@@ -790,10 +1067,11 @@ gpgcheck=0
 ### Examples
 
 - `sudo sar 3 3`, `-A`, `-b`, `-B`, ...
-- `sudo tail -f /var/log/messages`, `syslog`, `boot.log`, `dmesg` , `secure`
+- `sudo tail -f /var/log/messages`, `syslog`, `dmesg -w`, `boot.log`, `dmesg` , `secure`
 - `cat /etc/logrotate.conf`
 - `top`, `1`
 - `vmstat -a 2 1000`
+- https://wiki.ubuntu.com/Kernel/Reference/stress-ng
 - `git clone git://kernel.ubuntu.com/cking/stress-ng.git`, `cd stress-ng`, `make`, `sudo make install`
 - `stress-ng --help`, `info stress-ng`
 - `stress-ng -c 8 -i 4 -m 6 -t 20s`, `stress-ng -m 4 -t 20s`
@@ -805,38 +1083,110 @@ gpgcheck=0
 - `ps -eL`
 - `ps -C "bash"`
 - `ps -o pid,user,priority,cputime,pmem,size,command`
-- `pstree -aAp process-id`
+- `pstree -aAp process-id`, `-H`
 - `ls -l /proc/process-id/task`
 - `top`, `k`, `h`
-- `nice -n 10 bash`, `renice 15 -p process-id`
-- `dd if=/dev/urandom of=/dev/null &`, `ps -C dd -o pid,cmd,stat`
-- `fg`, `jobs`
+```
+ps -ef
+ps aux
+ps -o pid,pri,ni,cmd
+bash
+ps -o pid,pri,ni,cmd
+nice -n 10 bash
+renice 15 -p bash-process-id
+ps -o pid,pri,ni,cmd
+top
+```
+```
+dd if=/dev/urandom of=/dev/null &
+ps -C dd -o pid,cmd,stat
+fg
+^Z
+ps -C dd -o pid,cmd,stat
+jobs
+fg
+kill dd-pid
+```
 
 ## Memory monitoring
 
 - `cat /proc/meminfo`
 - `ls /proc/sys/vm`
 - `vmstat 2 4`, `vmstat -a 2 4`, `vmstat -SM -a 2 4`
+- https://lwn.net/Articles/104185/
 - `cat /proc/sys/vm/overcommit_memory`, `/proc/sys/vm/overcommit_ratio`
 - `cat /proc/[pid]/oom_score`
+```
+sudo /sbin/swapoff -a
+stress-ng -m 12 -t 10s
+sudo /sbin/swapon -a
+```
 
 ## I/O Monitoring
 
 - `iostat`, `iotop`, `ionice`
-- `iotop -o`, `-m`, `-k`, `-N`
+- `iostat`, ` -k`, `-m`, `-N`, `-d`, `-xk`
+- `iotop -o`
 - `ionice -c 2 -n 3 -p [pid]`
-- `time sudo bonnie++ -n 0 -u 0 -r 100 -f -b -d /mnt`, `bon_csv2txt < bonnie++.out > bonnie++.txt`
+```
+iostat -m /dev/sda /dev/sdb 2 200
+iotop -o
+for names in */*.vmdk ; do /bin/cp $names /tmp/junk ; done
+```
+```
+time sudo bonnie++ -n 0 -u 0 -r 100 -f -b -d /mnt
+bon_csv2txt < bonnie++.out > bonnie++.txt
+bon_csv2html < bonnie++.out > bonnie++.html
+```
+https://sourceforge.net/projects/fsmark/
+```
+tar zxvf fs_mark-3.3.tgz
+cd fs_mark
+make
+# fail:
+# sudo dnf install glibc-static
+# sudo zypper install glibc-devel-static
+fs_mark -d /tmp -n 2500 -s 10240
+iostat -x -d /dev/sda 2 10
+```
+
+## I/O Scheduler
+
+- `cat /sys/block/sda/queue/scheduler`
+- `echo bfq > /sys/block/sda/queue/scheduler`
+- `cat /sys/block/sda/queue/sheduler`
+- `ls /sys/block/sda/queue/iosched/`
+- `.../rotational`
+```
+sudo ./lab_iosched.sh 100 10
+```
 
 ## FS and VFS
 
+- https://sourceforge.net/projects/ntfs-3g/
 - `ln`, `ls -liF`
 - `cat /proc/filesystems`
-- `dd if=/dev/zero of=junk bs=1M count=512`, `sudo /sbin/mkfs.xfs junk`, `sudo mount junk /mnt`, `df -h`, `lsmod`
-- `sudo mkdir /mnt/tmpfs`, `sudo mount -t tmpfs none /mnt/tmpfs`, `df -h /mnt/tmpfs`, `sudo mount -t tmpfs -o size=1G none /mnt/tmpfs`, `sudo umount /mnt/tmpfs`
-- `df -h /dev/shm`, `df -h | grep 'tmpfs'`
+```
+lsmod
+dd if=/dev/zero of=junk bs=1M count=512
+sudo /sbin/mkfs.xfs junk
+sudo mount junk /mnt
+df -h
+lsmod
+```
+```
+sudo mkdir /mnt/tmpfs
+sudo mount -t tmpfs none /mnt/tmpfs
+df -h /mnt/tmpfs
+sudo mount -t tmpfs -o size=1G none /mnt/tmpfs
+sudo umount /mnt/tmpfs
+df -h /dev/shm
+df -h | grep 'tmpfs'
+```
 
 ## Disk partitioning
 
+- https://www.hp.com/us-en/shop/tech-takes/sas-vs-sata
 - `sudo fdisk -l /dev/sda | grep -i sector`
 - `ls -l`, `sudo mkfs.ext4 /dev/sdxy`
 - `sudo blkid /dev/sdx*`
@@ -845,22 +1195,69 @@ gpgcheck=0
 - `fdisk`, `sfdisk`, `parted`, `gparted`, `gdisk`, `sgdisk`
 - `sudo partprobe -s`, `cat /proc/partitions`
 - `mkfs.ext4 /dev/sdxy`
-- `dd if=/dev/zero of=imagefile bs=1M count=1024`, `mkfs.ext4 imagefile`, `mkdir mntpoint`, `sudo mount -o loop imagefile mntpoint`, `sudo umount mntpoint`
-- `sudo losetup /dev/loop2 imagefile`, `sudo mount /dev/loop2 mntpoint`, `sudo umount mntpoint`, `sudo losetup -d /dev/loop2`
-- `sudo fdisk -C 130 imagefile`, `n`, `+256M`
-- `sudo losetup -f`, `sudo losetup /dev/loop1 imagefile`, `losetup -a`, `sudo parted -s /dev/loop1 mklabel msdos`, `sudo parted -s /dev/loop1 unit MB mkpart primary ext4 0 256`, `sudo parted -s /dev/loop1 unit MB mkpart primary ext4 256 512`, `sudo parted -s /dev/loop1 unit MB mkpart primary ext4 512 1024`, `fdisk -l /dev/loop1`, `ls -l /dev/loop1*`, `sudo mkfs.ext3 /dev/loop1p1`, `sudo mkfs.ext4 /dev/loop1p2`,`sudo mkfs.ext4 /dev/loop1p3`, `mkdir mnt1 mnt2 mnt3`, `sudo mount /dev/loop1p1 mnt1`, `sudo mount /dev/loop1p2 mnt2`, `sudo mount /dev/loop1p3 mnt3`, `df -Th`, `sudo umount mnt1 mnt2 mnt3`, `rmdir mnt1 mnt2 mnt3`, `sudo losetup -d /dev/loop1`
+```
+dd if=/dev/zero of=imagefile bs=1M count=1024
+mkfs.ext4 imagefile
+mkdir mntpoint
+sudo mount -o loop imagefile mntpoint
+sudo umount mntpoint
+sudo losetup /dev/loop2 imagefile
+sudo mount /dev/loop2 mntpoint
+sudo umount mntpoint
+sudo losetup -d /dev/loop2
+```
+```
+sudo fdisk -C 130 imagefile
+	m
+	n
+	+256M
+	n
+	+256M
+	w
+```
+```
+sudo losetup -f
+sudo losetup /dev/loop1 imagefile
+losetup -a
+sudo parted -s /dev/loop1 mklabel msdos
+sudo parted -s /dev/loop1 unit MB mkpart primary ext4 0 256
+sudo parted -s /dev/loop1 unit MB mkpart primary ext4 256 512
+sudo parted -s /dev/loop1 unit MB mkpart primary ext4 512 1024
+fdisk -l /dev/loop1
+ls -l /dev/loop1*
+sudo mkfs.ext3 /dev/loop1p1
+sudo mkfs.ext4 /dev/loop1p2
+sudo mkfs.ext4 /dev/loop1p3
+mkdir mnt1 mnt2 mnt3
+sudo mount /dev/loop1p1 mnt1
+sudo mount /dev/loop1p2 mnt2
+sudo mount /dev/loop1p3 mnt3
+df -Th
+sudo umount mnt1 mnt2 mnt3
+rmdir mnt1 mnt2 mnt3
+sudo losetup -d /dev/loop1
+```
 
 ## Filesystem features: attributes, creating, checking, mounting
 
-- `lsattr`, `chattr`
+- `lsattr`, `chattr`, `man chattr`
 - `sudo mkfs -t ext4 /dev/sdxy`, `sudo mkfs.ext4 /dev/sd`
+- `sudo touch /forcefsck`
 - `mount -t ext /dev/sdxy /home`
 - `sudo mount LABEL=`, `-L`, `UUID`, `-U`
-- `sudo mount -o remount,ro /myfs`
+- `sudo mount -o remount,ro /myfs` +
 - `umount /dev/sdx`, `fuser`, `lsof`
 - `sudo mount -t nfs myserver.com:/shdir /mnt/shdir​`
 - `/etc/fstab`, `LABEL=Sam128 /SAM ext4 noauto,x-systemd.automount,x-systemd.device-timeout=10,x-systemd.idle-timeout=30 0 0`, `sudo systemctl daemon-reload`, `sudo systemctl restart local-fs.target`
 - `df -h -T`
+```
+touch /tmp/appendit
+cat /etc/hosts > /tmp/appendit
+diff /etc/hosts /tmp/appendit
+sudo chattr +a /tmp/appendit
+lsattr
+
+```
 - `sudo mount -o ro,loop,noexec ~/imagefile ~/mntpoint`
 - `/etc/fstab`, `/home/user/imagefile /home/user/mntpoint ext4 loop(defaults) 1 2`, `sudo mount -o remount ~/mntpoint`
 - `/etc/fstab`, `/home/user/imagefile /home/user/mntpoint ext4 loop(-),ro,noexec 1 2`, `sudo mount -o remount ~/mntpoint`
@@ -1137,7 +1534,7 @@ gpgcheck=0
 - `efibootmgr`
 - `/boot/loader/entries`, `/boot/grub2/grubenv`
 - `e`, ` 3`, `C-x`, `sudo systemctl start gdm`, `sudo systemctl start lightdm`, `sudo telinit 5`, `sudo service gdm restart`, `sudo service lightdm restart`
-- https://systemd.io/BOOT_LOADER_SPECIFICATION/ 
+- https://systemd.io/BOOT_LOADER_SPECIFICATION/
 
 ## System init: systemd, systemv and upstart
 
@@ -1284,7 +1681,7 @@ gpgcheck=0
 
 ## Email servers
 
-## File sharing 
+## File sharing
 
 ## Advanced networking
 
@@ -1305,5 +1702,3 @@ gpgcheck=0
 ## System log
 
 ## Package management
-
-
