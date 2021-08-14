@@ -1195,6 +1195,7 @@ df -h | grep 'tmpfs'
 - `fdisk`, `sfdisk`, `parted`, `gparted`, `gdisk`, `sgdisk`
 - `sudo partprobe -s`, `cat /proc/partitions`
 - `mkfs.ext4 /dev/sdxy`
+- `sudo sgdisk -p /dev/sda`
 ```
 dd if=/dev/zero of=imagefile bs=1M count=1024
 mkfs.ext4 imagefile
@@ -1256,7 +1257,33 @@ cat /etc/hosts > /tmp/appendit
 diff /etc/hosts /tmp/appendit
 sudo chattr +a /tmp/appendit
 lsattr
-
+date "+Date: %Y-%m-%d, Time: %H:%M:%S%n" > /tmp/appendit
+date "+Date: %Y-%m-%d, Time: %H:%M:%S%n" >> /tmp/appendit
+sudo date "+Date: %Y-%m-%d, Time: %H:%M:%S%n" > /tmp/appendit
+sudo chattr +i /tmp/appendit
+date "+Date: %Y-%m-%d, Time: %H:%M:%S%n" >> /tmp/appendit
+sudo chattr -aAi /tmp/appendit
+rm /tmp/appendit
+```
+```
+dd if=/dev/zero of=imagefile bs=1M count=250
+mkfs.ext4 -v imagefile
+# sudo mkfs -t ext4 -b 2048 -v /imagefile
+# sudo mkfs -t ext4 -b 4096 -v /imagefile
+sudo mkdir /mnt/tempdir
+sudo mount -o loop /imagefile /mnt/tempdir
+mount | grep tempdir
+sudo umount /mnt/tempdir
+sudo mount -o ro,loop /imagefile /mnt/tempdir
+sudo touch /mnt/tempdir/afile
+sudo umount /mnt/tempdir
+echo '/imagefile /mnt/tempdir ext4 loop 1 2' > /etc/fstab
+sudo mount /mnt/tempdir
+sudo mount | grep tempdir
+echo '/imagefile /mnt/tempdir ext4 loop,noexec 1 2' > /etc/fstab
+sudo mount -o remount /mnt/tempdir
+sudo cp /bin/ls /mnt/tempdir
+/mnt/tempdir/ls
 ```
 - `sudo mount -o ro,loop,noexec ~/imagefile ~/mntpoint`
 - `/etc/fstab`, `/home/user/imagefile /home/user/mntpoint ext4 loop(defaults) 1 2`, `sudo mount -o remount ~/mntpoint`
@@ -1268,25 +1295,57 @@ lsattr
 - `du`, `-a`, `-h`, `-h somedir`
 - `find . -maxdepth 1 -type d -exec du -shx {} \; | sort -hr`
 - `cat /proc/swaps`, `free -m`
+- `mkswap`, `swapon`, `swapoff`
+- `quotacheck`, `quotaon`, `quotaoff`, `edquota`, `quota`
 - `sudo mount -o remount /home`, `sudo quotacheck -vu /home`, `sudo quotaon -vu /home`, `sudo edquota someusername`
 - `sudo quotaon -av`, `sudo quotaoff -av`, `-avu`, `-avg`
 - `sudo quota user`
 - `sudo edquota -u user`, `sudo edquota -g group`, `sudo edquota -u -p userproto user`, `sudo edquota -t`
-- `cat /proc/swaps`, `dd if=/dev/zero of=swpfile bs=1M count=1024`, `mkswap swpfile`, `sudo swapon swpfile`, `sudo chown root:root swpfile`, `sudo chmod 600 swpfile`, `cat /proc/swaps`, `sudo swapoff swpfile`, `sudo rm swpfile`
-- `e /etc/fstab`, `/imagefile /mnt/tempdir ext4 loop,usrquota 1 2`, `sudo mount -o remount /mnt/tempdir`, `sudo quotacheck -u /mnt/tempdir`, `sudo quotaon -u /mnt/tempdir`, `sudo chown student.student /mnt/tempdir`, `sudo edquota -u student`, `cd /mnt/tempdir`, `dd if=/dev/zero of=bigfile1 bs=1024 count=200`, `quota`, `dd if=/dev/zero of=bigfile2 bs=1024 count=400`, `quota`, `dd if=/dev/zero of=bigfile2 bs=1024 count=600`
+```
+cat /proc/swaps
+dd if=/dev/zero of=swpfile bs=1M count=1024
+mkswap swpfile
+sudo swapon swpfile
+sudo chown root:root swpfile
+sudo chmod 600 swpfile
+cat /proc/swaps
+sudo swapoff swpfile
+sudo rm swpfile
+```
+```
+e /etc/fstab
+/imagefile /mnt/tempdir ext4 loop,usrquota 1 2
+sudo mount -o remount /mnt/tempdir
+sudo quotacheck -u /mnt/tempdir
+sudo quotaon -u /mnt/tempdir
+sudo chown student.student /mnt/tempdir
+sudo edquota -u student
+cd /mnt/tempdir
+dd if=/dev/zero of=bigfile1 bs=1024 count=200
+quota
+dd if=/dev/zero of=bigfile2 bs=1024 count=400
+quota
+dd if=/dev/zero of=bigfile2 bs=1024 count=600
+```
 
 ## The ext4 Filesystem
 
-- `sudo dumpe2fs /dev/sdb1`
+- `sudo dumpe2fs /dev/sdb1`, `sudo dumpe2fs /dev/sdb1`
 - `sudo tune2fs -c 25 /dev/sda1`
 - `sudo tune2fs -i 10 /dev/sda1`, `tune2fs -i 3w imagefile`
 - `sudo tune2fs -m 10 /dev/sda1`
 - `sudo tune2fs -l /dev/sda1`
 - `sudo e4defrag -c /var/log`
-- `dumpe2fs imagefile > dumpe2fs-output`, `grep -i  -e "Mount count" -e "Check interval" -e "Block Count" dumpe2fs-output`, `diff dumpe2fs-output-initial dumpe2fs-output-final`
+```
+dumpe2fs imagefile > dumpe2fs-output
+grep -i  -e "Mount count" -e "Check interval" -e "Block Count" dumpe2fs-output
+diff dumpe2fs-output-initial dumpe2fs-output-final
+```
 
 ## The Xfs and Btrfs filesystems
 
+- https://btrfs.wiki.kernel.org/index.php/Main_Page
+- https://lwn.net/Articles/575841/
 - `man -k xfs`
 - `btrfs`, `btrfs --help`, `man -k btrfs`
 
@@ -1302,9 +1361,49 @@ lsattr
 - `/etc/fstab`, `/dev/mapper/SECRET /mnt ext4 defaults 0 0`
 - `/etc/crypttab`, `SECRET ​/dev/sdc12`
 - `man crypttab`
-- `losetup -f`, `sudo losetup /dev/loop0 imagefile`, `losetup -l`, `sudo cryptsetup luksFormat /dev/loop0`, `sudo cryptsetup luksOpen /dev/loop0 cryptimage`, `ls -l /dev/mapper/`, `sudo mkfs.ext4 /dev/mapper/cryptimage`, `sudo mount /dev/mapper/cryptimage /mnt/`, `df -h`, `sudo umount /mnt`, `sudo cryptsetup luksClose /dev/mapper/cryptimage`, `sudo losetup -d /dev/loop0`, `losetup -l` (`rm imagefile`)
-- `sudo fdisk /dev/sda`, `sudo partprobe -s`, `sudo cryptsetup luksFormat /dev/sda4`, `sudo cryptsetup luksOpen /dev/sda4 secret-disk`, `/etc/crypttab`, `sudo mkfs -t ext4 /dev/mapper/secret-disk`, `sudo mkdir -p /secret`, `/etc/fstab`, `/dev/mapper/secret-disk    /secret    ext4    defaults 1 2`, `sudo mount /secret` , `sudo mount -a`, `reboot`
-- `cat /proc/swaps`, `sudo swapoff /dev/sda11`, `sudo cryptsetup luksFormat /dev/sda11  # --cipher aes`, `sudo cryptsetup luksOpen   /dev/sda11  swapcrypt`, `sudo mkswap /dev/mapper/swapcrypt`, `sudo swapon /dev/mapper/swapcrypt`, `cat /proc/swaps`, `sudo swapoff /dev/mapper/swapcrypt`, `sudo cryptsetup luksClose swapcrypt`, `sudo mkswap /dev/sda11`, `sudo swapon -a`, `/etc/fstab`, `/dev/sda11  swap   swap  defaults 0 0`, `sudo mkswap -L SWAP /dev/sda11`, `LABEL=SWAP  swap   swap  defaults 0 0`
+```
+losetup -f
+sudo losetup /dev/loop0 imagefile
+losetup -l
+sudo cryptsetup luksFormat /dev/loop0
+sudo cryptsetup luksOpen /dev/loop0 cryptimage
+ls -l /dev/mapper/
+sudo mkfs.ext4 /dev/mapper/cryptimage
+sudo mount /dev/mapper/cryptimage /mnt/
+df -h
+sudo umount /mnt
+sudo cryptsetup luksClose /dev/mapper/cryptimage
+sudo losetup -d /dev/loop0
+losetup -l # rm imagefile
+```
+```
+sudo fdisk /dev/sda
+sudo partprobe -s
+sudo cryptsetup luksFormat /dev/sda4
+sudo cryptsetup luksOpen /dev/sda4 secret-disk
+sudo vi /etc/crypttab # sudo mkfs -t ext4 /dev/mapper/secret-disk
+sudo mkdir -p /secret
+sudo vi /etc/fstab # /dev/mapper/secret-disk    /secret    ext4    defaults 1 2
+sudo mount /secret
+sudo mount -a
+reboot
+```
+```
+cat /proc/swaps
+sudo swapoff /dev/sda11
+sudo cryptsetup luksFormat /dev/sda11  # --cipher aes
+sudo cryptsetup luksOpen   /dev/sda11  swapcrypt
+sudo mkswap /dev/mapper/swapcrypt
+sudo swapon /dev/mapper/swapcrypt
+cat /proc/swaps
+sudo swapoff /dev/mapper/swapcrypt
+sudo cryptsetup luksClose swapcrypt
+sudo mkswap /dev/sda11
+sudo swapon -a
+sudo vi /etc/fstab # /dev/sda11  swap   swap  defaults 0 0
+sudo mkswap -L SWAP /dev/sda11
+LABEL=SWAP  swap   swap  defaults 0 0
+```
 
 ## Logical Volume Managment
 
