@@ -1381,7 +1381,8 @@ sudo fdisk /dev/sda
 sudo partprobe -s
 sudo cryptsetup luksFormat /dev/sda4
 sudo cryptsetup luksOpen /dev/sda4 secret-disk
-sudo vi /etc/crypttab # sudo mkfs -t ext4 /dev/mapper/secret-disk
+sudo vi /etc/crypttab # secret-disk    /dev/sda4
+sudo mkfs -t ext4 /dev/mapper/secret-disk
 sudo mkdir -p /secret
 sudo vi /etc/fstab # /dev/mapper/secret-disk    /secret    ext4    defaults 1 2
 sudo mount /secret
@@ -1396,13 +1397,15 @@ sudo cryptsetup luksOpen   /dev/sda11  swapcrypt
 sudo mkswap /dev/mapper/swapcrypt
 sudo swapon /dev/mapper/swapcrypt
 cat /proc/swaps
+sudo vi /etc/crypttab # swapcrypt/dev/sda11   /dev/urandom  swap,cipher=aes-cbc-essiv:sha256,size=256
+sudo vi /etc/fstab # /dev/mapper/swapcrypt  none    swap    defaults 0 0
 sudo swapoff /dev/mapper/swapcrypt
 sudo cryptsetup luksClose swapcrypt
 sudo mkswap /dev/sda11
 sudo swapon -a
 sudo vi /etc/fstab # /dev/sda11  swap   swap  defaults 0 0
 sudo mkswap -L SWAP /dev/sda11
-LABEL=SWAP  swap   swap  defaults 0 0
+sudo vi /etc/fstab # LABEL=SWAP  swap   swap  defaults 0 0
 ```
 
 ## Logical Volume Managment
@@ -1434,7 +1437,29 @@ LABEL=SWAP  swap   swap  defaults 0 0
 - `mount -o ro /dev/vg/mysnap /mysnap`
 - `sudo umount /mysnap`
 - `sudo lvremove /dev/vg/mysnap`
-- `sudo fdisk /dev/sda`, `sudo partprobe -s`, `sudo pvcreate /dev/sdaX`, `sudo pvcreate /dev/sdaY`, `sudo pvdisplay`, `sudo vgcreate myvg /dev/sdaX /dev/sdaY`, `sudo vgdisplay`, `sudo lvcreate -L 300M -n mylvm myvg`, `sudo lvdisplay`, `sudo mkfs.ext4 /dev/myvg/mylvm`, `sudo mkdir /mylvm`, `sudo mount /dev/myvg/mylvm /mylvm`, `/etc/fstab`, `/dev/myvg/mylvm /mylvm ext4 defaults 0 0`, `sudo lvdisplay`, `df -h`, `sudo lvresize -r -L 350M /dev/myvg/mylvm`, `df -h`, or `sudo lvresize -r -L +50M /dev/myvg/mylvm`, or `df -h`, `sudo lvextend -L 350M /dev/myvg/mylvm`, `sudo resize2fs /dev/myvg/mylvm`, `df -h`
+```
+sudo fdisk /dev/sda
+sudo partprobe -s
+sudo pvcreate /dev/sdaX
+sudo pvcreate /dev/sdaY
+sudo pvdisplay
+sudo vgcreate myvg /dev/sdaX /dev/sdaY
+sudo vgdisplay
+sudo lvcreate -L 300M -n mylvm myvg
+sudo lvdisplay
+sudo mkfs.ext4 /dev/myvg/mylvm
+sudo mkdir /mylvm
+sudo mount /dev/myvg/mylvm /mylvm
+/etc/fstab
+/dev/myvg/mylvm /mylvm ext4 defaults 0 0
+sudo lvdisplay
+df -h
+sudo lvresize -r -L 350M /dev/myvg/mylvm
+df -h
+# or sudo lvresize -r -l +50%FREE /dev/myvg/mylvm
+# or sudo lvextend -L 350M /dev/myvg/mylvm
+# or sudo resize2fs /dev/myvg/mylvm
+```
 
 ## Raid
 
@@ -1454,45 +1479,128 @@ LABEL=SWAP  swap   swap  defaults 0 0
 - `sudo mdadm --fail /dev/md0 /dev/sdb2`
 - `sudo mdadm --remove /dev/md0 /dev/sdb2`
 - `sudo mdadm --add /dev/md0 /dev/sde2`
+```
+sudo fdisk /dev/sda
+partprobe -s
+sudo mdadm -C /dev/md0 --level=1 --raid-disks=2 /dev/sdaX /dev/sdaY
+sudo mkfs.ext4 /dev/md0
+sudo mkdir /myraid
+sudo mount /dev/md0 /myraid
+sudo vi /etc/fstab # /dev/md0  /myraid    ext4    defaults 0 0
+sudo bash -c "mdadm --detail --scan >> /etc/mdadm.conf"
+cat /proc/mdstat
+```
 
 ## Kernel Services and Configuration
 
 - `cat /proc/cmdline`
+- https://www.kernel.org/doc/Documentation/
 - `man bootparam`
 - `sysctl -a`
-- `sudo sh -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'`, `sudo sysctl net.ipv4.ip_forward=1`
+- `sudo sh -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'` = `sudo sysctl net.ipv4.ip_forward=1`
 - `/etc/sysctl.conf`, `man sysctl.conf`, `sudo sysctl -p` (`/usr/lib/sysctl.d/`, `/etc/sysctl.d`)
 - `sudo sysctl net.ipv4.icmp_echo_ignore_all=1`, `ping localhost`, `se /etc/sysctl.conf`, `net.ipv4.icmp_echo_ignore_all=1`, `sysctl -p`, `sysctl net.ipv4.icmp_echo_ignore_all`, `ping localhost`
 - `cat /etc/sysctl.conf`
 - `sudo sysctl -p`
-- `sysctl kernel.pid_max`, `cat /proc/sys/kernel/pid_max`, `cat &`, `sudo sysctl kernel.pid_max=24000`, `sudo sh -c 'echo 24000 > /proc/sys/kernel/pid_max'`, `cat /proc/sys/kernel/pid_max`, `cat &`
+```
+sysctl kernel.pid_max
+cat /proc/sys/kernel/pid_max
+cat &
+sudo sysctl kernel.pid_max=24000
+sudo sh -c 'echo 24000 > /proc/sys/kernel/pid_max'
+sysctl kernel.pid_max
+cat /proc/sys/kernel/pid_max
+```
+```
+ping localhost
+sysctl net.ipv4.icmp_echo_ignore_all
+sudo sysctl net.ipv4.icmp_echo_ignore_all=1
+ping localhost
+sudo sysctl net.ipv4.icmp_echo_ignore_all=0
+ping localhost
+sudo vi /etc/sysctl.conf # net.ipv4.icmp_echo_ignore_all=1
+sysctl -p
+sysctl net.ipv4.icmp_echo_ignore_all
+ping localhost
+```
 
 ## Kernel Modules
 
 - `lsmod`, `insmod`, `rmmod`, `modprobe`, `depmod`, `modinfo`
-- `modprobe e1000e`, `modprobe -r e1000e`
+- `modprobe e1000e`, `modprobe -r e1000e` +
 - `depmod`
 - `insmod /lib/modules/$(uname -r)/kernel/drivers/net/ethernet/intel/e1000.ko.xz` , `rmmod e1000`
 - `sudo /sbin/insmod <pathto>/e1000e.ko debug=2 copybreak=256`, `sudo /sbin/modprobe e1000e debug=2 copybreak=256`, `cat /sys/module/e1000e/parameters`
 - `ll /etc/modprobe.d`
-- `cd /lib/modules/5.4.0-73-generic/kernel/drivers/net/ethernet/3com/`, `sudo modprobe 3c509`, `lsmod | head`, `sudo modprobe -r 3c509`, `lsmod | head`, `dmesg | tail -30`
-- `lsmod`, `sudo insmod /lib/modules/$(uname -r)/kernel/drivers/net/ethernet/intel/e100`, `sudo /sbin/modprobe e100`, `lsmod | grep e100`, `sudo rmmod e100`, `sudo modprobe -r e100`, `lsmod | grep e100`
+```
+cd /lib/modules/5.4.0-73-generic/kernel/drivers/net/ethernet/3com/
+sudo modprobe 3c509
+lsmod | head
+sudo modprobe -r 3c509
+lsmod | head
+dmesg | tail -30
+```
+```
+lsmod
+sudo insmod /lib/modules/$(uname -r)/kernel/drivers/net/ethernet/intel/e100
+sudo /sbin/modprobe e100
+lsmod | grep e100
+sudo rmmod e100
+sudo modprobe -r e100
+lsmod | grep e100
+```
 
 ## Devices and udev
 
 - `ls -l /dev`
-- `sudo mknod [-m mode] /dev/name <type> </major> <minor>`: `sudo mknod -m 666 /dev/mycdrv c 254 1`
+- `sudo mknod [-m mode] /dev/name <type> <major> <minor>`: `sudo mknod -m 666 /dev/mycdrv c 254 1`
 - `ll /etc/udev/rules.d/`, `cat /etc/udev/rules.d/<rulename>.rules`
 - `/etc/udev/rules.d`, `/run/udev/rules.d`, `/usr/lib/udev/rules.d`
 - `man udev`, `SYMLINK`, `RUN`
 - `cat /usr/lib/udev/rules.d/99-fitbit.rules`, `SUBSYSTEM=="usb", ATTR{idVendor}=="2687", ATTR{idProduct}=="fb01", SYMLINK+="fitbit", MODE="0666"`
-- `cat /usr/lib/udev/rules.d/98-kexec.rules`, `SUBSYSTEM=="cpu", ACTION=="add", PROGRAM="/bin/systemctl try-restart kdump.service"`, `SUBSYSTEM=="cpu", ACTION=="remove", PROGRAM="/bin/systemctl try-restart kdump.service"`, `SUBSYSTEM=="memory", ACTION=="online", PROGRAM="/bin/systemctl try-restart kdump.service"`, `SUBSYSTEM=="memory", ACTION=="offline", PROGRAM="/bin/systemctl try-restart kdump.service"`
+- `cat /usr/lib/udev/rules.d/98-kexec.rules`
+```
+SUBSYSTEM=="cpu", ACTION=="add", PROGRAM="/bin/systemctl try-restart kdump.service"
+SUBSYSTEM=="cpu", ACTION=="remove", PROGRAM="/bin/systemctl try-restart kdump.service"
+SUBSYSTEM=="memory", ACTION=="online", PROGRAM="/bin/systemctl try-restart kdump.service"
+SUBSYSTEM=="memory", ACTION=="offline", PROGRAM="/bin/systemctl try-restart kdump.service"
+```
 - `cat /usr/lib/udev/rules.d/80-kvm.rules`, `KERNEL=="kvm", GROUP="kvm", MODE="0666"`
 - `stat --help`, `mknod --help`
-- `se /etc/udev/rules.d/75-myusb.rules`, `SUBSYSTEM=="usb", SYMLINK+="myusb"`, `ls -lF /dev | grep myusb`, `umount /media/whatever`, `ls -lF /dev | grep myusb`
+```
+se /etc/udev/rules.d/75-myusb.rules
+SUBSYSTEM=="usb", SYMLINK+="myusb"
+ls -lF /dev | grep myusb
+umount /media/whatever
+ls -lF /dev | grep myusb
+```
+```
+#!/bin/bash
+SCRIPTDIR=${0%/*}
+echo $SCRIPTDIR 
+cd $SCRIPTDIR
+
+chmod 700 .
+chown -R `whoami` .
+
+mkdir executed &>/dev/null
+rm ./execme.sh
+
+while true ; do
+    touch ./execme.sh
+    chmod 700 .
+    chown -R `whoami` .
+    inotifywait -e modify ./execme.sh
+    . ./execme.sh &
+    mv ./execme.sh executed/
+done
+```
 
 ## Virtualization
 
+- https://lwn.net/Articles/182080/
+- https://www.libvirt.org/
+- https://www.libvirt.org/apps.html
 - `sudo apt-get install qemu`, `qemu-img --help | grep formats:`, `qemu-img convert -O vmdk myvm.qcow2 myvm.vmdk`
 - `grep -e vmx -e svm /proc/cpuinfo`
 - `sudo dnf|zypper install kvm* qemu* libvirt*`
@@ -1502,15 +1610,32 @@ LABEL=SWAP  swap   swap  defaults 0 0
 
 ## Containers
 
+- https://docs.docker.com/
 - `docker`, `docker-search`, `docker-pull`, `docker-create`, `docker-run`
 - `docker <command> --help`
 - `docker rm $(docker ps -a -q)`
 - `sudo apt-get update`, `sudo apt-get install software-properties-common`, `sudo add-apt-repository ppa:projectatomic/ppa`, `sudo apt-get update`, `sudo apt-get install podman`
+- `sudo apt-get update`, `sudo apt-get install podman`
 - `sudo yum install docker`, `sudo dnf install podman podman-docker`
 - `sudo apt-get install docker.io`
 - `sudo zypper install docker`
-- `sudo systemctl start docker`, `systemctl status docker`
-- `sudo docker search apache`, `sudo docker pull docker.io/httpd`, `sudo docker images`, `sudo  docker images --all`, `sudo docker run httpd`, `lynx   http://172.17.0.2`, `w3m    http://172.17.0.2`, `elinks http://172.17.0.2`, `sudo docker ps`, `sudo docker stop hexid`, `sudo docker rmi -f docker.io/httpd`, `sudo docker system prune -a`, `sudo systemctl stop docker`
+```
+sudo systemctl start docker
+systemctl status docker
+sudo docker search apache
+sudo docker pull docker.io/httpd
+sudo docker images
+sudo  docker images --all
+sudo docker run httpd
+lynx   http://172.17.0.2
+w3m    http://172.17.0.2
+elinks http://172.17.0.2
+sudo docker ps
+sudo docker stop hexid
+sudo docker rmi -f docker.io/httpd
+sudo docker system prune -a
+sudo systemctl stop docker
+```
 
 ## User account management
 
