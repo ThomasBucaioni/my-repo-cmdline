@@ -1650,7 +1650,23 @@ sudo systemctl stop docker
 - `sudo chage -l stephane`, `sudo chage -m 14 -M 30 kevlin`, `sudo chage -E 2012-4-1 isabelle`, `sudo chage -d 0 clyde`
 - `bash -r`, https://www.metahackers.pro/breakout-of-restricted-shell/, https://www.exploit-db.com/docs/english/44592-linux-restricted-shell-bypass-guide.pdf
 - `sudo grep student /etc/passwd /etc/shadow`, `sudo useradd user1`, `ssh user1@localhost`, `sudo service sshd restart`, `sudo systemctl restart sshd.service`, `sudo passwd user1`, `sudo grep user1 /etc/passwd /etc/shadow`, `cat /etc/default/useradd`, `cat /etc/login.defs`, `sudo useradd -s /bin/ksh user2`, `sudo passwd user2`, `sudo grep user1 /etc/shadow`, `sudo chage -E 2013-12-1 user1`, `sudo grep user1 /etc/shadow`, `sudo usermod -L user1`, `sudo passwd user1`
-- `bash -r`, `cd $HOME`, `PATH=$PATH:/tmp`, `exit`, `sudo ln /bin/bash /bin/rbash`, `sudo useradd -s /bin/rbash fool`, `sudo passwd fool`, `sudo su - fool`, `cd /tmp`, `PATH=$PATH:/tmp`, `exit`, `sudo userdel -r fool`, `sudo rm /bin/rbash`
+```
+bash -r
+cd $HOME
+PATH=$PATH:/tmp
+exit
+```
+```
+sudo ln /bin/bash /bin/rbash
+sudo useradd -s /bin/rbash fool
+sudo passwd fool
+sudo su - fool
+cd /tmp
+PATH=$PATH:/tmp
+exit
+sudo userdel -r fool
+sudo rm /bin/rbash
+```
 
 ## Group management
 
