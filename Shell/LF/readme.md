@@ -1722,6 +1722,7 @@ sudo rm /bin/rbash
 - Red Hat: `/etc/sysconfig/network`, `/etc/sysconfig/network-scripts/ifcfg-ethX`, `/etc/sysconfig/network-scripts/ifcfg-ethX:Y`, `/etc/sysconfig/network-scripts/route-ethX`
 - Debian: `/etc/network/interfaces`
 - Suse: `/etc/sysconfig/network`
+- https://fedoraproject.org/wiki/Networking/CLI
 - `man nmcli-examples`
 - `route -n`, `ip route`
 - `sudo nmcli con mod virbr0 ipv4.routes 192.168.10.0/24 +ipv4.gateway 192.168.122.0`, `sudo nmcli con up virbr0`
