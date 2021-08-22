@@ -1690,7 +1690,33 @@ sudo rm /bin/rbash
 - `sudo groupmod -g 101 blah`
 - `sudo groupdel newgroup`
 - `sudo usermod -G student,group1,group2 student`
-- `sudo useradd -m rocky`, `sudo useradd -m bullwinkle`, `sudo passwd rocky`, `sudo passwd bullwinkle`, `ls -l /home`, `sudo groupadd friends`, `sudo groupadd -g 490 bosses`, `grep -e friends -e bosses /etc/group`, `sudo usermod -G friends,bosses rocky`, `sudo usermod -G friends bullwinkle`, `grep -e rocky -e bullwinkle /etc/group`, `groups rocky bullwinkle`, `ssh rocky@localhost`, `cd ~`, `mkdir somedir`, `chgrp bosses somedir`, `ls -l`, `chmod a+x .`, `ssh bullwinkle@localhost`, `touch /home/rocky/somedir/somefile`, `exit`, `sudo usermod -a -G bosses bullwinkle`, `ssh bullwinkle@localhost`, `touch /home/rocky/somedir/somefile`, `ls -al /home/rocky/somedir`
+```
+sudo useradd -m rocky
+sudo useradd -m bullwinkle
+sudo passwd rocky
+sudo passwd bullwinkle
+ls -l /home
+sudo groupadd friends
+sudo groupadd -g 490 bosses
+grep -e friends -e bosses /etc/group
+sudo usermod -G friends,bosses rocky
+sudo usermod -G friends bullwinkle
+grep -e rocky -e bullwinkle /etc/group
+groups rocky bullwinkle
+ssh rocky@localhost
+cd ~
+mkdir somedir
+chgrp bosses somedir
+ls -l
+chmod a+x .
+ssh bullwinkle@localhost
+touch /home/rocky/somedir/somefile
+exit
+sudo usermod -a -G bosses bullwinkle
+ssh bullwinkle@localhost
+touch /home/rocky/somedir/somefile
+ls -al /home/rocky/somedir
+```
 
 ## File Permissions and ownership
 
@@ -1708,8 +1734,31 @@ sudo rm /bin/rbash
 - `setfacl -x u:isabelle /home/stephane/file`
 - `setfacl -m d:u:isabelle:rx somedir`
 - `chmod u=r,g=w,o=x afile`, `chmod u+w,g-w,o+rw afile`, `chmod ug=rwx,o-rw afile`, `ls -l afile`
-- `touch afile`, `ls -l afile`, `umask`, `umask 0022`, `touch afile2`, `umask 0666`, `touch afile3`, `ls -l afile*`
-- `echo This is a file > /tmp/afile`, `getfacl /tmp/afile`, `sudo useradd fool`, `sudo passwd fool`, `sudo su - fool`, `echo another line > /tmp/afile`, `setfacl -m u:fool:rw /tmp/afile`, `getfacl /tmp/afile`, `echo another line > /tmp/afile`, `setfacl -m u:fool:w /tmp/afile`, `echo another line > /tmp/afile`, `rm /tmp/afile`, `sudo userdel -r fool`
+```
+touch afile
+ls -l afile
+umask
+umask 0022
+touch afile2
+umask 0666
+touch afile3
+ls -l afile*
+```
+```
+echo This is a file > /tmp/afile
+getfacl /tmp/afile
+sudo useradd fool
+sudo passwd fool
+sudo su - fool
+echo another line > /tmp/afile
+setfacl -m u:fool:rw /tmp/afile
+getfacl /tmp/afile
+echo another line > /tmp/afile
+setfacl -m u:fool:r /tmp/afile
+echo another line > /tmp/afile
+rm /tmp/afile
+sudo userdel -r fool
+```
 
 ## Pluggable authentication modules
 
@@ -1751,10 +1800,71 @@ sudo rm /bin/rbash
 - `/etc/hosts`, `/etc/hosts.deny`, `/etc/hosts.allow`, (`/etc/host.conf`, `/etc/nsswitch.conf`)
 - `/etc/resolv.conf`
 - `ping -c 10 linuxfoundation.org`, `traceroute linuxfoundation.org`, `mtr linuxfoundation.org`
-- `ip addr show eth0`, `ip route`, `cp /etc/resolv.conf resolv.conf.keep`, `ifconfig eth0`, `route -n`, `cp /etc/resolv.conf resolv.conf.keep`, `sudo ip link set eth0 down`, `sudo ifconfig eth0 down`; Red Hat: `/etc/sysconfig/network-scripts/ifcfg-eth0`, `DEVICE=eth0`, `BOOTPROTO=static`, `ONBOOT=yes`, `IPADDR=noted from step1`, `NETMASK=noted from step1`, `GATEWAY=noted from step1`; Suse: `/etc/sysconfig/network`, `iface eth0 inet static`, `address noted from step1`, `netmask noted from step1`, `gateway noted from step1`; Debian: `/etc/networking/interfaces`, `sudo ip link set eth0 up`, `sudo ifconfig eth0 up`, `sudo cp resolv.conf.keep /etc/resolv.conf`, `cat /etc/sysconfig/network`, `cat /etc/hosts`, `ping yourhostname`, `sudo reboot`, `ping hostname`
-- `/etc/hosts`, `sudo sh -c "echo 192.168.1.180    mysystem.mydomain >> /etc/hosts"`, `ping mysystem.mydomain`, `sudo sh -c "echo 127.0.0.1       ad.doubleclick.net >> /etc/hosts"`, `ping ad.doubleclick.net`, `wget http://winhelp2002.mvps.org/hosts.txt`, `sudo sh -c "cat hosts.txt >> /etc/hosts"`
-- `sudo nmcli con`, `sudo nmcli con show "Auto Ethernet" | grep IP4.ADDRESS`, `nmcli con show 1c46bf37-2e4c-460d-8b20-421540f7d0e2`, `sudo nmcli con modify "Auto Ethernet" +ipv4.addresses 172.16.2.140/24`, `sudo nmcli con up "Auto Ethernet"`, `sudo nmcli con modify  "Auto Ethernet" -ipv4.addresses 172.16.2.140/24`, `sudo nmcli con up "Auto Ethernet"`
-- `route`, `ip route`, `sudo nmcli conn mod "Auto Ethernet" +ipv4.routes "192.168.100.0/24 172.16.2.1"`, `route`, `sudo nmcli conn up "Auto Ethernet"`, `route`, `reboot`, `route`, `sudo nmcli conn mod "Auto Ethernet" -ipv4.routes "192.168.100.0/24 172.16.2.1"`, `sudo nmcli conn up "Auto Ethernet"`, `sudo ip route add 192.168.100.0/24 via 172.16.2.1`, `sudo route`
+```
+ip addr show eth0
+ip route
+cp /etc/resolv.conf resolv.conf.keep
+ifconfig eth0
+route -n
+cp /etc/resolv.conf resolv.conf.keep
+sudo ip link set eth0 down
+sudo ifconfig eth0 down
+# Red Hat:
+/etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE=eth0
+BOOTPROTO=static
+ONBOOT=yes
+IPADDR=noted from step1
+NETMASK=noted from step1
+GATEWAY=noted from step1
+# Suse:
+/etc/sysconfig/network
+iface eth0 inet static
+address noted from step1
+netmask noted from step1
+gateway noted from step1
+# Debian:
+/etc/networking/interfaces
+sudo ip link set eth0 up
+sudo ifconfig eth0 up
+sudo cp resolv.conf.keep /etc/resolv.conf
+cat /etc/sysconfig/network
+cat /etc/hosts
+ping yourhostname
+sudo reboot
+ping hostname
+```
+```/etc/hosts
+sudo sh -c "echo 192.168.1.180    mysystem.mydomain >> /etc/hosts"
+ping mysystem.mydomain
+sudo sh -c "echo 127.0.0.1       ad.doubleclick.net >> /etc/hosts"
+ping ad.doubleclick.net
+wget http://winhelp2002.mvps.org/hosts.txt
+sudo sh -c "cat hosts.txt >> /etc/hosts"
+```
+```
+sudo nmcli con
+sudo nmcli con show "Auto Ethernet" | grep IP4.ADDRESS
+nmcli con show 1c46bf37-2e4c-460d-8b20-421540f7d0e2
+sudo nmcli con modify "Auto Ethernet" +ipv4.addresses 172.16.2.140/24
+sudo nmcli con up "Auto Ethernet"
+sudo nmcli con modify  "Auto Ethernet" -ipv4.addresses 172.16.2.140/24
+sudo nmcli con up "Auto Ethernet"
+```
+```
+route
+ip route
+sudo nmcli conn mod "Auto Ethernet" +ipv4.routes "192.168.100.0/24 172.16.2.1"
+route
+sudo nmcli conn up "Auto Ethernet"
+route
+reboot
+route
+sudo nmcli conn mod "Auto Ethernet" -ipv4.routes "192.168.100.0/24 172.16.2.1"
+sudo nmcli conn up "Auto Ethernet"
+sudo ip route add 192.168.100.0/24 via 172.16.2.1
+sudo route
+```
 
 ## Firewalls
 
@@ -1771,7 +1881,13 @@ sudo rm /bin/rbash
 - `sudo firewall-cmd --zone=home --add-port=21/tcp`, `sudo firewall-cmd --zone=home --list-ports`, `grep "21/tcp" /etc/services`
 - `tar xvf firewalld-0.3.13.tar.bz2`, `cd firewalld-0.3.13`, `./configure`, `make`, `sudo make install`, `sudo make uninstall`
 - `man firewall-cmd`, `man firewalld`
-- `sudo firewall-cmd  --zone=public --add-service=http`, `sudo firewall-cmd  --zone=public --add-service=https`, `sudo firewall-cmd --list-services --zone=public`, `sudo firewall-cmd --reload`, `sudo firewall-cmd --list-services --zone=public`
+```
+sudo firewall-cmd  --zone=public --add-service=http
+sudo firewall-cmd  --zone=public --add-service=https
+sudo firewall-cmd --list-services --zone=public
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-services --zone=public
+```
 
 ## System startup and shutdown
 
@@ -1805,7 +1921,27 @@ sudo rm /bin/rbash
 - `sudo systemctl enable sshd.service`
 - `sudo systemctl disable sshd.service`
 - https://fedoraproject.org/wiki/SysVinit_to_Systemd_Cheatsheet
-- `sudo systemctl start fake.service`, `sudo systemctl status fake.service`, `sudo systemctl stop fake.service`, `sudo systemctl daemon-reload`, `sudo tail -f /var/log/messages` (`/var/log/syslog`), `sudo systemctl enable fake.service`, `sudo systemctl disable fake.service`
+```
+[Unit]
+Description=fake
+After=network.target
+
+[Service]
+ExecStart=/bin/sh -c '/bin/echo I am starting the fake service ; /bin/sleep 30 ; echo The fake service has been started'
+ExecStop=/bin/echo I am stopping the fake service
+
+[Install]
+WantedBy=multi-user.target
+```
+```
+sudo systemctl start fake.service
+sudo systemctl status fake.service
+sudo systemctl stop fake.service
+sudo systemctl daemon-reload
+sudo tail -f /var/log/messages # /var/log/syslog
+sudo systemctl enable fake.service
+sudo systemctl disable fake.service
+```
 
 ## Backup and recovery methods
 
@@ -1838,10 +1974,50 @@ sudo rm /bin/rbash
 - http://www.amanda.org/
 - https://www.bacula.org/7.0.x-manuals/en/main/Main_Reference.html
 - https://clonezilla.org/
-- `mkdir /tmp/backup`, `cd /usr ; tar zcvf /tmp/backup/include.tar.gz include`, `cd /usr ; tar jcvf /tmp/backup/include.tar.bz2 include`, `cd /usr ; tar Jcvf /tmp/backup/include.tar.xz include`, `tar -C /usr -zcf include.tar.gz include`, `tar -C /usr -jcf include.tar.bz2 include`, `tar -C /usr -Jcf include.tar.xz include`, `du -sh /usr/include`, `ls -lh include.tar.*`, `tar tvf include.tar.xz`, `cd .. ; mkdir restore ; cd restore`, `tar xvf ../backup/include.tar.bz2`, `diff -qr include /usr/include`
-- `(cd /usr ; find include | cpio -c -o > /home/student/backup/include.cpio)`, `(cd /usr ; find include | cpio -c -o | gzip -c > /home/student/backup/include.cpio.gz)`, `ls -lh include*`, `cpio -ivt < include.cpio`, `cd ../restore`, `cat ../backup/include.cpio | cpio -ivt`, `gunzip -c include.cpio.gz | cpio -ivt`, `rm -rf include`, `cpio -id < ../backup/include.cpio`, `ls -lR include`, `cpio -idv < ../backup/include.cpio`, `diff -qr include /usr/include`
-- `rm -rf include`, `rsync -av /usr/include .`, `rsync -av /usr/include .`, `rsync -av /usr/include include`, `rsync -av --delete /usr/include .`, `rm -rf include/xen`, `rsync -av --delete --dry-run /usr/include .`, `rsync -av --delete  /usr/include .`
-- `#!/bin/sh`, `set -x`, `rsync --progress -avrxH --delete $*`
+```
+mkdir /tmp/backup
+cd /usr ; tar zcvf /tmp/backup/include.tar.gz include
+cd /usr ; tar jcvf /tmp/backup/include.tar.bz2 include
+cd /usr ; tar Jcvf /tmp/backup/include.tar.xz include
+tar -C /usr -zcf include.tar.gz include
+tar -C /usr -jcf include.tar.bz2 include
+tar -C /usr -Jcf include.tar.xz include
+du -sh /usr/include
+ls -lh include.tar.*
+tar tvf include.tar.xz
+cd .. ; mkdir restore ; cd restore
+tar xvf ../backup/include.tar.bz2
+diff -qr include /usr/include
+```
+```
+(cd /usr ; find include | cpio -c -o > /home/student/backup/include.cpio)
+(cd /usr ; find include | cpio -c -o | gzip -c > /home/student/backup/include.cpio.gz)
+ls -lh include*
+cpio -ivt < include.cpio
+cd ../restore
+cat ../backup/include.cpio | cpio -ivt
+gunzip -c include.cpio.gz | cpio -ivt
+rm -rf include
+cpio -id < ../backup/include.cpio
+ls -lR include
+cpio -idv < ../backup/include.cpio
+diff -qr include /usr/include
+```
+```
+rm -rf include
+rsync -av /usr/include .
+rsync -av /usr/include .
+rsync -av /usr/include include
+rsync -av --delete /usr/include .
+rm -rf include/xen
+rsync -av --delete --dry-run /usr/include .
+rsync -av --delete  /usr/include .
+```
+```
+#!/bin/sh
+set -x
+rsync --progress -avrxH --delete $*
+```
 
 ## Linux security modules
 
@@ -1872,8 +2048,37 @@ sudo rm /bin/rbash
 - `man apparmor.d`
 - `rpm -qil apparmor-utils | grep bin`, `ls -l /usr/sbin/*complain`
 - `apparmor_status`, `apparmor_notify`, `complain`, `enforce`, `disable`, `logprof`, `easyprof`
-- `sudo dnf install  httpd`, `elinks http:/localhost`, `sudo sh -c "echo file1 > /var/www/html/file1.html"`, `elinks -dump http://localhost/file1.html`, `sudo cd /root`, `sudo sh -c "echo file2 > file2.html"`, `sudo mv file2.html /var/www/html`, `elinks -dump http://localhost/file2.html`, `cd  /var/www/html`, `ls -Z file*html`, `sudo chcon -t httpd_sys_content_t file2.html`, `elinks http://localhost/file2.html`
-- `sudo apt-get install apparm*`, `sudo cp /bin/ping /bin/ping-x`, `sudo ls -l /bin/ping-x`, `sudo getcap /bin/ping-x`, `ping-x -c3 -4 127.0.0.1`, `sudo setcap cap_net_raw+ep  /bin/ping-x`, `ping-x  -c3 -4 127.0.0.1`, `sudo aa-status`, `sudo aa-status | grep -e "ˆ[[:alnum:]]" -e ping`, `sudo aa-genprof /bin/ping-x`, `ping-x  -c3 -4 127.0.0.1`, `AASF`, `sudo cat /etc/apparmor.d/bin.ping-x`, `ping-x -c3 -4 127.0.0.1`, `ping-x -c3  -6 ::1`
+```
+sudo dnf install  httpd
+elinks http:/localhost
+sudo sh -c "echo file1 > /var/www/html/file1.html"
+elinks -dump http://localhost/file1.html
+sudo cd /root
+sudo sh -c "echo file2 > file2.html"
+sudo mv file2.html /var/www/html
+elinks -dump http://localhost/file2.html
+cd  /var/www/html
+ls -Z file*html
+sudo chcon -t httpd_sys_content_t file2.html
+elinks http://localhost/file2.html
+```
+```
+sudo apt-get install apparm*
+sudo cp /bin/ping /bin/ping-x
+sudo ls -l /bin/ping-x
+sudo getcap /bin/ping-x
+ping-x -c3 -4 127.0.0.1
+sudo setcap cap_net_raw+ep  /bin/ping-x
+ping-x  -c3 -4 127.0.0.1
+sudo aa-status
+sudo aa-status | grep -e "ˆ[[:alnum:]]" -e ping
+sudo aa-genprof /bin/ping-x
+ping-x  -c3 -4 127.0.0.1
+AASF
+sudo cat /etc/apparmor.d/bin.ping-x
+ping-x -c3 -4 127.0.0.1
+ping-x -c3  -6 ::1
+```
 
 ## Local system security
 
@@ -1883,7 +2088,19 @@ sudo rm /bin/rbash
 - `/dev/sda2 /edsel  ext4 ro,noexec,nodev 0 0`
 - `chmod u+s somefile`, `chmod g+s somefile`, `chmod g+s somedir`
 - `setuid`, `setgid`
-- `dd if=/dev/zero of=image bs=1M count=100`, `sudo mkfs.ext3 image`, `mkdir mountpoint`, `sudo mount -o loop image mountpoint`, `sudo cp /bin/ls mountpoint`, `mountpoint/ls`, `sudo umount mountpoint ; sudo mount -o noexec,loop image mountpoint` or `sudo mount -o noexec,remount image mountpoint`, `mountpoint/ls`, `sudo umount mountpoint`, `rm image`, `rmdir mountpoint`
+```
+dd if=/dev/zero of=image bs=1M count=100
+sudo mkfs.ext3 image
+mkdir mountpoint
+sudo mount -o loop image mountpoint
+sudo cp /bin/ls mountpoint
+mountpoint/ls
+sudo umount mountpoint ; sudo mount -o noexec,loop image mountpoint # or sudo mount -o noexec,remount image mountpoint
+mountpoint/ls
+sudo umount mountpoint
+rm image
+rmdir mountpoint
+```
 - `/home/student/image  /home/student/mountpoint    ext3    loop,rw,noexec 0 0`
 
 ## Basic troubleshooting
@@ -1909,8 +2126,17 @@ sudo rm /bin/rbash
 - `dd if=boot.iso of=/dev/sdX`
 - `livecd-tools`, `liveusb-creator`
 - `e`, `emergency`, `single`
-- `dd if=/dev/sda of=/root/mbrsave bs=446 count=1`, `sudo ls -l /root/mbrsave`, `dd if=/dev/zero of=/dev/sda bs=446 count=1`, `dd if=/mnt/sysimage/root/mbrsave of=/dev/sda bs=446 count=1`
-- `mount /dev/cdrom /mnt/source`, `mount /dev/sdXY /mnt/mysys`, `rpm -ivh --force --root /mnt/mysys /mnt/source/Packages/zsh*.rpm`
+```
+dd if=/dev/sda of=/root/mbrsave bs=446 count=1
+sudo ls -l /root/mbrsave
+dd if=/dev/zero of=/dev/sda bs=446 count=1
+dd if=/mnt/sysimage/root/mbrsave of=/dev/sda bs=446 count=1
+```
+```
+mount /dev/cdrom /mnt/source
+mount /dev/sdXY /mnt/mysys
+rpm -ivh --force --root /mnt/mysys /mnt/source/Packages/zsh*.rpm
+```
 
 <!------ L2 ------>
 

@@ -72,6 +72,7 @@
 - `journalctl --vacuum-time=2d`, `journalctl --vacuum-size=100M`
 - `for file in /proc/*/status ; do awk '/VmSwap|Name/{printf $2 " " $3}END{ print ""}' $file; done | sort -k 2 -n -r | less`
 - `du --separate-dirs --all --time --threshold=1G --human-readable`
+- `crontab -e`, `* * * * *	XDG_RUNTIME_DIR=/run/user/$(id -u) notify-send Hey "this is dog!"`
 
 ### Prompt
 
