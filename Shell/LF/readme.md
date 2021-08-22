@@ -1,3 +1,17 @@
+# L-1
+
+## Compliance projects
+
+- https://www.fossology.org/
+- https://www.linuxfoundation.org/press-release/2018/12/the-linux-foundation-to-launch-new-tooling-project-to-improve-open-source-compliance/
+- https://spdx.dev/
+- https://spdx.dev/specifications/
+- https://github.com/david-a-wheeler/spdx-tutorial
+- https://spdx.org/licenses/
+- https://chaoss.community/
+- https://www.linuxfoundation.org/blog/2017/09/chaoss-project-creates-tools-to-analyze-software-development-and-measure-open-source-community-health/
+- https://chaoss.community/about/
+
 # L0
 
 ## OSS projects
