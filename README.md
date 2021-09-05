@@ -137,6 +137,14 @@ RPS1="%(?.%F{green}0.%K{red}%F{011})%(?..(%?%))%(?.%f.%f%k)%F{magenta}%K{grey}:%
 
 - https://www.geeksforgeeks.org/screen-command-in-linux-with-examples/
 - `C-z :layout dump`
+```
+escape ^z^z
+
+bindkey -k k8 prev
+bindkey -k k9 next
+
+caption always " %w %= %c "
+```
 
 ## Salt
 
