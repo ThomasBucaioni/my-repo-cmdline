@@ -75,3 +75,75 @@ for i in range(N):
 
 print(f'{x=}')
 print_board(N)
+
+
+def rot(N,t):
+    # print(N, t)
+    centre = np.array([[N/2], [N/2]])
+    # print(centre)
+    t0 = np.array([[t[0] + 0.5], [t[1] + 0.5]])
+    # print(t0)
+    mat = np.matrix([[0, 1], [-1, 0]])
+    # print(mat.T)
+    t0 = t0-centre
+    # print(t0)
+    ts = mat*(t0)+centre
+    # print(f'{ts=}')
+    ts = (int(ts[0]), int(ts[1]))
+    # print(f'Return: {ts}')
+    return(ts)
+    
+t1 = (3,8)
+t2 = rot(N,t1)
+t3 = rot(N,t2)
+t4 = rot(N,t3)
+if rot(N,t4) != t1:
+    print("Erreur")
+t5 = (t1[1],t1[0])
+t6 = (t2[1],t2[0])
+t7 = (t3[1],t3[0])
+t8 = (t4[1],t4[0])
+
+print(t1, x[t1[0]])
+print(t2, x[t2[0]])
+print(t3, x[t3[0]])
+print(t4, x[t4[0]])
+print(t5, x[t5[0]])
+print(t6, x[t6[0]])
+print(t7, x[t7[0]])
+print(t8, x[t8[0]])
+
+def nQueen(n):
+    N = n
+    if N == 1:
+        return [0]
+    if N == 2 or N == 3:
+        return []
+    x = [0] * N
+    l = []
+    for i in range(1,N+1):
+        if (i % 2) == 1:
+            l.append(i)
+        else:
+            l.insert(int(i/2)-1,i)
+    print(f'{l=}')
+
+    r = N % 6
+    if r == 2:
+        n = int(N/2)
+        a = l[n]
+        l[n] = l[n+1]
+        l[n+1] = a
+        l.remove(5)
+        l.append(5)
+    print(f'{l=}')
+
+    for i in range(N):
+        x[l[i]-1] = i
+
+    print(f'{x=}')
+    print_board(N)
+
+    return x
+
+nQueen(21)
