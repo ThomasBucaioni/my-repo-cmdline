@@ -4,6 +4,10 @@
 
 - https://www.markdownguide.org/basic-syntax/
 
+## Yaml
+
+- https://yaml.org/refcard.html
+
 ## Git
 
 ### Init
