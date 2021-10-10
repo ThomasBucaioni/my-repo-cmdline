@@ -59,3 +59,11 @@ LABEL = system("ls -1 ~/mydir/*data*.dat | sed -e 's/.dat//' -e 's/.*data.*//'")
 plot for [i=1:words(FILES)] word(FILES,i) u (($1)*1.668335e-3):($3*1e3) with lines title word(LABEL,i)
 
 ```
+
+- History: http://gnuplot.sourceforge.net/docs_4.2/node95.html
+```
+history ?load         # show all history entries starting with "load"
+history ?"set c"      # like above, several words enclosed in quotes
+hi !reread            # execute last entry starting with "reread"
+hist !"set xr"        # like above, several words enclosed in quotes
+```
