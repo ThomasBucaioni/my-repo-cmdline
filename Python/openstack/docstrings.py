@@ -1,5 +1,9 @@
 from pathlib import Path
 import shutil, os
+import logging
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
+logging.debug('Start cleaning docstrings')
 
 for folderName, subfolders, filenames in os.walk('.'):
     print('The current folder is ' + folderName)
@@ -11,8 +15,10 @@ for folderName, subfolders, filenames in os.walk('.'):
             current_proxy_file = open(filename, 'r')
             filelines = current_proxy_file.readlines()
             for line in filelines:
-                #print(line)
-                #print(line.lstrip()[0:6])
+                #logging.info(line)
+                #logging.info(line.lstrip()[0:6])
                 if ':param' == line.lstrip()[0:6]:
                     print('Ok:', line)
 print('')
+
+logging.debug('End cleaning docstrings')
