@@ -43,7 +43,7 @@ for folderName, subfolders, filenames in os.walk('.'):
                            ':retur' == line.lstrip()[0:6] or \
                            ':rtype' == line.lstrip()[0:6] or \
                            ':attrs' == line.lstrip()[0:6] or \
-                           ':type' == line.lstrip()[0:6] or \
+                           ':type ' == line.lstrip()[0:6] or \
                            ':raise' == line.lstrip()[0:6]:
                             logging.debug('Ok:' + line[0:20])
                             indent8line = True
