@@ -3,6 +3,8 @@ import shutil, os
 import logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
+logging.disable(logging.DEBUG)
+
 logging.debug('Start cleaning docstrings')
 
 for folderName, subfolders, filenames in os.walk('.'):
@@ -12,8 +14,11 @@ for folderName, subfolders, filenames in os.walk('.'):
     for filename in filenames:
         if filename == '_proxy.py':
             print('FILE INSIDE ' + folderName + ': '+ filename)
-            current_proxy_file = open(filename, 'r')
-            new_proxy_file = open('_proxy_new', 'w')
+            logging.info('Cwd: ' + str(Path.cwd()))
+            mypath = Path(os.path.abspath(folderName))
+            logging.info('Path to the file: ' + str(mypath))
+            current_proxy_file = open(mypath / filename, 'r')
+            new_proxy_file = open(mypath / '_proxy_new.py', 'w')
             filelines = current_proxy_file.readlines()
             indent8line = False
             indent12line = False
@@ -36,8 +41,11 @@ for folderName, subfolders, filenames in os.walk('.'):
                     if indocstring:
                         if ':param' == line.lstrip()[0:6] or \
                            ':retur' == line.lstrip()[0:6] or \
+                           ':rtype' == line.lstrip()[0:6] or \
+                           ':attrs' == line.lstrip()[0:6] or \
+                           ':type' == line.lstrip()[0:6] or \
                            ':raise' == line.lstrip()[0:6]:
-                            print('Ok:', line[0:20])
+                            logging.debug('Ok:' + line[0:20])
                             indent8line = True
                             indent12line = False
                             newline = ' ' * 8 + line.lstrip()
@@ -54,7 +62,7 @@ for folderName, subfolders, filenames in os.walk('.'):
                             indent8line = False
                             indent12line = False
                             newline = ' ' * 8 + line.lstrip()
-                print(newline[0:len(newline)])
+                logging.debug('Nw:' + newline[0:len(newline)])
                 new_proxy_file.write(newline)
                 #input("Press Enter to continue...")
             new_proxy_file.close()
