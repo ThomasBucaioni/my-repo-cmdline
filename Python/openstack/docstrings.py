@@ -27,7 +27,7 @@ for folderName, subfolders, filenames in os.walk('.'):
                 logging.debug(line)
                 newline = line
                 if line != '\n':
-                    logging.debug('Line not empty: >>>' + line + '<<<')
+                    logging.debug('Line not empty: >>>' + line.replace('\n', ' ') + '<<<')
                     if '"""' == line.lstrip()[0:3]:
                         indocstring = not indocstring
                         logging.debug(indocstring)
