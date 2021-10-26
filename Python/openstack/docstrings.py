@@ -55,7 +55,7 @@ for folderName, subfolders, filenames in os.walk('.'):
                                 indent12line = True
                                 newline = ' ' * 12 + line.lstrip()
                             elif indent12line == True:
-                                newline = ' ' * 16 + line.lstrip()
+                                newline = ' ' * 14 + line.lstrip()
                             else:
                                 newline = ' ' * 12 + line.lstrip()
                         elif '"""' == line.lstrip()[0:3]:
