@@ -26,11 +26,13 @@ for folderName, subfolders, filenames in os.walk('.'):
             for line in filelines:
                 logging.debug(line)
                 newline = line
+                stripped = line.lstrip()
+                logging.debug('Nl org:' + newline)
                 if line != '\n':
                     logging.debug('Line not empty: >>>' + line.replace('\n', ' ') + '<<<')
-                    if '"""' == line.lstrip()[0:3]:
+                    if '"""' in line:
                         indocstring = not indocstring
-                        logging.debug(indocstring)
+                        logging.debug("Inside a docstring: " + str(indocstring))
                         if indocstring:
                             logging.debug('In docstrings')
                             indent8line = False
@@ -39,32 +41,37 @@ for folderName, subfolders, filenames in os.walk('.'):
                             logging.debug('Out docstrings')
                             indocstring = False
                     if indocstring:
-                        if ':param' == line.lstrip()[0:6] or \
-                           ':retur' == line.lstrip()[0:6] or \
-                           ':rtype' == line.lstrip()[0:6] or \
-                           ':attrs' == line.lstrip()[0:6] or \
-                           ':type ' == line.lstrip()[0:6] or \
-                           ':raise' == line.lstrip()[0:6]:
-                            logging.debug('Ok:' + line[0:20])
+                        if ':param' == stripped[0:6] or \
+                           ':retur' == stripped[0:6] or \
+                           ':rtype' == stripped[0:6] or \
+                           ':attrs' == stripped[0:6] or \
+                           ':type ' == stripped[0:6] or \
+                           ':raise' == stripped[0:6]:
+                            logging.debug('Item: --- ' + stripped[0:20] + ' ---')
                             indent8line = True
                             indent12line = False
-                            newline = ' ' * 8 + line.lstrip()
+                            newline = ' ' * 8 + stripped
+                            logging.debug('Nl ind8 :' + newline)
                         elif indent8line == True:
                             logging.debug('line to debug: >>>' + line + '<<<')
-                            if line.lstrip()[0] == '*':
+                            if stripped[0] == '*':
                                 indent12line = True
-                                newline = ' ' * 12 + line.lstrip()
+                                newline = ' ' * 12 + stripped
+                                logging.debug('Nl ind12 :' + newline)
                             elif indent12line == True:
-                                newline = ' ' * 14 + line.lstrip()
+                                newline = ' ' * 14 + stripped
+                                logging.debug('Nl ind14 :' + newline)
                             else:
-                                newline = ' ' * 12 + line.lstrip()
-                        elif '"""' == line.lstrip()[0:3]:
+                                newline = ' ' * 12 + stripped
+                                logging.debug('Nl ind12 :' + newline)
+                        elif '"""' in stripped:
                             indent8line = False
                             indent12line = False
-                            newline = ' ' * 8 + line.lstrip()
-                logging.debug('Nw:' + newline[0:len(newline)])
+                            newline = ' ' * 8 + stripped
+                            logging.debug('Nl ind8 :' + newline[0:len(newline)])
+                logging.debug('Nl wr:' + newline)
                 new_proxy_file.write(newline)
-                #input("Press Enter to continue...")
+#                input("Press Enter to continue...")
             new_proxy_file.close()
             current_proxy_file.close()
 print('')
