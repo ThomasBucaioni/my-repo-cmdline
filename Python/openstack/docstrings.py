@@ -37,6 +37,7 @@ for folderName, subfolders, filenames in os.walk('.'):
                             logging.debug('In docstrings')
                             indent8line = False
                             indent12line = False
+                            leadingspaces = len(line) - len(stripped)
                         else:
                             logging.debug('Out docstrings')
                             indocstring = False
@@ -50,24 +51,24 @@ for folderName, subfolders, filenames in os.walk('.'):
                             logging.debug('Item: --- ' + stripped[0:20] + ' ---')
                             indent8line = True
                             indent12line = False
-                            newline = ' ' * 8 + stripped
+                            newline = ' ' * leadingspaces + stripped
                             logging.debug('Nl ind8 :' + newline)
                         elif indent8line == True:
                             logging.debug('line to debug: >>>' + line + '<<<')
                             if stripped[0] == '*':
                                 indent12line = True
-                                newline = ' ' * 12 + stripped
+                                newline = ' ' * (leadingspaces + 4) + stripped
                                 logging.debug('Nl ind12 :' + newline)
                             elif indent12line == True:
-                                newline = ' ' * 14 + stripped
+                                newline = ' ' * (leadingspaces + 6) + stripped
                                 logging.debug('Nl ind14 :' + newline)
                             else:
-                                newline = ' ' * 12 + stripped
+                                newline = ' ' * (leadingspaces + 4) + stripped
                                 logging.debug('Nl ind12 :' + newline)
                         elif '"""' in stripped:
                             indent8line = False
                             indent12line = False
-                            newline = ' ' * 8 + stripped
+                            newline = ' ' * leadingspaces + stripped
                             logging.debug('Nl ind8 :' + newline[0:len(newline)])
                 logging.debug('Nl wr:' + newline)
                 new_proxy_file.write(newline)
