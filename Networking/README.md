@@ -43,5 +43,11 @@
 - http://cbor.me/
 - https://datatracker.ietf.org/doc/html/rfc2396
 - https://www.iana.org/assignments/core-parameters/core-parameters.xhtml#content-formats
-- 
+- https://www.iana.org/assignments/core-parameters/core-parameters.xhtml#option-numbers
+- https://datatracker.ietf.org/doc/html/rfc8724
+- https://forum.pycom.io/topic/1690/correct-formula-for-batt-monitoring-on-expansion-board
+- https://omaspecworks.org/what-is-oma-specworks/iot/lightweight-m2m-lwm2m/
+- https://www.openmobilealliance.org/release/LightweightM2M/V1_1_1-20190617-A/OMA-TS-LightweightM2M_Core-V1_1_1-20190617-A.pdf
+- https://www.openmobilealliance.org/release/LightweightM2M/V1_1_1-20190617-A/OMA-TS-LightweightM2M_Transport-V1_1_1-20190617-A.pdf
+- https://technical.openmobilealliance.org/OMNA/LwM2M/LwM2MRegistry.html#resources
 
