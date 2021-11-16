@@ -35,3 +35,13 @@
 
 ## RFCs IPv6
 - https://tools.ietf.org/html/rfc8200
+
+## IoT
+- https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml#http-status-codes-1
+- https://pycom.io
+- https://www.iana.org/assignments/cbor-tags/cbor-tags.xhtml
+- http://cbor.me/
+- https://datatracker.ietf.org/doc/html/rfc2396
+- https://www.iana.org/assignments/core-parameters/core-parameters.xhtml#content-formats
+- 
+
