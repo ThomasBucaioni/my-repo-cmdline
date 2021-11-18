@@ -50,4 +50,12 @@
 - https://www.openmobilealliance.org/release/LightweightM2M/V1_1_1-20190617-A/OMA-TS-LightweightM2M_Core-V1_1_1-20190617-A.pdf
 - https://www.openmobilealliance.org/release/LightweightM2M/V1_1_1-20190617-A/OMA-TS-LightweightM2M_Transport-V1_1_1-20190617-A.pdf
 - https://technical.openmobilealliance.org/OMNA/LwM2M/LwM2MRegistry.html#resources
+- https://www.etsi.org/deliver/etsi_ts/103300_103399/103378/01.01.01_60/ts_103378v010101p.pdf
+- https://www.w3.org/TR/2014/REC-json-ld-20140116/
+- https://docs.mongodb.com/manual/tutorial/query-arrays/
+- https://schema.org/Person
+- http://www.qudt.org/2.1/catalog/qudt-catalog.html
+- view-source:https://www.w3.org/2009/XMLSchema/XMLSchema.xsd
+- https://www.w3.org/TR/2014/REC-json-ld-20140116/
+- https://docs.mongodb.com/manual/reference/operator/query/
 
