@@ -59,3 +59,16 @@
 - https://www.w3.org/TR/2014/REC-json-ld-20140116/
 - https://docs.mongodb.com/manual/reference/operator/query/
 
+## Cybersecurity
+
+- https://www.exploit-db.com/papers/13587
+- https://datatracker.ietf.org/doc/html/rfc3360
+- https://www.cloudflare.com/learning/ddos/glossary/denial-of-service/
+- https://www.usenix.org/system/files/conference/usenixsecurity14/sec14-paper-kuhrer.pdf
+- https://www.usenix.org/system/files/conference/woot14/woot14-kuhrer.pdf
+- http://eugen.dedu.free.fr/teaching/tcp/cours.pdf
+- https://rbeyah.ece.gatech.edu/classes/spring2012/ece4110/handouts/TCPTimeoutandRetransmission.pdf
+- http://ccr.sigcomm.org/archive/1999/oct99/savage.pdf
+- https://www.ndss-symposium.org/wp-content/uploads/2018/02/ndss2018_02A-1_Jero_paper.pdf
+- https://conferences.sigcomm.org/sigcomm/2003/papers/p75-kuzmanovic.pdf
+- 
