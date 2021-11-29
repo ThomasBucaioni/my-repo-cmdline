@@ -59,3 +59,13 @@
 - https://www.w3.org/TR/2014/REC-json-ld-20140116/
 - https://docs.mongodb.com/manual/reference/operator/query/
 
+- https://clusif.fr/publications/panorama-de-la-cybercriminalite-2018-authentification-la-fin-dune-ere/
+- https://clusif.fr/replay/panorama-de-la-cybercriminalite-annee-2018/
+- https://www.youtube.com/user/WebTVFIC/videos
+- https://www.youtube.com/watch?v=QcQFC8c0JFw
+- https://www.sstic.org/2017/presentation/2017_cloture/
+- https://www.youtube.com/watch?v=qtUN4kvKL7A
+- https://clusif.fr/publications/panorama-de-la-cybercriminalite-2018-les-nouveaux-modes-operatoires-cybercriminels/
+- https://www.youtube.com/watch?v=360D8RoKwOQ
+- https://clusif.fr/publications/menaces-informatiques-pratiques-de-securite-france-edition-2018-rapport/?
+- 
