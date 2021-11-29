@@ -59,6 +59,8 @@
 - https://www.w3.org/TR/2014/REC-json-ld-20140116/
 - https://docs.mongodb.com/manual/reference/operator/query/
 
+## Cybersecurity
+
 - https://clusif.fr/publications/panorama-de-la-cybercriminalite-2018-authentification-la-fin-dune-ere/
 - https://clusif.fr/replay/panorama-de-la-cybercriminalite-annee-2018/
 - https://www.youtube.com/user/WebTVFIC/videos
@@ -68,4 +70,25 @@
 - https://clusif.fr/publications/panorama-de-la-cybercriminalite-2018-les-nouveaux-modes-operatoires-cybercriminels/
 - https://www.youtube.com/watch?v=360D8RoKwOQ
 - https://clusif.fr/publications/menaces-informatiques-pratiques-de-securite-france-edition-2018-rapport/?
+- https://www.exploit-db.com/papers/13587
+- https://datatracker.ietf.org/doc/html/rfc3360
+- https://www.cloudflare.com/learning/ddos/glossary/denial-of-service/
+- https://www.usenix.org/system/files/conference/usenixsecurity14/sec14-paper-kuhrer.pdf
+- https://www.usenix.org/system/files/conference/woot14/woot14-kuhrer.pdf
+- http://eugen.dedu.free.fr/teaching/tcp/cours.pdf
+- https://rbeyah.ece.gatech.edu/classes/spring2012/ece4110/handouts/TCPTimeoutandRetransmission.pdf
+- http://ccr.sigcomm.org/archive/1999/oct99/savage.pdf
+- https://www.ndss-symposium.org/wp-content/uploads/2018/02/ndss2018_02A-1_Jero_paper.pdf
+- https://conferences.sigcomm.org/sigcomm/2003/papers/p75-kuzmanovic.pdf
+- https://datatracker.ietf.org/doc/html/rfc1123
+- https://www.cloudflare.com/learning/security/glossary/bgp-hijacking/
+- https://bishopfox.com/blog/bgp-hijacking-overview
+- https://www.oracle.com/cloud/networking/dns/
+- https://tma.roc.cnam.fr/Proceedings/TMA_Paper_4.pdf
+- https://github.com/mininet/mininet/wiki/BGP-Path-Hijacking-Attack-Demo
+- https://www.cs.cornell.edu/~shmat/shmat_securecomm10.pdf
+- https://owasp.org/www-community/attacks/Session_hijacking_attack
+- https://blog.cloudflare.com/technical-details-behind-a-400gbps-ntp-amplification-ddos-attack/
+- https://blog.cloudflare.com/understanding-and-mitigating-ntp-based-ddos-attacks/
+- https://us-cert.cisa.gov/ncas/alerts/TA14-017A
 - 
