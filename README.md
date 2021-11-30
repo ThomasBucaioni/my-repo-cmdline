@@ -77,6 +77,32 @@
 - `for file in /proc/*/status ; do awk '/VmSwap|Name/{printf $2 " " $3}END{ print ""}' $file; done | sort -k 2 -n -r | less`
 - `du --separate-dirs --all --time --threshold=1G --human-readable`
 - `crontab -e`, `* * * * *	XDG_RUNTIME_DIR=/run/user/$(id -u) notify-send Hey "this is dog!"`
+- `du -a . | sort -n -r | head -n 50`, `find -type f -exec du -Sh {} + | sort -rh | head -n 50`
+- `convert image.heavy  new_image.light`, `ffmpeg -i audiofile_input.light -vn audiofile_output.light`, `ffmpeg -i input_video.heavy output_video.light`
+
+### Misc (https://opensource.com/)
+
+- `smem --pie name -c pss`
+- `echo 'smem -c pss -P "$1" -k -t | tail -n 1' > ~/bin/memory-use && chmod +x ~/bin/memory-use`, `memory-use firefox`
+- `sudo shred -vfz /dev/sdX`, `sudo dd if=shredos.img of=/dev/sdX bs=4M status=progress`, `sudo umount /dev/sdXY -l ; sudo dd if=/dev/urandom of=/dev/sdX bs=10M`, `sudo nvme sanitize /dev/nvme0nX`
+- `wget --max-redirect 0 http://iana.org`, `--mirror`, `wget --continue https://example.com/linux-distro.iso`
+- `ping -D 8.8.8.8`, `ping -s 2`, `ping -w 6`, `host example.com`
+- procps-ng: `pidof bash`, `pgrep .sh`, `fuser --user ~/example.txt`, `ps 3234`, `ps -e | less`, `ps -U tux | less`, `pstree -U tux -u --show-pids`, `ps -U tux -u`, `pmap 1776`
+- cron: `01 01 * * * /usr/local/bin/rsbu -vbd1 ; /usr/local/bin/rsbu -vbd2`, `03 05 * * * /sbin/hwclock --systohc`, `25 04 1 * * /usr/bin/dnf -y update`, `00 15 * * Thu /usr/local/bin/mycronjob.sh`, `02 03 1 1,4,7,10 * /usr/local/bin/reports.sh`, `01 09-17 * * * /usr/local/bin/hourlyreminder.sh`, `*/5 08-18/2 * * * /usr/local/bin/mycronjob.sh`, `04 07 * * * student /usr/local/bin/mycronjob.sh`, `/etc/cron.d`
+- awk: `gawk 'pattern {action}' file1 file2 ...`, `gawk -F: '{print "uid", $3;}' /etc/passwd`, `gawk /^[A-Z]s/exp1/&exp2/g`
+- irc: `/msg NickServ REGISTER password youremail@example.com`, `/msg NickServ IDENTIFY nick password`, `/query nick`, `/motd`, `/topic`
+- net: `nslookup example.com`, `telnet example.com 110`, `openssl s_client -starttls smtp -connect example.com:587`, `netstat --listening --all --route  --interfaces`, `systemctl restart network`, `tcpdump -i eth0`,
+- nmcli: `device`, `device show eth0`, `connection`, `connection up foo`, `device wifi connect foo`
+- ip: `route`, `route add default gw 10.0.0.1`, `addr show`, `neighbor show`, `arp`
+- firewall: `firewall-cmd --get-active-zones`, `-–change-interface eth0 --zone=example`, `--get-services`, `--add-service samba --zone=example`, `--add-port=123/tcp --zone=example`, `--permanent`
+- ssh: `-D <port> <remote_host>`, `-L <port>:<target_host>:3389 <bastion_server>`, `-L 5901:localhost:5901 <remote_host>`, `ssh-keygen`, `ssh-keygen -p`, `ssh-copy-id -i <identity file> <remote_host>`, `-i <identity file>`, `-p <remote port>`, `-C`, `-D <port>`, `-X`, `-A `, `-4`, `-6`, `-L <local port>:<target host>:<target port>`
+```
+$ ssh myhouse
+${HOME}/.ssh/config
+host myhouse
+ User itsme
+ HostName house.example.com
+```
 
 ### Bash lists
 
