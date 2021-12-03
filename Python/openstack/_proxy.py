@@ -32,8 +32,10 @@ class Proxy(proxy.Proxy):
         """Get a single deployable.
 
         :param uuid: The value can be the UUID of a deployable.
-        :returns: One :class:`~openstack.accelerator.v2.deployable.Deployable`
-        :raises: :class:`~openstack.exceptions.ResourceNotFound` when no
+        :returns: One :class:`~openstack.accelerator.v2.
+            deployable.Deployable`
+        :raises: :class:
+            `~openstack.exceptions.ResourceNotFound` when no
             deployable matching the criteria could be found.
         """
         return self._get(_deployable.Deployable, uuid)
@@ -74,8 +76,8 @@ class Proxy(proxy.Proxy):
         """Get a single device.
 
         :param uuid: The value can be the UUID of a device.
-        :returns: One :class:`~openstack.accelerator.v2.device.Device`
-        :raises: :class:`~openstack.exceptions.ResourceNotFound` when no
+        :returns: One :class: `~openstack.accelerator.v2.device.Device`
+        :raises: :class: `~openstack.exceptions.ResourceNotFound` when no
             device matching the criteria could be found.
         """
         return self._get(_device.Device, uuid)
@@ -103,7 +105,7 @@ class Proxy(proxy.Proxy):
         :param name_or_id: The value can be either the ID or name of
             a device profile.
         :param bool ignore_missing: When set to ``False``
-            :class:`~openstack.exceptions.ResourceNotFound` will be
+            :class: `~openstack.exceptions.ResourceNotFound` will be
             raised when the device profile does not exist.
             When set to ``True``, no exception will be set when
             attempting to delete a nonexistent device profile.
@@ -116,9 +118,9 @@ class Proxy(proxy.Proxy):
         """Get a single device profile.
 
         :param uuid: The value can be the UUID of a device profile.
-        :returns: One :class:
+        :returns: One :class: 
             `~openstack.accelerator.v2.device_profile.DeviceProfile`
-        :raises: :class:`~openstack.exceptions.ResourceNotFound` when no
+        :raises: :class: `~openstack.exceptions.ResourceNotFound` when no
             device profile matching the criteria could be found.
         """
         return self._get(_device_profile.DeviceProfile, uuid)
@@ -145,7 +147,7 @@ class Proxy(proxy.Proxy):
         :param name_or_id: The value can be either the ID or name of
         an accelerator request.
         :param bool ignore_missing: When set to ``False``
-        :class:`~openstack.exceptions.ResourceNotFound` will be
+        :class: `~openstack.exceptions.ResourceNotFound` will be
         raised when the device profile does not exist.
         When set to ``True``, no exception will be set when
         attempting to delete a nonexistent accelerator request.
@@ -157,9 +159,9 @@ class Proxy(proxy.Proxy):
     def get_accelerator_request(self, uuid, fields=None):
         """Get a single accelerator request.
         :param uuid: The value can be the UUID of a accelerator request.
-        :returns: One :class:
+        :returns: One :class: 
         `~openstack.accelerator.v2.accelerator_request.AcceleratorRequest`
-        :raises: :class:`~openstack.exceptions.ResourceNotFound` when no
+        :raises: :class: '`~openstack.exceptions.ResourceNotFound` when no
         accelerator request matching the criteria could be found.
         """
         return self._get(_arq.AcceleratorRequest, uuid)

@@ -91,4 +91,15 @@
 - https://blog.cloudflare.com/technical-details-behind-a-400gbps-ntp-amplification-ddos-attack/
 - https://blog.cloudflare.com/understanding-and-mitigating-ntp-based-ddos-attacks/
 - https://us-cert.cisa.gov/ncas/alerts/TA14-017A
-- 
+- https://datatracker.ietf.org/doc/html/rfc4890
+- https://www.ssi.gouv.fr/politique-filtrage-parefeu
+- https://www.ssi.gouv.fr/guide-ddos
+- https://www.ssi.gouv.fr/uploads/2016/07/nt_commutateurs.pdf
+- https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-41r1.pdf
+- https://www.amazon.com/Firewalls-Internet-Security-Repelling-Hacker/dp/020163466X
+- https://www.ssi.gouv.fr/uploads/2012/01/anssi-guide-passerelle_internet_securisee-v2.pdf
+- https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-44ver2.pdf
+- https://www.icsalabs.com/sites/default/files/WAF_Criteria_V2.1_Document_V2.4.pdf
+- http://people.ac.upc.edu/pbarlet/reports/TBU_phd_thesis_final.pdf
+- https://tools.ietf.org/html/rfc3027
+
