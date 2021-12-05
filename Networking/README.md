@@ -91,4 +91,5 @@
 - https://blog.cloudflare.com/technical-details-behind-a-400gbps-ntp-amplification-ddos-attack/
 - https://blog.cloudflare.com/understanding-and-mitigating-ntp-based-ddos-attacks/
 - https://us-cert.cisa.gov/ncas/alerts/TA14-017A
+- https://www.ntop.org/products/deep-packet-inspection/ndpi/
 - 
