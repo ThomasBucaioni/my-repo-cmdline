@@ -103,5 +103,23 @@
 - http://people.ac.upc.edu/pbarlet/reports/TBU_phd_thesis_final.pdf
 - https://tools.ietf.org/html/rfc3027
 - https://www.ntop.org/products/deep-packet-inspection/ndpi/
+- https://www.rfc-editor.org/rfc/rfc8446.txt
+- https://fr.wikipedia.org/wiki/Wi-Fi_Protected_Access
+- https://www.krackattacks.com/
+- https://www.bortzmeyer.org/tls-renego.html
+- https://fr.wikipedia.org/wiki/Heartbleed
+- https://www.zdnet.fr/actualites/freak-une-faille-majeure-nee-de-la-lutte-des-us-contre-le-chiffrement-39815774.htm
+- https://www.mitls.org/pages/attacks/3SHAKE
+- https://tlime.com/vpn-bonnes-raisons-dutiliser-vpn.html
+- https://www.frameip.com/ssl-tls/
+- https://www.rfc-editor.org/rfc/rfc3746.txt
+- https://www.rfc-editor.org/rfc/rfc5216.txt
+- https://www.rfc-editor.org/rfc/rfc5246.txt
+- https://www.rfc-editor.org/rfc/rfc8446.txt
+- https://www.ssi.gouv.fr/guide/recommandations-de-securite-relatives-a-ipsec-pour-la-protection-des-flux-reseau/
+- https://www.ssi.gouv.fr/guide/recommandations-de-securite-relatives-a-tls/
+- https://www.ssi.gouv.fr/guide/recommandations-de-securite-relatives-aux-reseaux-wifi/
+- https://www.ssi.gouv.fr/guide/recommandations-de-deploiement-du-protocole-802-1x-pour-le-controle-dacces-a-des-reseaux-locaux/
 -
-
+-
+-

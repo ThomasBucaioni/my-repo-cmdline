@@ -231,6 +231,25 @@ caption always " %w %= %c "
 - `mv ~/.ssh/known_hosts ~/.ssh/known_hosts.old`
 - `ssh-keygen -R HOSTNAME`
 
+### Certificates
+
+from https://nps.edu/web/c3o/labtainers
+
+#### Authority
+- `openssl genrsa -des3 -out private/ca.key.pem 2048`
+- `openssl rsa -in private/ca.key.pem -text`
+- `openssl req -config openssl.cnf -new -x509 -days 1825 -extensions v3_ca -key private/ca.key.pem -out ca.crt.pem`
+
+#### Server
+- `openssl genrsa -des3 -out server.key.pem 1024`
+- `openssl req -config openssl.cnf -new -key server.key.pem -out server.req.pem`
+- `openssl ca -config openssl.cnf -in server.req.pem -out server.crt.pem -extensions server`
+
+#### OCSP
+- `openssl genrsa -des3 -out ocsp.key.pem 1024`
+- `openssl req -config openssl.cnf -new -key ocsp.key.pem -out ocsp.req.pem`
+- `openssl ca -config openssl.cnf -in ocsp.req.pem -out ocsp.crt.pem -extensions ocsp_ext`
+
 ## Arch
 
 1. `loadkeys dvorak`
