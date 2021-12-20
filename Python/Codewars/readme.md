@@ -27,3 +27,16 @@
 ## 5 kyu
 
 - `round_rgb = lambda rgb: min(255, max(rgb, 0))`, `hex_rgb = ("{:02X}" * 3).format(round_rgb(int_r), round_rgb(int_g), round_rgb(int_b))`
+- `import itertools`, `import collections`:
+```
+def rolldice_sum_prob(sum_, dice_amount):
+    
+    import itertools
+    import collections   
+    
+    sums  = [sum(list(i)) for i in itertools.product([1,2,3,4,5,6], repeat=dice_amount)]
+    count = collections.Counter(sums)
+    prob  = count[sum_]*1.0/(len(sums))
+    
+    return prob
+```
