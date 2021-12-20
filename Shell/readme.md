@@ -9,6 +9,21 @@
 - `echo "Tongue tied and twisted just an earth bound misfit" | tr [:lower:] [:upper:]`
 - `foo="bar" ; echo "${foo/a/}"`
 
+### Characters
+
+```
+printf 'Please enter a character: '
+IFS= read -r c
+case $c in
+  ([[:lower:]]) echo lowercase letter;;
+  ([[:upper:]]) echo uppercase letter;;
+  ([[:alpha:]]) echo neither lower nor uppercase letter;;
+  ([[:digit:]]) echo decimal digit;;
+  (?) echo any other single character;;
+  ("") echo nothing;;
+  (*) echo anything else;;
+esac
+```
 
 ## bc
 
@@ -22,6 +37,7 @@ do
   echo "c=$c"
 done
 ```
+
 
 ## Lists
 
