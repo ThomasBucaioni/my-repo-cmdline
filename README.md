@@ -103,6 +103,7 @@ host myhouse
  User itsme
  HostName house.example.com
 ```
+- forward tunnel: `ssh -p vps-open-port -i ~/.ssh/vps-key vps-user@vps-public-ip -L localhost-random-port:vps-private-ip:vps-website-port-say-80`, `http://localhost:localhost-random-port`
 - reverse tunnel: `ssh -v -p vps-open-port -i ~/.ssh/vps-key vps-user@vps-ip -R vps-random-port:localhost:localhost-open-port-say-22`, `ssh -v -p vps-random-port -i ~/.ssh/vps-key user-on-local-computer@vps-ip`
 
 ### Bash lists
