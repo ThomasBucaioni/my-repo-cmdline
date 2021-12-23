@@ -28,6 +28,8 @@
 
 - `round_rgb = lambda rgb: min(255, max(rgb, 0))`, `hex_rgb = ("{:02X}" * 3).format(round_rgb(int_r), round_rgb(int_g), round_rgb(int_b))`
 - `import itertools`, `import collections`:
+- unknown dice numbers:
+	- itertools:
 ```
 def rolldice_sum_prob(sum_, dice_amount):
     
@@ -40,3 +42,15 @@ def rolldice_sum_prob(sum_, dice_amount):
     
     return prob
 ```
+	- recursive:
+```
+def s(x,n):
+    if n==1:
+        return 1 if 1<=x<=6 else 0
+    else:
+        return sum([s(x-i, n-1) for i in range(1,7)])
+    
+def rolldice_sum_prob(x, n):
+    return 1.0*s(x,n)/6**n
+```
+
