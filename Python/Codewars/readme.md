@@ -52,4 +52,5 @@ def s(x,n):
 def rolldice_sum_prob(x, n):
     return 1.0*s(x,n)/6**n
 ```
+- `from math import comb`, `pascal_diag = [comb(n+i, n) for i in range(l)]`
 
