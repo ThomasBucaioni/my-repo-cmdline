@@ -42,6 +42,7 @@ def rolldice_sum_prob(sum_, dice_amount):
     
     return prob
 ```
+	
 	- recursive:
 ```
 def s(x,n):
