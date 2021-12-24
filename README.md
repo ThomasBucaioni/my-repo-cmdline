@@ -155,6 +155,35 @@ PS1="$PS1 %K{105}%F{11} %~/ %f%k%F{magenta}%K{grey}%B>%b%k %f"
 RPS1="%(?.%F{green}0.%K{red}%F{011})%(?..(%?%))%(?.%f.%f%k)%F{magenta}%K{grey}:%k%f%F{105}%2c%f"
 ```
 
+3. Bash root
+```
+RED='\[\033[0;31m\]'
+WHITE='\[\033[1;37m\]'
+GRAY='\[\033[0;37m\]'
+BROWN='\[\033[0;33m\]'
+PS1="$RED[$WHITE\u$BROWN@$WHITE\h$BROWN:$WHITE\W$RED] #$GRAY "
+```
+
+4. Bash admin
+```
+GREEN='\[\033[0;32m\]'
+BROWN='\[\033[0;33m\]'
+WHITE='\[\033[1;37m\]'
+WHITEUNDLN='\[\033[4;37m\]'
+GRAY='\[\033[0;37m\]'
+CYAN='\[\033[0;36m\]'
+PS1="$GREEN[$WHITE\u$CYAN@$WHITE\h$CYAN:$BROWN\w$GREEN] \$ $GRAY"
+
+alias rm='rm -i'
+alias mv='mv -i'
+alias cp='cp -i'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias v='vim'
+alias ve='sudo vim'
+alias e='emacs'
+alias se='sudo emacs'
+```
 ### Screensaver
 
 1. `xset s off`

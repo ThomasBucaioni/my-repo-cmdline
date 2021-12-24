@@ -168,7 +168,7 @@ def solution(A):
 
     B = sorted(T, key=lambda tup: (tup[1],tup[0]))
 
-    B.reverse()
+    #B.reverse()
 
     logging.debug('----------')
     logging.debug(f"{A}")
@@ -256,6 +256,9 @@ def solutionOkButTimeOut(A):
 
     l = len(A)
 
+    if sum(min(A[i],2*l) for i in range(l)) >= 10_000_000:
+        return -1
+    
     T = []
     for i in range(len(A)):
         T.append((i,A[i]))
@@ -265,8 +268,10 @@ def solutionOkButTimeOut(A):
     B.reverse()
 
     n = 0
-    
+
     for i in range(l):
+        if n >= 10_000_000:
+            return -1
         p = B[i][0]
         r = B[i][1]
         for j in range(p+1, min(p+r+1, l)):
