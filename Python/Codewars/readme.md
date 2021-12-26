@@ -55,4 +55,4 @@ def rolldice_sum_prob(x, n):
 - `from math import comb`, `pascal_diag = [comb(n+i, n) for i in range(l)]`
 - `d = dict(l)`
 - `sum(1 for x in a for y in b for z in c if x + y + z == s)`
-
+- `printf "%d\n" "'$myChar"`
