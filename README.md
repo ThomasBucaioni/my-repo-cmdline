@@ -217,8 +217,11 @@ alias se='sudo emacs'
 ```
 escape ^z^z
 
-bindkey -k k8 prev
-bindkey -k k9 next
+bindkey -k k6 prev
+bindkey -k k7 next
+
+bindkey -k k8 focus prev
+bindkey -k k9 focus next
 
 caption always " %w %= %c "
 ```
