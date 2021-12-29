@@ -24,6 +24,7 @@
 - `''.join( f'{"0"*(d.bit_length()-1)}1{d:b}' for d in map(int,s))`, `out.append( int(''.join(next(it) for _ in range(n)), 2) )`
 - `is_prime = lambda n: n>1 and n%2 and all(n%d for d in range(3, int(n**.5) + 1, 2))`, `step = lambda g, m, n: next(([i, i+g] for i in [2] + range(m|1, n-g+1, 2) if is_prime(i) and is_prime(i + g)), None)`
 - `sum(c // 2 for c in Counter(gloves).values())`
+- `sum(ch1 != ch2 for ch1, ch2 in zip(a, b))`
 
 ## 5 kyu
 
