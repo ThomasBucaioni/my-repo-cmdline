@@ -24,6 +24,8 @@ case $c in
   (*) echo anything else;;
 esac
 ```
+- `printf "\x$(printf %x 65)"`, `awk 'BEGIN{printf "%c", 65}'`' `printf '%d\n' "'$A"`
+- generate a password: `echo {A..Z} {a..z} {0..9} {0..9} '! @ # % ^ & * ( ) _ + = - [ ] { } " < > . / ?' | tr ' ' "\n" | shuf | xargs | tr -d ' ' | cut -b 1-18`
 
 ## bc
 
