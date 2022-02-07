@@ -1,0 +1,25 @@
+(defun row-sum-odd-numbers (n)
+  (print n)
+  (let ((a
+         (loop for i from 1 to n
+               do (print i)
+               when (oddp i)
+               collect i)))
+    (print a)
+    (terpri)
+    )
+  (let* ((i 0)
+        (b
+	 (loop while (<= i n)
+                 collect (1+ (* 2 i))
+		 do (progn
+		      (setf i (+ i 1))
+		      (princ (list "next i: " i))
+		      (terpri))
+		 )
+	   )
+	)
+    (print b)
+    )
+  )
+(row-sum-odd-numbers 10)
