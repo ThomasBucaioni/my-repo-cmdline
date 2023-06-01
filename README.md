@@ -209,6 +209,7 @@ alias se='sudo emacs'
 - `"+y`, `"+p`
 - `~/.config/nvim/init.vim`, `echom "I am here"`, `set termguicolors`, `set mouse=a`, `set nohlsearch`
 - `vnoremap <C-C> y:call system("wl-copy --trim-newline", @")<cr>`, `inoremap <C-V> <ESC>:let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>pa`
+- delete every other line: `:g/^/+d`
 
 ## Screen command
 
