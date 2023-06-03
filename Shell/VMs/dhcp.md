@@ -1,6 +1,6 @@
 # DHCP config
 
-File `/etc/dhcp/dhcpd.conf`
+## File `/etc/dhcp/dhcpd.conf`
 
 ```
 option domain-name "mydomtest.xyz";
@@ -24,5 +24,13 @@ subnet 10.0.9.0 netmask 255.255.255.0 {
 		fixed-address		10.0.9.21;
 	}	
 }
+```
+
+## Hints
+
+```
+dhclient
+ip link enp8s0 down ; ip link enp8s0 up
+nmcli con modify ethernet-enp7s0 +ipv4.dns 10.0.9.1
 ```
 
