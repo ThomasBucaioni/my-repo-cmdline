@@ -31,6 +31,6 @@ subnet 10.0.9.0 netmask 255.255.255.0 {
 ```
 dhclient
 ip link enp8s0 down ; ip link enp8s0 up
-nmcli con modify ethernet-enp7s0 +ipv4.dns 10.0.9.1
+nmcli con modify ethernet-enp7s0 +ipv4.dns 10.0.9.1 ipv4.dns-priority 10
 ```
 
